@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import LoginForm from "../../_components/login/login_form";
 import Link from "next/link";
 import CreateForm from "@/app/_components/login/create_form";
 
@@ -29,14 +28,14 @@ export default function CreateHome() {
           </div>
 
           <div className="flex gap-4">
-            <Link href={"/create_id"}>
+            <Link href={"/create_account"}>
               <button className="py-2 px-4 bg-gray-800 rounded-md text-white">
                 회원가입
               </button>
             </Link>
 
             <Link href={"/"}>
-              <button className="py-2 px-4 bg-green-400 rounded-md">
+              <button className="py-2 px-4 bg-gray-500 rounded-md text-white">
                 로그인
               </button>
             </Link>

@@ -1,7 +1,28 @@
+import { createAccount } from "@/app/(auth)/create_account/action";
 import Button from "../common/button";
 import Input from "../common/input";
+import { useFormState } from "react-dom";
+import React, { useEffect, useRef } from "react";
 
 export default function CreateForm() {
+  const [state, action] = useFormState(createAccount, null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const psRef = useRef<HTMLInputElement>(null);
+  const pscRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (state?.fieldErrors?.username) {
+      nameRef.current?.focus();
+    } else if (state?.fieldErrors?.email) {
+      emailRef.current?.focus();
+    } else if (state?.fieldErrors?.password) {
+      psRef.current?.focus();
+    } else if (state?.fieldErrors?.password_check) {
+      pscRef.current?.focus();
+    }
+  }, [state?.fieldErrors]);
+
   return (
     <div className="px-4 py-4">
       <div>
@@ -12,39 +33,35 @@ export default function CreateForm() {
           </h2>
         </div>
 
-        <form /* action={action} */>
+        <form action={action}>
           <div className="flex flex-col">
             <Input
               label="닉네임"
               name="username"
               type="text"
               placeholder="닉네임"
-              required
-              /* errors={state?.fieldErrors.username} */
+              errors={state?.fieldErrors.username}
             />
             <Input
               label="Email"
               name="email"
               type="text"
               placeholder="이메일 주소"
-              required
-              /* errors={state?.fieldErrors.email} */
+              errors={state?.fieldErrors.email}
             />
             <Input
               label="비밀번호"
               name="password"
               type="password"
               placeholder="비밀번호"
-              required
-              /* errors={state?.fieldErrors.password} */
+              errors={state?.fieldErrors.password}
             />
             <Input
               label="비밀번호 확인"
               name="password_check"
               type="password"
               placeholder="비밀번호 확인"
-              required
-              /* errors={state?.fieldErrors.password_check} */
+              errors={state?.fieldErrors.password_check}
             />
           </div>
 
