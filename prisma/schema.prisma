@@ -3,6 +3,19 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement()) //첫번째 사용자는 자동으로 1부터 시작
+  username   String   @unique
+  email      String?  @unique
+  password   String?
+  kakao_id   String?  @unique
+  google_id  String?  @unique
+  bio        String? //자기소개
+  avatar     String? // 카톡, 구글 로그인 시 프로필 사진 등록하기 위해서
+  created_at DateTime @default(now()) //새유저가 만들어질때 그 시점의 날짜
+  updated_at DateTime @updatedAt //수정될 때 마다 수정된 시간을 넣음
 }
