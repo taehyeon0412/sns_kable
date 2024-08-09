@@ -2,16 +2,30 @@
 
 import Button from "../common/button";
 import Input from "@/app/_components/common/input";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useFormState } from "react-dom";
 import { login } from "../../(auth)/enter/action";
 
 export default function LoginForm() {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const psRef = useRef<HTMLInputElement>(null);
   const [state, action] = useFormState(login, null);
   /* from action을 실행하면 action.ts의  handleForm이 실행되고 
   return 값을 state로 받아옴 
   useFormState는 상호작용을 하므로 use client를 상단에 써야됨
   */
+
+  //useRef
+  useEffect(() => {
+    // 이메일 오류가 우선
+    if (state?.fieldErrors?.email) {
+      emailRef.current?.focus();
+    }
+    // 이메일 오류가 없을 때만 비밀번호에 포커스
+    else if (state?.fieldErrors?.password) {
+      psRef.current?.focus();
+    }
+  }, [state?.fieldErrors?.email, state?.fieldErrors?.password]);
 
   return (
     <div className="mt-16 px-4">
@@ -25,12 +39,14 @@ export default function LoginForm() {
         <form action={action} className="flex flex-col">
           <div className="mt-1">
             <Input
+              ref={emailRef}
               name="email"
               label=""
               placeholder="이메일 주소"
               errors={state?.fieldErrors.email} //useFormState의 state를 받아오고 handleForm의 return값이 출력됨
             />
             <Input
+              ref={psRef}
               name="password"
               label=""
               type="password"
