@@ -1,3 +1,40 @@
 {
-  "extends": "next/core-web-vitals"
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+
+  "plugins": ["import", "react-hooks", "prettier"],
+
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+
+  "rules": {
+    "linebreak-style": 0, //개행을 체크하는 옵션
+    //Windows는 CRLF, Unix에선 LF를 사용한다.
+
+    "quotes": ["error", "double"], //따옴표 규칙 ' ' or " "
+
+    "semi": ["error", "always"], //세미콜론 적용 여부
+
+    "react/react-in-jsx-scope": "off", //React 전역 선언 여부
+    //이 옵션이 없으면 React 프로젝트에서
+    //항상 react를 import 해야한다.
+
+    "react/prop-types": "off", //PropTypes 타입검사
+
+    "no-unused-vars": "off" //미사용 변수 경고처리 여부
+  }
 }
