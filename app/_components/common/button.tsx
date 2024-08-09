@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormStatus } from "react-dom";
-import { cls } from "../_libs/_client/utils";
+import { cls } from "../../_libs/_client/utils";
 import Link from "next/link";
 
 interface ButtonProps {
@@ -28,7 +28,7 @@ export default function Button({
       className="flex gap-2 justify-center items-center py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
     >
       <svg
-        enable-background="new 0 0 32 32"
+        enableBackground="new 0 0 32 32"
         version="1.1"
         className="w-5 h-5"
         viewBox="0 0 32 32"

@@ -3,8 +3,9 @@
 import Image from "next/image";
 import LoginForm from "../../_components/login/login_form";
 import Link from "next/link";
+import CreateForm from "@/app/_components/login/create_form";
 
-export default function InitHome() {
+export default function CreateHome() {
   return (
     <div className="bg-white flex flex-col items-center min-h-screen">
       <div
@@ -44,11 +45,11 @@ export default function InitHome() {
 
         {/* 중단 */}
         <div className="flex items-center justify-center px-[8%]">
-          <div className=" h-[90%] w-full grid grid-cols-2 gap-8 lg:px-[10%] xl:px-[15%]">
-            <div className="bg-black text-white flex justify-center items-center">
+          <div className=" h-[90%] w-full grid grid-cols-2 gap-8 lg:px-[10%] xl:px-[15%] items-center">
+            <div className="bg-black text-white flex justify-center items-center h-full">
               이미지 들어감
             </div>
-            <LoginForm />
+            <CreateForm />
           </div>
         </div>
 

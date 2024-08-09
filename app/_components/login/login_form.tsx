@@ -1,10 +1,18 @@
 "use client";
 
-import Button from "../_components/button";
-import Input from "@/app/_components/input";
+import Button from "../common/button";
+import Input from "@/app/_components/common/input";
 import React from "react";
+import { useFormState } from "react-dom";
+import { login } from "../../(auth)/enter/action";
 
 export default function LoginForm() {
+  const [state, action] = useFormState(login, null);
+  /* from action을 실행하면 action.ts의  handleForm이 실행되고 
+  return 값을 state로 받아옴 
+  useFormState는 상호작용을 하므로 use client를 상단에 써야됨
+  */
+
   return (
     <div className="mt-16 px-4">
       <div className="flex justify-center">이미지 들어갈 공간</div>
@@ -14,23 +22,20 @@ export default function LoginForm() {
           <h5 className="text-lg text-gray-500 font-semibold">입장하기</h5>
         </div>
 
-        <form className="flex flex-col">
+        <form action={action} className="flex flex-col">
           <div className="mt-1">
             <Input
               name="email"
               label=""
-              type="email"
               placeholder="이메일 주소"
-              /* errors={state?.fieldErrors.email} //useFormState의 state를 받아오고 handleForm의 return값이 출력됨 */
-              required
+              errors={state?.fieldErrors.email} //useFormState의 state를 받아오고 handleForm의 return값이 출력됨
             />
             <Input
               name="password"
               label=""
               type="password"
               placeholder="비밀번호"
-              /* errors={state?.fieldErrors.password} */
-              required
+              errors={state?.fieldErrors.password}
             />
           </div>
 
