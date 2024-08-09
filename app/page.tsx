@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
+import InitHome from "./(auth)/enter/page";
 
-export default function InitHome() {
-  return <div></div>;
+export default function Home() {
+  return <InitHome />;
 }
