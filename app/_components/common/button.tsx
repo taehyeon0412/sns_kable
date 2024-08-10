@@ -55,7 +55,7 @@ export default function Button({
     </Link>
   ) : type === "kakao" ? (
     <Link
-      href=""
+      href="/kakao/start"
       className="flex gap-2 justify-center items-center py-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
     >
       <svg
