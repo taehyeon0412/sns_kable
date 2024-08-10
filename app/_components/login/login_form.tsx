@@ -71,7 +71,7 @@ export default function LoginForm() {
 
           <div className="grid grid-cols-2 gap-3 mt-2">
             <Button text={"카카오톡"} type="kakao" />
-            <Button text={"구글"} type="google" />
+            <Button text={"깃허브"} type="github" />
           </div>
 
           <div className="bottom-0 mt-12 flex justify-center items-center hover:cursor-pointer">

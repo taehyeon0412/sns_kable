@@ -56,7 +56,7 @@ export async function GET(req: NextRequest) {
   const newUser = await db.user.create({
     data: {
       kakao_id: userInfo.id + "",
-      avatar: userInfo.properties.profile_image,
+      profile_img: userInfo.properties.profile_image,
       username: userInfo.properties.nickname,
     },
     select: {
