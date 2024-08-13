@@ -23,7 +23,7 @@ const formSchema = z
       .toLowerCase() //대문자를 소문자로 자동변환
       .trim() //공백제거
       .min(2, "닉네임은 2글자 이상 입력해 주세요")
-      .max(8, "넥네임은 8글자 이상 입력할 수 없습니다."),
+      .max(5, "넥네임은 5글자 이상 입력할 수 없습니다."),
 
     email: z.string().email("잘못된 이메일 형식입니다.").toLowerCase(),
 
@@ -69,7 +69,7 @@ export async function createAccount(prevState: any, formData: FormData) {
         username: result.data.username,
         email: result.data.email,
         password: hashedPassword,
-        avatar: noImage.src,
+        profile_img: noImage.src,
       },
       select: {
         id: true,
