@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tailwind의 유틸리티 클래스를 커스텀 클래스에 적용 */
 @layer utilities {
   .nav_h {
-    @apply pt-16; /* Tailwind의 유틸리티 클래스를 커스텀 클래스에 적용 */
+    @apply pt-16;
+  }
+
+  .layout_px {
+    @apply md:px-[10%] xl:px-[15%] 2xl:px-[20%];
   }
 }
 

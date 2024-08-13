@@ -60,8 +60,8 @@ export default function LoginForm() {
 
         <div className="mt-8">
           <div className="relative">
-            <div className="absolute w-full border-t border-gray-300" />
             {/* 중간 라인 선 */}
+            <div className="absolute w-full border-t border-gray-300" />
             <div className="relative -top-3 text-center">
               <span className="px-2 text-sm text-gray-500  bg-white">
                 다른 입장 방법

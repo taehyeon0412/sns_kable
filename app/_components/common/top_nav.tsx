@@ -9,7 +9,7 @@ export default async function TopNav() {
 
   return (
     //네비게이션바
-    <nav className="md:px-[10%] xl:px-[15%] 2xl:px-[20%] fixed top-0 left-0 w-full h-16 bg-orange-400 flex items-center justify-between px-4 z-50">
+    <nav className="layout_px fixed top-0 left-0 w-full h-16 bg-orange-400 flex items-center justify-between px-4 z-50">
       <div className="text-white font-bold text-xl md:text-2xl ">KABLE</div>
       <div className="hidden md:flex items-center gap-10 *:px-4">
         <Link href="/home" className="text-white">

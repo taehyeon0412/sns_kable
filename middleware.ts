@@ -9,7 +9,7 @@ interface Routes {
 const publicOnlyUrls: Routes = {
   "/": true,
   "/enter": true,
-  "/create-account": true,
+  "/create_account": true,
   "/github/start": true,
   "/github/complete": true,
   "/kakao/start": true,
@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
   //로그인하지 않은 상태
   if (!session.id) {
     if (!exists) {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/enter", request.url));
     }
   }
   //로그인 한 상태

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import CreateForm from "@/app/_components/login/create_form";
+import Kable_name from "@/public/asset/kable_name.png";
 
 export default function CreateHome() {
   return (
@@ -12,32 +13,32 @@ export default function CreateHome() {
         style={{ gridTemplateRows: "8% 82% 10%" }}
       >
         {/* 상단 */}
-        <div className="bg-gray-300 flex items-center justify-between px-[8%]">
+        <div className="bg-black flex items-center justify-between px-[8%]">
           <div className="flex gap-20">
-            <div className="py-4 px-20 bg-black text-white">로고</div>
+            <div className="relative py-4 px-20">
+              <Image src={Kable_name} alt="KABLE logo" layout="fill" />
+            </div>
 
-            <div className="flex flex-col justify-center">
+            <div className="hidden md:flex flex-col justify-center">
               <div>
-                <span>sns에 오신것을 환영함 설명 쭉~</span>
-              </div>
-
-              <div>
-                <span className="text-sm">빠르게 가입해서 즐겨보세요!</span>
+                <span className="text-sm text-white">
+                  빠르게 가입해서 즐겨보세요!
+                </span>
               </div>
             </div>
           </div>
 
           <div className="flex gap-4">
-            <Link href={"/create_account"}>
-              <button className="py-2 px-4 bg-gray-800 rounded-md text-white">
+            <Link href="/create_account">
+              <div className="py-2 px-3 lg:px-4 bg-gray-700 hover:bg-gray-100 hover:text-black rounded-md text-white">
                 회원가입
-              </button>
+              </div>
             </Link>
 
-            <Link href={"/"}>
-              <button className="py-2 px-4 bg-gray-500 rounded-md text-white">
+            <Link href="/enter">
+              <div className="py-2 px-3 lg:px-4 bg-gray-400 text-white hover:bg-gray-100 hover:text-black rounded-md ">
                 로그인
-              </button>
+              </div>
             </Link>
           </div>
         </div>
@@ -54,12 +55,9 @@ export default function CreateHome() {
 
         {/* 하단 */}
         <div className="bg-gray-300  px-[8%]">
-          <div className="flex gap-20 justify-center items-center h-full">
+          <div className="flex gap-20 justify-start items-center h-full">
             <span className="text-sm  font-semibold">
               Contact Us: taehyeon202@naver.com
-            </span>
-            <span className="text-sm hover:cursor-pointer font-semibold">
-              고객센터
             </span>
           </div>
         </div>
