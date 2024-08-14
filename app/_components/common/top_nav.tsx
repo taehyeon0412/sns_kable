@@ -3,6 +3,7 @@ import Image from "next/image";
 import { getUser } from "@/app/hooks/users";
 import { useRouter } from "next/navigation";
 import ProfileModal from "../profile_modal";
+import Kable_name from "@/public/asset/kable.name.png";
 
 export default async function TopNav() {
   const user = await getUser();
@@ -10,8 +11,14 @@ export default async function TopNav() {
   return (
     //네비게이션바
     <nav className="layout_px fixed top-0 left-0 w-full h-16 bg-orange-400 flex items-center justify-between px-4 z-50">
-      <div className="text-white font-bold text-xl md:text-2xl ">KABLE</div>
-      <div className="hidden md:flex items-center gap-10 *:px-4">
+      <div className="text-white font-bold text-xl md:text-2xl w-32 ">
+        <div className="absolute h-20 md:h-24 -top-3 md:-top-5 py-4 px-20">
+          <Image src={Kable_name} alt="KABLE logo" layout="fill" />
+        </div>
+
+        <div className="h-full w-full py-4 px-10" />
+      </div>
+      <div className="hidden md:flex items-center gap-6 lg:gap-10 *:px-4">
         <Link href="/home" className="text-white">
           홈
         </Link>

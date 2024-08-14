@@ -88,7 +88,7 @@ export default function Button({
       className={cls(
         "mt-3 w-full text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none",
         large ? "py-3 text-base" : "py-2 text-sm",
-        pending ? "bg-gray-400" : "bg-orange-500 hover:bg-orange-600"
+        pending ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-900"
       )}
     >
       {pending ? "로그인 중.." : text}
@@ -100,7 +100,7 @@ export default function Button({
       className={cls(
         "mt-3 w-full text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none",
         large ? "py-3 text-base" : "py-2 text-sm",
-        pending ? "bg-gray-400" : "bg-orange-500 hover:bg-orange-600"
+        pending ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-900"
       )}
     >
       {pending ? "업로드 중.." : text}
@@ -109,7 +109,7 @@ export default function Button({
     <button
       {...rest}
       className={cls(
-        "mt-3 w-full bg-orange-500 hover:bg-orange-600 text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none",
+        "mt-3 w-full bg-blue-500 hover:bg-blue-900 text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none",
         large ? "py-3 text-base" : "py-2 text-sm"
       )}
     >

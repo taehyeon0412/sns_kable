@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import CreateForm from "@/app/_components/login/create_form";
-import Kable_name from "@/public/asset/kable_name.png";
+import Kable_name from "@/public/asset/kable.name.gif";
 
 export default function CreateHome() {
   return (
@@ -13,18 +13,17 @@ export default function CreateHome() {
         style={{ gridTemplateRows: "8% 82% 10%" }}
       >
         {/* 상단 */}
-        <div className="bg-black flex items-center justify-between px-[8%]">
+        <div className="relative bg-white flex items-center justify-between px-[8%]">
           <div className="flex gap-20">
-            <div className="relative py-4 px-20">
+            <div className="absolute h-24 -top-4 py-4 px-20">
               <Image src={Kable_name} alt="KABLE logo" layout="fill" />
             </div>
 
-            <div className="hidden md:flex flex-col justify-center">
-              <div>
-                <span className="text-sm text-white">
-                  빠르게 가입해서 즐겨보세요!
-                </span>
-              </div>
+            <div className="py-4 px-20" />
+
+            <div className="hidden md:flex flex-col justify-center items-center">
+              <span className="text-sm ">카테고리로 소통하자 카블!</span>
+              <span className="text-sm ">빠르게 가입해서 즐겨보세요!</span>
             </div>
           </div>
 
