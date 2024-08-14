@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface ProfileInfo {
@@ -11,6 +12,7 @@ interface ProfileInfo {
 
 export default function ProfileModal({ name, email, profileImg }: ProfileInfo) {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const onClickLogout = async () => {
     try {
@@ -27,6 +29,10 @@ export default function ProfileModal({ name, email, profileImg }: ProfileInfo) {
     } catch (error) {
       console.error("Logout error:", error);
     }
+  };
+
+  const onClickUpload = () => {
+    router.push("/items/upload");
   };
 
   return (
@@ -81,7 +87,10 @@ export default function ProfileModal({ name, email, profileImg }: ProfileInfo) {
             <div className="w-full border-t border-gray-300" />
 
             <div className="flex gap-4 justify-center items-center *:px-4">
-              <button className="text-white border-transparent bg-orange-400 hover:bg-orange-500 border-2 rounded-md">
+              <button
+                onClick={onClickUpload}
+                className="text-white border-transparent bg-orange-400 hover:bg-orange-500 border-2 rounded-md"
+              >
                 새 글쓰기
               </button>
 
