@@ -9,7 +9,7 @@ interface Routes {
 const publicOnlyUrls: Routes = {
   "/": true,
   "/enter": true,
-  "/create_account": true,
+  "/create-account": true,
   "/github/start": true,
   "/github/complete": true,
   "/kakao/start": true,

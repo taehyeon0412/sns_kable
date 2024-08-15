@@ -28,7 +28,7 @@ export default function InitHome() {
           </div>
 
           <div className="flex gap-4">
-            <Link href="/create_account">
+            <Link href="/create-account">
               <div className="py-2 px-3 lg:px-4 bg-gray-700 hover:bg-gray-100 hover:text-black rounded-md text-white">
                 회원가입
               </div>
