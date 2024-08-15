@@ -5,6 +5,7 @@ import Image from "next/image";
 import ProfileModal from "../profile_modal";
 import Kable_name from "@/public/asset/kable.name.png";
 import { userInfo } from "@/app/hooks/user_info";
+import { AnimatePresence } from "framer-motion";
 
 interface NavKind {
   kind?: "default" | "upload";
@@ -99,20 +100,22 @@ export default function TopNav({ kind = "default" }: NavKind) {
               </div>
 
               {/* 모달창 */}
-              <div className="absolute top-0 w-full h-full rounded-full bg-transparent z-50">
-                <ProfileModal
-                  name={user?.username}
-                  email={
-                    user?.email ||
-                    (user?.kakao_id
-                      ? `카카오: ${user.kakao_id}`
-                      : user?.github_id
-                      ? `깃허브: ${user.github_id}`
-                      : "")
-                  }
-                  profileImg={user?.profile_img}
-                />
-              </div>
+              <AnimatePresence>
+                <div className="absolute top-0 w-full h-full rounded-full bg-transparent z-50">
+                  <ProfileModal
+                    name={user?.username}
+                    email={
+                      user?.email ||
+                      (user?.kakao_id
+                        ? `카카오: ${user.kakao_id}`
+                        : user?.github_id
+                        ? `깃허브: ${user.github_id}`
+                        : "")
+                    }
+                    profileImg={user?.profile_img}
+                  />
+                </div>
+              </AnimatePresence>
             </div>
           </div>
         </>
