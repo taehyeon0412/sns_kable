@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useLogout } from "../hooks/logout";
+import { useRouter } from "next/navigation";
 
 interface ProfileInfo {
   name: string;
@@ -13,22 +14,10 @@ interface ProfileInfo {
 export default function ProfileModal({ name, email, profileImg }: ProfileInfo) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const logout = useLogout();
 
-  const onClickLogout = async () => {
-    try {
-      const response = await fetch("/api/logout", {
-        method: "POST",
-      });
-
-      if (response.ok) {
-        // 로그아웃 성공 시 홈페이지로 리다이렉트
-        window.location.href = "/";
-      } else {
-        console.error("Logout failed");
-      }
-    } catch (error) {
-      console.error("Logout error:", error);
-    }
+  const onClickLogout = () => {
+    logout.mutate(); //로그아웃 요청
   };
 
   const onClickUpload = () => {
