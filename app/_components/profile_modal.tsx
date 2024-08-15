@@ -6,7 +6,7 @@ import { useLogout } from "../hooks/logout";
 import { useRouter } from "next/navigation";
 
 interface ProfileInfo {
-  name: string;
+  name: string | null | undefined;
   email: string | null | undefined;
   profileImg: string | null | undefined;
 }
@@ -63,7 +63,7 @@ export default function ProfileModal({ name, email, profileImg }: ProfileInfo) {
 
               <div className="flex flex-col w-[160px] items-start justify-center gap-1 pr-4">
                 <div className="flex w-full items-center justify-start gap-2">
-                  <p className="text-sm">{name.substring(0, 6)}님</p>
+                  <p className="text-sm">{name?.substring(0, 6)}님</p>
                 </div>
 
                 <div className="w-full flex justify-start items-center">

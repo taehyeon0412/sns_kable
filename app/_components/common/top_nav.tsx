@@ -1,16 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { getUser } from "@/app/hooks/users";
-import { useRouter } from "next/navigation";
 import ProfileModal from "../profile_modal";
 import Kable_name from "@/public/asset/kable.name.png";
+import { userInfo } from "@/app/hooks/user_info";
 
 interface NavKind {
   kind?: "default" | "upload";
 }
 
-export default async function TopNav({ kind = "default" }: NavKind) {
-  const user = await getUser();
+export default function TopNav({ kind = "default" }: NavKind) {
+  const { data: user } = userInfo();
 
   return (
     //네비게이션바
@@ -100,16 +101,16 @@ export default async function TopNav({ kind = "default" }: NavKind) {
               {/* 모달창 */}
               <div className="absolute top-0 w-full h-full rounded-full bg-transparent z-50">
                 <ProfileModal
-                  name={user.username}
+                  name={user?.username}
                   email={
-                    user.email ||
-                    (user.kakao_id
+                    user?.email ||
+                    (user?.kakao_id
                       ? `카카오: ${user.kakao_id}`
-                      : user.github_id
+                      : user?.github_id
                       ? `깃허브: ${user.github_id}`
                       : "")
                   }
-                  profileImg={user.profile_img}
+                  profileImg={user?.profile_img}
                 />
               </div>
             </div>
