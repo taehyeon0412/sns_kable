@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { useLogout } from "../hooks/logout";
+import { useLogout } from "../../hooks/logout";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -34,7 +34,6 @@ export default function ProfileModal({ name, email, profileImg }: ProfileInfo) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
             onClick={() => setIsOpen(false)}
             className="fixed flex inset-0 items-center justify-center bg-transparent"
           >
@@ -42,7 +41,6 @@ export default function ProfileModal({ name, email, profileImg }: ProfileInfo) {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
               onClick={(e) => e.stopPropagation()} // 내부 컨텐츠 클릭시 이벤트 버블링 방지
               className="flex flex-col w-[250px] gap-2 border-2 bg-white p-4 pr-2 rounded-lg absolute top-16 right-0 md:right-[3%] xl:right-[10%] 2xl:right-[15%]"
             >

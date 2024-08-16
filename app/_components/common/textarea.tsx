@@ -23,7 +23,7 @@ export default function TextArea({
 
       <textarea
         id={labelName}
-        className="mt-1 shadow-sm w-full min-h-40 focus:ring-orange-500 rounded-md border-gray-300 focus:border-orange-500 "
+        className="mt-1 px-2 py-2 shadow-sm w-full min-h-40 focus:outline-none focus:ring-orange-500 focus:border-orange-500 rounded-md border border-gray-300 "
         rows={4}
         name={name}
         {...rest}

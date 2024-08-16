@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import ProfileModal from "../profile_modal";
+import ProfileModal from "../modal/profile_modal";
 import Kable_name from "@/public/asset/kable.name.png";
 import { userInfo } from "@/app/hooks/user_info";
 import { AnimatePresence } from "framer-motion";
