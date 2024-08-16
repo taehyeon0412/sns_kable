@@ -87,7 +87,7 @@ export default function CategoryModal() {
                   key={category.id}
                   type="button"
                   onClick={() => categorySelect(category.name)}
-                  className="flex items-center justify-center border-2 rounded-xl p-1 hover:border-gray-900"
+                  className="flex items-center justify-center border-2 rounded-xl p-1 hover:border-blue-400"
                 >
                   {category.name}
                 </button>

@@ -4,11 +4,6 @@ export function cls(...classnames: string[]) {
 
 export const MB = 1024 * 1024;
 
-export function formatToWon(price: number): string {
-  return price.toLocaleString("ko-KR");
-}
-//한화(원)으로 바꿔주는 함수
-
 export function formatToTimeAgo(date: string): string {
   const dayInMs = 1000 * 60 * 60 * 24; //24시간 밀리초
   const time = new Date(date).getTime();
