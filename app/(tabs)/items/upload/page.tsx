@@ -15,18 +15,19 @@ export default function Upload() {
 
       <div className="nav_h layout_px grid grid-cols-1 md:grid-cols-12 w-full min-h-screen">
         {/* 사이드 */}
-        <div className="hidden md:flex flex-col md:col-span-2 bg-red-100"></div>
+        <div className="hidden md:flex flex-col md:col-span-2 "></div>
 
         {/* 본문 */}
         <div className="col-span-full md:col-span-8 ">
           <form
+            id="uploadForm"
             /* action={action} */ className="relative px-4 pt-4 mb-5 h-full"
           >
             <div>
               <div>
                 {/* label로 input을 감싸고 hidden으로 input을 감춰주면 이쁜 input이 된다 */}
                 <label
-                  className="w-full text-gray-600 hover:cursor-pointer hover:border-orange-500 hover:text-orange-500 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 h-60 sm:h-96  rounded-md bg-contain bg-center bg-no-repeat"
+                  className="w-full text-gray-600 hover:cursor-pointer hover:border-blue-400 hover:text-blue-500 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 h-60 sm:h-96  rounded-md bg-contain bg-center bg-no-repeat"
                   /* style={{ backgroundImage: `url(${preview})` }} */
                 >
                   {preview === "" ? (
@@ -56,7 +57,6 @@ export default function Upload() {
                     className="hidden z-30"
                     type="file"
                     accept="image/*"
-                    required
                   />
                 </label>
 
@@ -108,7 +108,14 @@ export default function Upload() {
         </div>
 
         {/* 사이드 */}
-        <div className="hidden md:flex flex-col md:col-span-2 bg-gray-400"></div>
+        <div className="hidden md:flex flex-col md:col-span-2 ">
+          <div className="flex flex-col">
+            <span>글 작성 Tip!</span>
+            <span>1.카테고리에 맞는 사진을 추가하세요</span>
+            <span>2.제목을 입력하세요</span>
+            <span>3.내용을 입력하세요</span>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { createAccount } from "@/app/(auth)/create_account/action";
+import { createAccount } from "@/app/(auth)/create-account/action";
 import Button from "../common/button";
 import Input from "../common/input";
 import { useFormState } from "react-dom";

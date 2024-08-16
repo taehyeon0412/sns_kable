@@ -55,6 +55,7 @@ export default function CategoryModal() {
       <button
         ref={buttonRef}
         onClick={() => setIsOpen(true)}
+        type="button"
         className="w-full h-full"
       >
         {isCategory}
@@ -84,6 +85,7 @@ export default function CategoryModal() {
               {category?.map((category) => (
                 <button
                   key={category.id}
+                  type="button"
                   onClick={() => categorySelect(category.name)}
                   className="flex items-center justify-center border-2 rounded-xl p-1 hover:border-gray-900"
                 >
