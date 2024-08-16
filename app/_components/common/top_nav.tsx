@@ -6,6 +6,7 @@ import ProfileModal from "../modal/profile_modal";
 import Kable_name from "@/public/asset/kable.name.png";
 import { userInfo } from "@/app/hooks/user_info";
 import { AnimatePresence } from "framer-motion";
+import Button from "./button";
 
 interface NavKind {
   kind?: "default" | "upload";
@@ -119,18 +120,10 @@ export default function TopNav({ kind = "default" }: NavKind) {
             </div>
           </div>
         </>
-      ) : (
-        <div className="flex lg:mr-12 xl:mr-16">
-          <button
-            type="submit"
-            form="uploadForm"
-            className="py-2 px-4 border-2 border-gray-700 bg-gray-700 text-white  rounded-lg"
-          >
-            작성하기
-          </button>
+      ) : /*  <div className="flex lg:mr-12 xl:mr-16">
+          <Button type="upload" form="uploadForm" text="작성 하기"></Button>
           <div className="hidden md:flex w-16"></div>
-        </div>
-      )}
+        </div> */ null}
     </nav>
   );
 }

@@ -4,12 +4,16 @@ import CategoryDiv from "@/app/_components/common/category_div";
 import Input from "@/app/_components/common/input";
 import TextArea from "@/app/_components/common/textarea";
 import TopNav from "@/app/_components/common/top_nav";
-import { MB } from "@/app/_libs/_client/utils";
-import { useRef, useState } from "react";
+import { cls, MB } from "@/app/_libs/_client/utils";
+import { useRef, useState, useTransition } from "react";
+import { useFormState, useFormStatus } from "react-dom";
+import { uploadItem } from "./action";
+import Button from "@/app/_components/common/button";
 
 export default function Upload() {
   const [preview, setPreview] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [state, action] = useFormState(uploadItem, null);
 
   //파일 크기 검사
   const isOversizeImage = (file: File): boolean => {
@@ -20,8 +24,8 @@ export default function Upload() {
     return false;
   };
 
-  // 이벤트에서 파일 목록을 가져옴
   //사진 추가 로직
+  // 이벤트에서 파일 목록을 가져옴
   const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { files },
@@ -56,6 +60,19 @@ export default function Upload() {
     }
   };
 
+  //form의 pending 상태를 감지
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // 기본 폼 제출 동작 방지
+
+    startTransition(() => {
+      action(new FormData(event.currentTarget)); // 폼 데이터로 action 실행
+    });
+  };
+
+  console.log("image Errors:", state?.fieldErrors.image);
+
   return (
     <>
       <TopNav kind="upload" />
@@ -68,8 +85,23 @@ export default function Upload() {
         <div className="col-span-full md:col-span-8 ">
           <form
             id="uploadForm"
-            /* action={action} */ className="relative px-4 pt-4 mb-5 h-full"
+            onSubmit={handleSubmit}
+            action={action}
+            className="relative px-4 pt-4 mb-5 h-full"
           >
+            <button
+              type="submit"
+              disabled={isPending}
+              className={cls(
+                "absolute right-2 md:-right-8 -top-14 py-2 px-4 border-2 border-gray-700 bg-gray-700 text-white rounded-lg  z-[51]",
+                isPending
+                  ? "bg-gray-400"
+                  : "bg-blue-500 hover:bg-blue-900 hover:border-blue-900"
+              )}
+            >
+              {isPending ? "업로드 중.." : "작성 하기"}
+            </button>
+
             <div>
               <div>
                 {/* label로 input을 감싸고 hidden으로 input을 감춰주면 이쁜 input이 된다 */}
@@ -94,13 +126,15 @@ export default function Upload() {
                         />
                       </svg>
                       <span>사진을 추가해주세요.</span>
-                      {/* {state?.fieldErrors.photo} */}
+                      <span className="text-red-500">
+                        {state?.fieldErrors.image}
+                      </span>
                     </>
                   ) : null}
 
                   <input
                     onChange={onImageChange}
-                    name="photo"
+                    name="image"
                     className="hidden z-30"
                     type="file"
                     accept="image/*"
@@ -130,14 +164,14 @@ export default function Upload() {
                 )}
               </div>
 
-              <CategoryDiv />
+              <CategoryDiv errors={state?.fieldErrors.category} />
 
               <Input
                 label="제목"
                 name="title"
                 type="text"
                 placeholder="제목"
-                /* errors={state?.fieldErrors.title} */
+                errors={state?.fieldErrors.title}
               />
 
               <div className="mt-5 pb-20 block text-sm font-medium">
@@ -145,10 +179,16 @@ export default function Upload() {
                   name="description"
                   label="내용"
                   labelName="textArea"
-                  /* errors={state?.fieldErrors.description} */
+                  errors={state?.fieldErrors.description}
                 />
               </div>
             </div>
+
+            {isPending ? (
+              <div className="fixed flex inset-0 items-center justify-center bg-black opacity-50 z-[99]">
+                <span className="text-white">업로드 중...</span>
+              </div>
+            ) : null}
           </form>
         </div>
 

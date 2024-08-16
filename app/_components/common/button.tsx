@@ -95,12 +95,14 @@ export default function Button({
     </button>
   ) : type === "upload" ? (
     <button
+      type="submit"
       disabled={pending}
       {...rest}
       className={cls(
-        "mt-3 w-full text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none",
-        large ? "py-3 text-base" : "py-2 text-sm",
-        pending ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-900"
+        "py-2 px-4 border-2 border-gray-700 bg-gray-700 text-white  rounded-lg",
+        pending
+          ? "bg-gray-400"
+          : "bg-blue-500 hover:bg-blue-900 hover:border-blue-900"
       )}
     >
       {pending ? "업로드 중.." : text}

@@ -1,6 +1,7 @@
 interface TextAreaProps {
   label?: string;
   name?: string;
+  errors?: string[];
   [key: string]: any;
 }
 
@@ -8,6 +9,7 @@ export default function TextArea({
   label,
   labelName,
   name,
+  errors = [],
   ...rest
 }: TextAreaProps) {
   return (
@@ -28,6 +30,15 @@ export default function TextArea({
         name={name}
         {...rest}
       />
+
+      {errors?.map((error, index) => (
+        <span
+          key={index}
+          className="flex flex-col pt-1 pl-1 text-red-500 text-xs font-semibold"
+        >
+          {error}
+        </span>
+      ))}
     </div>
   );
 }

@@ -1,10 +1,14 @@
-"use client";
+/* "use client";
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCategoryInfo } from "@/app/hooks/category_info";
 
-export default function CategoryModal() {
+interface CategoryErrorProps {
+  errors?: string[];
+}
+
+export default function CategoryModal({ errors = [] }: CategoryErrorProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isCategory, setIsCategory] = useState("카테고리");
   const [isDisabled, SetIsDisabled] = useState(false); //버튼 활성화
@@ -12,7 +16,7 @@ export default function CategoryModal() {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const { data: category } = useCategoryInfo();
 
-  /* useRef로 버튼의 위치를 파악하고 모달의 위치를 업데이트 하는 함수 */
+
   const updateModalPosition = () => {
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
@@ -23,7 +27,7 @@ export default function CategoryModal() {
     }
   };
 
-  /* 모달의 상태(isOpen)가 변경될 때마다 모달의 위치를 초기화, 창크기 변경될 때 위치 업데이트 */
+  
   useEffect(() => {
     if (isOpen) {
       updateModalPosition();
@@ -52,6 +56,8 @@ export default function CategoryModal() {
 
   return (
     <>
+      
+      <input type="hidden" name="category" value={isCategory} required />
       <button
         ref={buttonRef}
         onClick={() => setIsOpen(true)}
@@ -60,6 +66,16 @@ export default function CategoryModal() {
       >
         {isCategory}
       </button>
+
+      {errors?.map((error, index) => (
+        <span
+          key={index}
+          className="flex flex-col pt-1 pl-1 text-red-500 text-xs font-semibold"
+        >
+          {error}
+        </span>
+      ))}
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -99,3 +115,4 @@ export default function CategoryModal() {
     </>
   );
 }
+ */
