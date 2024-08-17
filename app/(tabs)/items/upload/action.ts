@@ -31,9 +31,8 @@ const itemSchema = z.object({
 });
 
 export async function uploadItem(_: any, formData: FormData) {
-  console.log("FormData:", Object.fromEntries(formData.entries()));
-
-  await new Promise((resolve) => setTimeout(resolve, 10000));
+  /* pending 상태 유지 */
+  await new Promise((resolve) => setTimeout(resolve, 5000));
 
   const data = {
     image: formData.get("image"),

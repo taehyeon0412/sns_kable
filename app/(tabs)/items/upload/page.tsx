@@ -9,11 +9,13 @@ import { useRef, useState, useTransition } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { uploadItem } from "./action";
 import Button from "@/app/_components/common/button";
+import UploadLayout from "@/app/_components/common/upload_overlay";
 
 export default function Upload() {
   const [preview, setPreview] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [state, action] = useFormState(uploadItem, null);
+  const [imageError, setImageError] = useState<string | null>(null);
 
   //파일 크기 검사
   const isOversizeImage = (file: File): boolean => {
@@ -60,19 +62,6 @@ export default function Upload() {
     }
   };
 
-  //form의 pending 상태를 감지
-  const [isPending, startTransition] = useTransition();
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // 기본 폼 제출 동작 방지
-
-    startTransition(() => {
-      action(new FormData(event.currentTarget)); // 폼 데이터로 action 실행
-    });
-  };
-
-  console.log("image Errors:", state?.fieldErrors.image);
-
   return (
     <>
       <TopNav kind="upload" />
@@ -85,22 +74,12 @@ export default function Upload() {
         <div className="col-span-full md:col-span-8 ">
           <form
             id="uploadForm"
-            onSubmit={handleSubmit}
             action={action}
             className="relative px-4 pt-4 mb-5 h-full"
           >
-            <button
-              type="submit"
-              disabled={isPending}
-              className={cls(
-                "absolute right-2 md:-right-8 -top-14 py-2 px-4 border-2 border-gray-700 bg-gray-700 text-white rounded-lg  z-[51]",
-                isPending
-                  ? "bg-gray-400"
-                  : "bg-blue-500 hover:bg-blue-900 hover:border-blue-900"
-              )}
-            >
-              {isPending ? "업로드 중.." : "작성 하기"}
-            </button>
+            <div className="absolute right-2 md:-right-8 -top-14 z-[51]">
+              <Button text="작성 완료" type="upload" />
+            </div>
 
             <div>
               <div>
@@ -126,9 +105,10 @@ export default function Upload() {
                         />
                       </svg>
                       <span>사진을 추가해주세요.</span>
-                      <span className="text-red-500">
-                        {state?.fieldErrors.image}
-                      </span>
+
+                      {imageError && (
+                        <span className="text-red-500">{imageError}</span>
+                      )}
                     </>
                   ) : null}
 
@@ -138,6 +118,7 @@ export default function Upload() {
                     className="hidden z-30"
                     type="file"
                     accept="image/*"
+                    ref={fileInputRef}
                   />
                 </label>
 
@@ -184,11 +165,7 @@ export default function Upload() {
               </div>
             </div>
 
-            {isPending ? (
-              <div className="fixed flex inset-0 items-center justify-center bg-black opacity-50 z-[99]">
-                <span className="text-white">업로드 중...</span>
-              </div>
-            ) : null}
+            <UploadLayout />
           </form>
         </div>
 
