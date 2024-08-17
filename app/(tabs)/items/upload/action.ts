@@ -20,6 +20,15 @@ function createFieldError(field: string, message: string) {
   };
 }
 
+//sharp 모듈을 로드
+//실패하면(예: 환경에서 모듈을 사용할 수 없는 경우) 오류를 기록하고 대체 메커니즘을 계속 사용
+let sharp: typeof import("sharp");
+try {
+  sharp = require("sharp");
+} catch (error) {
+  console.error("로드 실패 sharp module:", error);
+}
+
 export async function uploadItem(_: any, formData: FormData) {
   /* action 반응이 너무 빨라서 화면이 튀는 것 처럼 보여서 0.2초 딜레이를 줌 */
   await new Promise((resolve) => setTimeout(resolve, 200));
@@ -51,17 +60,29 @@ export async function uploadItem(_: any, formData: FormData) {
   if (data.image) {
     try {
       const imageData = await data.image.arrayBuffer();
-      const buffer = Buffer.from(imageData);
+
+      let optimizedImage: Buffer;
+
+      // Sharp를 사용하여 이미지 최적화 if문 사용
+      if (sharp) {
+        optimizedImage = await sharp(Buffer.from(imageData))
+          .webp({ quality: 95 }) // WebP 형식으로 변환 및 압축 품질 설정
+          .toBuffer();
+      } else {
+        //sharp가 정상 동작하지 않으면 그대로 넣는 대체 구문
+        optimizedImage = Buffer.from(imageData);
+      }
+
       const fileName = data.image.name
         ? data.image.name.split(".")[0]
         : "default";
-      const imgName = `${Date.now()}-${fileName}.png`;
+      const imgName = `${Date.now()}-${fileName}.webp`;
 
       const params = {
         Bucket: bucketName!,
         Key: imgName,
-        Body: buffer,
-        ContentType: data.image.type,
+        Body: optimizedImage,
+        ContentType: "image/webp",
       };
 
       const uploadResult = await s3.upload(params).promise();
