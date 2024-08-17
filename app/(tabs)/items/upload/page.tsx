@@ -15,7 +15,7 @@ export default function Upload() {
   const [preview, setPreview] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [state, action] = useFormState(uploadItem, null);
-  const [imageError, setImageError] = useState<string | null>(null);
+  /* const [imageError, setImageError] = useState<string | null>(null); */
 
   //파일 크기 검사
   const isOversizeImage = (file: File): boolean => {
@@ -106,8 +106,10 @@ export default function Upload() {
                       </svg>
                       <span>사진을 추가해주세요.</span>
 
-                      {imageError && (
-                        <span className="text-red-500">{imageError}</span>
+                      {state?.fieldErrors.image && (
+                        <span className="text-red-500">
+                          {state?.fieldErrors.image}
+                        </span>
                       )}
                     </>
                   ) : null}

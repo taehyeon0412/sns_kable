@@ -34,7 +34,7 @@ export default function TextArea({
       {errors?.map((error, index) => (
         <span
           key={index}
-          className="flex flex-col pt-1 pl-1 text-red-500 text-xs font-semibold"
+          className="flex flex-col pl-1 text-red-500 text-xs font-semibold"
         >
           {error}
         </span>

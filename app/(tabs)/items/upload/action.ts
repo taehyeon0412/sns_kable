@@ -2,104 +2,115 @@
 
 import db from "@/app/_libs/_server/db";
 import getSession from "@/app/_libs/_server/session";
-import AWS from "aws-sdk";
+import { bucketName, s3 } from "@/app/_libs/config/awsConfig";
+import { itemSchema } from "@/app/_libs/schema/itemSchema";
 import { redirect } from "next/navigation";
-import { z } from "zod";
 
-//AWS 설정
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION, // .env.local에서 설정한 리전 값 사용
-});
-
-const bucketName = process.env.AWS_BUCKET_NAME;
-
-if (!bucketName) {
-  throw new Error("AWS_BUCKET_NAME is not defined");
+// 공통 예외 처리 함수
+function createFieldError(field: string, message: string) {
+  return {
+    fieldErrors: {
+      title: [],
+      category: [],
+      description: [],
+      image: [],
+      session: [],
+      [field]: [message],
+    },
+  };
 }
 
-//zod 설정
-const itemSchema = z.object({
-  image: z.string().min(1, { message: "사진을 추가해 주세요." }),
-
-  title: z.string().min(1, { message: "제목을 입력해주세요." }),
-
-  category: z.string().min(1, { message: "카테고리를 선택해주세요." }),
-
-  description: z.string().min(1, { message: "설명을 입력해주세요." }),
-});
-
 export async function uploadItem(_: any, formData: FormData) {
-  /* pending 상태 유지 */
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+  /* action 반응이 너무 빨라서 화면이 튀는 것 처럼 보여서 0.2초 딜레이를 줌 */
+  await new Promise((resolve) => setTimeout(resolve, 200));
 
   const data = {
-    image: formData.get("image"),
+    image: formData.get("image") as File | null,
     title: formData.get("title"),
     category: formData.get("category"),
     description: formData.get("description"),
   };
 
-  if (data.image instanceof File) {
-    const photoData = await data.image.arrayBuffer();
-
-    const buffer = Buffer.from(photoData);
-
-    const imgName = `${Date.now()}-${data.image.name.split(".")[0]}.png`;
-
-    const params = {
-      Bucket: bucketName!, // bucketName이 undefined가 아님을 명시적으로 알림
-      Key: imgName, // 고유한 파일 이름 생성
-      Body: buffer,
-      ContentType: "image/png",
-    };
-
-    try {
-      const uploadResult = await s3.upload(params).promise();
-      data.image = uploadResult.Location;
-    } catch (error) {
-      console.error("실패지점:", error);
-    }
-  }
-
+  // Zod를 사용하여 입력된 데이터 유효성 검사
   const result = itemSchema.safeParse(data);
   if (!result.success) {
-    return result.error.flatten();
-  } else {
-    const session = await getSession();
-    if (session.id) {
-      //category 이름으로 ID 찾기
-      //현재 input으로 받아온 값은 카테고리의 이름이라서 id를 찾아야됨
-      const category = await db.category.findUnique({
-        where: { name: result.data.category },
-        select: { id: true }, // id만 선택하여 반환
-      });
-
-      await db.item.create({
-        data: {
-          title: result.data.title,
-          description: result.data.description,
-          category: {
-            connect: {
-              id: category?.id,
-            },
-          },
-          image: result.data.image,
-          user: {
-            connect: {
-              id: session.id,
-            },
-          },
-        },
-        select: {
-          id: true,
-        },
-      });
-      /*  revalidateTag("home-detail");*/
-      redirect(`/home`);
-    }
+    const fieldErrors = result.error.flatten().fieldErrors;
+    return {
+      fieldErrors: {
+        title: fieldErrors.title ?? [], //오류가 없을 때는 빈배열로 초기화
+        category: fieldErrors.category ?? [],
+        description: fieldErrors.description ?? [],
+        image: fieldErrors.image ?? [],
+        session: [],
+      },
+    };
   }
 
-  console.log(result);
+  //aws 이미지 업로드 처리
+  let imageUrl = "";
+  if (data.image) {
+    try {
+      const imageData = await data.image.arrayBuffer();
+      const buffer = Buffer.from(imageData);
+      const fileName = data.image.name
+        ? data.image.name.split(".")[0]
+        : "default";
+      const imgName = `${Date.now()}-${fileName}.png`;
+
+      const params = {
+        Bucket: bucketName!,
+        Key: imgName,
+        Body: buffer,
+        ContentType: data.image.type,
+      };
+
+      const uploadResult = await s3.upload(params).promise();
+      imageUrl = uploadResult.Location;
+    } catch (error) {
+      return createFieldError("image", "이미지 업로드에 실패했습니다.");
+    }
+  } else {
+    return createFieldError("image", "유효한 이미지 파일이 필요합니다.");
+  }
+
+  // 사용자 세션 확인 및 예외 처리
+  const session = await getSession();
+  if (!session.id) {
+    return createFieldError("session", "사용자 세션을 확인할 수 없습니다.");
+  }
+
+  // db에서 현재 선택한 값과 같은 카테고리 찾기
+  const category = await db.category.findUnique({
+    where: { name: data.category as string },
+    select: { id: true },
+  });
+
+  // image 예외 처리
+  if (!imageUrl) {
+    return createFieldError("image", "이미지 URL 생성에 실패했습니다.");
+  }
+
+  // db에 item 생성
+  await db.item.create({
+    data: {
+      title: data.title as string, //type 오류 때문에 string으로 명시해줌
+      description: data.description as string,
+      category: {
+        connect: {
+          id: category?.id,
+        },
+      },
+      image: imageUrl,
+      user: {
+        connect: {
+          id: session.id,
+        },
+      },
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  redirect(`/home`);
 }
