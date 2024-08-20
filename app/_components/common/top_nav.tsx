@@ -51,7 +51,7 @@ export default function TopNav({ kind = "default" }: NavKind) {
             </Link>
           </div>
           <div className="md:hidden flex items-center space-x-2">
-            <Link href="#" className="text-white">
+            <Link href="#" className="text-blue-400">
               메뉴
             </Link>
           </div>

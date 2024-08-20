@@ -12,6 +12,12 @@ const config: Config = {
       colors: {
         "custom-blue": "#1B2B44",
       },
+      gridTemplateColumns: {
+        "14": "repeat(14, minmax(0, 1fr))",
+        "16": "repeat(16, minmax(0, 1fr))",
+        "18": "repeat(18, minmax(0, 1fr))",
+        "20": "repeat(20, minmax(0, 1fr))",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -19,6 +25,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };
 export default config;
