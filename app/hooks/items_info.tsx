@@ -6,7 +6,15 @@ export interface ItemsInfo {
   image: string;
   description: string;
   categoryId: string;
-  user: string;
+  category: {
+    name: string;
+  };
+  user: {
+    username: string;
+    profile_img: string;
+  };
+  created_at: Date;
+  views: number;
 }
 
 export function useItemsInfo() {

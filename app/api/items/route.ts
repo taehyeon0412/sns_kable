@@ -12,6 +12,12 @@ export async function GET() {
             name: true,
           },
         },
+        user: {
+          select: {
+            username: true,
+            profile_img: true,
+          },
+        },
       },
     });
 
