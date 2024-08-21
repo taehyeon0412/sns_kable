@@ -17,6 +17,9 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    appDir: true, // app 디렉토리와 관련된 기능을 활성화
+  },
 };
 
 export default nextConfig;

@@ -4,12 +4,17 @@ import TopNav from "@/app/_components/common/top_nav";
 import { formatToTimeAgo } from "@/app/_libs/_client/utils";
 import { useItemDetailInfo } from "@/app/hooks/item_detail_info";
 import Image from "next/image";
+import Loading from "./loading";
 
 export default function ItemDetail({ params }: { params: { id: string } }) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
-  const { data: item } = useItemDetailInfo(itemId);
+  const { data: item, isLoading } = useItemDetailInfo(itemId);
 
-  console.log(itemId);
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  //console.log(itemId);
 
   return (
     <>

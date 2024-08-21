@@ -5,10 +5,15 @@ import { cls, formatToTimeAgo } from "@/app/_libs/_client/utils";
 import { useItemsInfo } from "@/app/hooks/items_info";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Loading from "./loading";
 
 export default function Home() {
-  const { data: items } = useItemsInfo();
+  const { data: items, isLoading } = useItemsInfo();
   const router = useRouter();
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   const onClickUpload = () => {
     router.push("/items/upload");
@@ -23,7 +28,7 @@ export default function Home() {
       <TopNav />
 
       <div className="nav_h layout_px grid grid-cols-1 md:grid-cols-14 w-full min-h-screen">
-        <div className="hidden gap-2 px-2 md:flex md:flex-col xl:flex-row md:col-span-3 bg-red-100 items-center xl:items-start xl:justify-center">
+        <div className="hidden gap-2 px-2 md:flex md:flex-col xl:flex-row md:col-span-3 items-center xl:items-start xl:justify-center">
           <button
             onClick={onClickUpload}
             className="mt-6 text-white border-transparent w-[80%] bg-blue-400 hover:bg-blue-600 border-2 rounded-md py-2"
