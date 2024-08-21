@@ -6,6 +6,7 @@ import { useItemsInfo } from "@/app/hooks/items_info";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Loading from "./loading";
+import { useItemDetailInfo } from "@/app/hooks/item_detail_info";
 
 export default function Home() {
   const { data: items, isLoading } = useItemsInfo();
@@ -81,7 +82,7 @@ export default function Home() {
                             strokeWidth="1.5"
                           ></path>
                         </svg>
-                        50
+                        {item.heartCount}
                       </span>
                     </div>
 
@@ -165,7 +166,7 @@ export default function Home() {
                             strokeWidth="1.5"
                           ></path>
                         </svg>
-                        50
+                        {item.heartCount}
                       </span>
                     </div>
 

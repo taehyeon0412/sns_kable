@@ -21,21 +21,24 @@ export async function GET() {
       },
     });
 
-    if (itemsInfo) {
-      return NextResponse.json(itemsInfo, { status: 200 });
-    } else {
-      return NextResponse.json(
-        {
-          message: "아이템을 찾을 수 없습니다. API 오류",
-        },
-        { status: 404 }
-      );
-    }
-  } catch (error) {
-    console.error("Error fetching itemsInfo:", error);
-    return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
+    //Promise.all => 비동기 작업을 병렬로 처리하고
+    //모든 하트 개수 계산이 완료되면, 결과를 배열(itemsHeartCount)로 반환함
+    const itemsHeartCount = await Promise.all(
+      itemsInfo.map(async (item) => {
+        const heartCount = await prisma.heart.count({
+          where: { itemId: item.id },
+        });
+
+        return {
+          ...item,
+          heartCount,
+        };
+      })
     );
+
+    return NextResponse.json(itemsHeartCount, { status: 200 });
+  } catch (error) {
+    console.error("아이템 정보를 가져오는 중 오류 발생:", error);
+    return NextResponse.json({ message: "서버 내부 오류" }, { status: 500 });
   }
 }
