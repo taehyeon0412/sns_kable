@@ -6,6 +6,9 @@ const prisma = new PrismaClient();
 export async function GET() {
   try {
     const itemsInfo = await prisma.item.findMany({
+      orderBy: {
+        created_at: "desc",
+      },
       include: {
         category: {
           select: {
