@@ -6,20 +6,23 @@ import { useItemDetailInfo } from "@/app/hooks/item_detail_info";
 import Image from "next/image";
 import Loading from "./loading";
 import HeartButton from "@/app/_components/common/heart_button";
+import { userInfo } from "@/app/hooks/user_info";
+import { useState } from "react";
+import DeleteDiv from "@/app/_components/common/delete_div";
 
 export default function ItemDetail({ params }: { params: { id: string } }) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
   const { data: item, isLoading } = useItemDetailInfo(itemId);
+  const { data: user } = userInfo();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (isLoading) {
     return <Loading />;
   }
 
-  //console.log(itemId);
-
-  /*  console.log(item?.isHearted);
-  console.log(item?.heartCount); */
-
+  /*  console.log("로그인 유저 아이디 : ", user?.id);
+  console.log("아이템 글쓴이 아이디 : ", item?.user.id);
+ */
   return (
     <>
       <TopNav />
@@ -79,9 +82,19 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
                   />
 
                   {/* 팔로우 */}
-                  <div className="bg-blue-400 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
-                    팔로우
-                  </div>
+                  {user?.id === item.user.id ? (
+                    <div className="flex justify-center items-center gap-1">
+                      <div className="bg-blue-400 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
+                        수정
+                      </div>
+
+                      <DeleteDiv />
+                    </div>
+                  ) : (
+                    <div className="bg-blue-400 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
+                      팔로우
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

@@ -10,6 +10,7 @@ export interface ItemDetailInfo {
     name: string;
   };
   user: {
+    id: number;
     username: string;
     profile_img: string;
   };
