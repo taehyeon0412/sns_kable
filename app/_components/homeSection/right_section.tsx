@@ -1,6 +1,6 @@
 export default function RightSection() {
   return (
-    <div className="hidden md:flex flex-col md:col-span-3 gap-3">
+    <>
       <span className="flex mt-10 w-full justify-center">
         지금 인기있는 글 🔥
       </span>
@@ -20,6 +20,6 @@ export default function RightSection() {
         <div>인기글</div>
         <div>인기글</div>
       </div>
-    </div>
+    </>
   );
 }

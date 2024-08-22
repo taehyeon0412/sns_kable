@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
+import { ItemsInfoProps } from "./items_info";
 
 async function deleteItemById(itemId: number): Promise<void> {
   const response = await fetch(`/api/items/${itemId}`, {
@@ -16,29 +17,46 @@ export function useDeleteItem() {
 
   return useMutation({
     mutationFn: deleteItemById,
-    // 낙관적 업데이트 구현
     onMutate: async (itemId: number) => {
-      // 이전 상태 스냅샷을 저장
       await queryClient.cancelQueries(["items"]);
-      const previousItems = queryClient.getQueryData<
-        { id: number; title: string }[]
-      >(["items"]);
 
-      // 낙관적으로 UI 업데이트 (아이템을 즉시 제거)
-      queryClient.setQueryData(["items"], (oldItems: any) =>
-        oldItems?.filter((item: { id: number }) => item.id !== itemId)
+      // 무한 스크롤을 고려한 데이터 구조 처리
+      const previousData = queryClient.getQueryData<{
+        pages: ItemsInfoProps[][];
+        pageParams: number[];
+      }>(["items"]);
+
+      if (!previousData) return;
+
+      //데이터 업데이트, filter로 삭제할 아이템을 제외하고 새로운 데이터 생성
+      const updatedPages = previousData.pages.map((page) =>
+        page.filter((item) => item.id !== itemId)
       );
 
-      // 이전 상태를 반환하여 onError에서 복원할 수 있도록 함
-      return { previousItems };
+      // 캐시 업데이트, updatedPages를 이용하여 즉시 업데이트 상태 반영
+      queryClient.setQueryData(["items"], {
+        ...previousData,
+        pages: updatedPages,
+      });
+
+      return { previousData };
     },
     onError: (err, itemId, context) => {
-      // 에러 발생 시 이전 상태로 롤백
-      queryClient.setQueryData(["items"], context?.previousItems);
+      if (context?.previousData) {
+        queryClient.setQueryData(["items"], context.previousData);
+      }
     },
     onSettled: () => {
-      // 요청이 완료되면(성공 또는 실패) 캐시를 무효화하여 최신 데이터를 가져옴
       queryClient.invalidateQueries(["items"]);
     },
   });
 }
+
+/* 
+낙관적 업데이트: 아이템 삭제를 요청하기 전에 캐시에서 해당 아이템을 제거하여, 
+사용자에게 즉시 삭제된 것처럼 보이게 합니다.
+
+오류 처리: 삭제 요청이 실패한 경우, 이전의 캐시 상태로 롤백하여 데이터의 일관성을 유지합니다.
+
+무효화 및 갱신: 삭제 작업이 완료된 후, 관련된 쿼리를 무효화하여 최신 데이터를 다시 가져옵니다.
+*/
