@@ -1,4 +1,5 @@
 import getSession from "@/app/_libs/_server/session";
+import { bucketName, s3 } from "@/app/_libs/config/awsConfig";
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
@@ -29,6 +30,7 @@ export async function GET(
         },
         user: {
           select: {
+            id: true,
             username: true,
             profile_img: true,
           },
@@ -79,6 +81,87 @@ export async function GET(
     console.error("Error fetching item detail:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}
+
+//DELETE 요청
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const itemId = parseInt(params.id, 10);
+
+  if (isNaN(itemId)) {
+    return NextResponse.json(
+      { message: "아이템ID가 존재하지 않습니다." },
+      { status: 400 }
+    );
+  }
+
+  const session = await getSession();
+  const userId = session.id;
+
+  if (!userId) {
+    return NextResponse.json(
+      { message: "인증되지 않은 사용자입니다." },
+      { status: 401 }
+    );
+  }
+
+  const item = await prisma.item.findUnique({
+    where: {
+      id: itemId,
+      userId,
+    },
+    select: {
+      id: true,
+      image: true,
+    },
+  });
+
+  if (!item) {
+    return NextResponse.json(
+      { message: "아이템을 찾을 수 없거나 삭제 권한이 없습니다." },
+      { status: 404 }
+    );
+  }
+
+  // S3에서 이미지 삭제
+  try {
+    await s3
+      .deleteObject({
+        Bucket: bucketName!,
+        Key: item.image!,
+      })
+      .promise();
+  } 
+  catch (error) {
+    console.error("이미지 삭제 중 오류 발생:", error);
+    return NextResponse.json(
+      { message: "이미지 삭제 중 오류가 발생했습니다." },
+      { status: 500 }
+    );
+  }
+
+  // DB에서 아이템 삭제
+  try {
+    await prisma.item.delete({
+      where: {
+        id: itemId,
+        userId,
+      },
+    });
+
+    return NextResponse.json(
+      { message: "아이템이 성공적으로 삭제되었습니다." },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("아이템 삭제 중 오류 발생:", error);
+    return NextResponse.json(
+      { message: "아이템 삭제 중 오류가 발생했습니다." },
       { status: 500 }
     );
   }

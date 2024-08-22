@@ -7,22 +7,19 @@ import Image from "next/image";
 import Loading from "./loading";
 import HeartButton from "@/app/_components/common/heart_button";
 import { userInfo } from "@/app/hooks/user_info";
-import { useState } from "react";
 import DeleteDiv from "@/app/_components/common/delete_div";
 
 export default function ItemDetail({ params }: { params: { id: string } }) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
   const { data: item, isLoading } = useItemDetailInfo(itemId);
   const { data: user } = userInfo();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (isLoading) {
     return <Loading />;
   }
 
-  /*  console.log("로그인 유저 아이디 : ", user?.id);
-  console.log("아이템 글쓴이 아이디 : ", item?.user.id);
- */
+  /*console.log(item?.image); */
+
   return (
     <>
       <TopNav />
@@ -88,7 +85,7 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
                         수정
                       </div>
 
-                      <DeleteDiv />
+                      <DeleteDiv itemId={item.id} />
                     </div>
                   ) : (
                     <div className="bg-blue-400 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
