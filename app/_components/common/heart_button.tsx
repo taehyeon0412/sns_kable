@@ -17,13 +17,13 @@ export default function HeartButton({
 
   const { mutate } = heartAction(itemId);
 
-  const onClick = () => {
-    mutate(undefined, {
-      onSuccess: (data) => {
-        setIsHearted(data.isHearted);
-        setHeartCount(data.heartCount);
-      },
-    });
+  const HeartClick = () => {
+    //ui 낙관적 업데이트
+    setIsHearted((prev) => !prev);
+    setHeartCount((prev) => prev + (isHearted ? -1 : 1));
+
+    // mutation 실행(서버에 하트 상태를 변경하는 요청을 보냄)
+    mutate();
   };
 
   /*   console.log(isHearted);
@@ -31,7 +31,7 @@ export default function HeartButton({
 
   return (
     <div
-      onClick={onClick}
+      onClick={HeartClick}
       className={`flex gap-1 justify-center items-center text-white py-2 px-4 rounded-lg hover:cursor-pointer hover:bg-blue-700 ${
         isHearted ? "bg-blue-400" : "bg-blue-500 "
       }`}
