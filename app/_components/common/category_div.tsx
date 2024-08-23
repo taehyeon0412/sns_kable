@@ -4,13 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCategoryInfo } from "@/app/hooks/category_info";
 
-interface CategoryErrorProps {
+interface CategoryDivProps {
   errors?: string[];
+  initCategory?: string;
 }
 
-export default function CategoryDiv({ errors }: CategoryErrorProps) {
+export default function CategoryDiv({
+  errors,
+  initCategory,
+}: CategoryDivProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCategory, setIsCategory] = useState("");
+  const [isCategory, setIsCategory] = useState(`${initCategory}` || "");
   const [isDisabled, SetIsDisabled] = useState(false); //버튼 활성화
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -53,6 +57,13 @@ export default function CategoryDiv({ errors }: CategoryErrorProps) {
       }, 300);
     }
   };
+
+  //page.tsx에서 수정 버튼 눌렀을 때 initCategory가 변경 되면 상태 업데이트
+  useEffect(() => {
+    if (initCategory) {
+      setIsCategory(initCategory);
+    }
+  }, [initCategory]);
 
   return (
     <div className="flex items-center gap-4">

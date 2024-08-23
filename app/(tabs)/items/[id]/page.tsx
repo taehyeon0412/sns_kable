@@ -8,6 +8,7 @@ import Loading from "./loading";
 import HeartButton from "@/app/_components/common/heart_button";
 import { userInfo } from "@/app/hooks/user_info";
 import DeleteDiv from "@/app/_components/common/delete_div";
+import Link from "next/link";
 
 export default function ItemDetail({ params }: { params: { id: string } }) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
@@ -81,9 +82,11 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
                   {/* 팔로우 */}
                   {user?.id === item.user.id ? (
                     <div className="flex justify-center items-center gap-1">
-                      <div className="bg-blue-400 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
-                        수정
-                      </div>
+                      <Link href={`/items/upload?id=${item.id}`}>
+                        <div className="bg-blue-400 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
+                          수정
+                        </div>
+                      </Link>
 
                       <DeleteDiv itemId={item.id} />
                     </div>

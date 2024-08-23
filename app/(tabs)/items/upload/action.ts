@@ -3,7 +3,10 @@
 import db from "@/app/_libs/_server/db";
 import getSession from "@/app/_libs/_server/session";
 import { bucketName, s3 } from "@/app/_libs/config/awsConfig";
-import { itemSchema } from "@/app/_libs/schema/itemSchema";
+import {
+  itemUpdateSchema,
+  itemUploadSchema,
+} from "@/app/_libs/schema/itemSchema";
 import { redirect } from "next/navigation";
 
 // 공통 예외 처리 함수
@@ -33,7 +36,12 @@ export async function uploadItem(_: any, formData: FormData) {
   /* action 반응이 너무 빨라서 화면이 튀는 것 처럼 보여서 0.2초 딜레이를 줌 */
   await new Promise((resolve) => setTimeout(resolve, 200));
 
+  const isUpdate = !!formData.get("id"); // ID가 있으면 수정 모드
+
+  const schema = isUpdate ? itemUpdateSchema : itemUploadSchema;
+
   const data = {
+    id: formData.get("id"),
     image: formData.get("image") as File | null,
     title: formData.get("title"),
     category: formData.get("category"),
@@ -41,7 +49,7 @@ export async function uploadItem(_: any, formData: FormData) {
   };
 
   // Zod를 사용하여 입력된 데이터 유효성 검사
-  const result = itemSchema.safeParse(data);
+  const result = schema.safeParse(data);
   if (!result.success) {
     const fieldErrors = result.error.flatten().fieldErrors;
     return {
@@ -57,7 +65,7 @@ export async function uploadItem(_: any, formData: FormData) {
 
   //aws 이미지 업로드 처리
   let imageUrl = "";
-  if (data.image) {
+  if (data.image && data.image.size > 0) {
     try {
       const imageData = await data.image.arrayBuffer();
 
@@ -90,7 +98,8 @@ export async function uploadItem(_: any, formData: FormData) {
     } catch (error) {
       return createFieldError("image", "이미지 업로드에 실패했습니다.");
     }
-  } else {
+  } else if (!isUpdate) {
+    // 업로드 모드에서 이미지가 없으면 오류 처리
     return createFieldError("image", "유효한 이미지 파일이 필요합니다.");
   }
 
@@ -107,31 +116,52 @@ export async function uploadItem(_: any, formData: FormData) {
   });
 
   // image 예외 처리
-  if (!imageUrl) {
+  if (!imageUrl && !isUpdate) {
     return createFieldError("image", "이미지 URL 생성에 실패했습니다.");
   }
 
-  // db에 item 생성
-  await db.item.create({
-    data: {
-      title: data.title as string, //type 오류 때문에 string으로 명시해줌
-      description: data.description as string,
-      category: {
-        connect: {
-          id: category?.id,
+  // db에 item 생성 & 수정
+  if (isUpdate) {
+    const existingItem = await db.item.findUnique({
+      where: { id: parseInt(data.id as string) },
+      select: { image: true },
+    });
+
+    await db.item.update({
+      where: { id: parseInt(data.id as string) },
+      data: {
+        title: data.title as string, //type 오류 때문에 string으로 명시해줌
+        description: data.description as string,
+        category: {
+          connect: {
+            id: category?.id,
+          },
+        },
+        image: imageUrl || existingItem?.image, // imageUrl이 없으면 기존 이미지를 유지
+      },
+    });
+  } else {
+    await db.item.create({
+      data: {
+        title: data.title as string, //type 오류 때문에 string으로 명시해줌
+        description: data.description as string,
+        category: {
+          connect: {
+            id: category?.id,
+          },
+        },
+        image: imageUrl,
+        user: {
+          connect: {
+            id: session.id,
+          },
         },
       },
-      image: imageUrl,
-      user: {
-        connect: {
-          id: session.id,
-        },
+      select: {
+        id: true,
       },
-    },
-    select: {
-      id: true,
-    },
-  });
+    });
+  }
 
   redirect(`/home`);
 }
