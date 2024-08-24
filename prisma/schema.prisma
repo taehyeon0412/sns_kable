@@ -8,18 +8,19 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement()) //첫번째 사용자는 자동으로 1부터 시작
-  username    String   @unique
-  email       String?  @unique
+  id          Int       @id @default(autoincrement()) //첫번째 사용자는 자동으로 1부터 시작
+  username    String    @unique
+  email       String?   @unique
   password    String?
-  kakao_id    String?  @unique
-  github_id   String?  @unique
+  kakao_id    String?   @unique
+  github_id   String?   @unique
   bio         String? //자기소개
   profile_img String? // 카톡, 구글 로그인 시 프로필 사진 등록하기 위해서
-  created_at  DateTime @default(now()) //새유저가 만들어질때 그 시점의 날짜
-  updated_at  DateTime @updatedAt //수정될 때 마다 수정된 시간을 넣음
+  created_at  DateTime  @default(now()) //새유저가 만들어질때 그 시점의 날짜
+  updated_at  DateTime  @updatedAt //수정될 때 마다 수정된 시간을 넣음
   item        Item[]
   Heart       Heart[]
+  Comment     Comment[]
 }
 
 model Item {
@@ -37,7 +38,8 @@ model Item {
 
   views Int @default(0) //기본값 0
 
-  Heart Heart[]
+  Heart   Heart[]
+  Comment Comment[]
 }
 
 model Category {
@@ -57,4 +59,18 @@ model Heart {
   updated_at DateTime @updatedAt
 
   @@id(name: "id", [userId, itemId])
+}
+
+model Comment {
+  id      Int    @id @default(autoincrement())
+  payload String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  item Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  userId Int
+  itemId Int
 }
