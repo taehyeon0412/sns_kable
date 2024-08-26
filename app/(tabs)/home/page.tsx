@@ -17,7 +17,6 @@ export default function Home() {
         </div>
 
         {/* 중앙 메인 div */}
-
         <div className="col-span-full md:col-span-8 flex flex-col gap-6 my-8 px-2">
           <MainSection />
         </div>
