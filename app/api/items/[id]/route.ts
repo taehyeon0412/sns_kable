@@ -35,6 +35,19 @@ export async function GET(
             profile_img: true,
           },
         },
+        Comment: {
+          select: {
+            id: true,
+            payload: true,
+            created_at: true,
+            user: {
+              select: {
+                username: true,
+                profile_img: true,
+              },
+            },
+          },
+        },
       },
     });
 
@@ -136,8 +149,7 @@ export async function DELETE(
         Key: item.image!,
       })
       .promise();
-  } 
-  catch (error) {
+  } catch (error) {
     console.error("이미지 삭제 중 오류 발생:", error);
     return NextResponse.json(
       { message: "이미지 삭제 중 오류가 발생했습니다." },

@@ -1,5 +1,15 @@
 import { useQuery } from "react-query";
 
+export interface CommentInfo {
+  id: number;
+  payload: string;
+  created_at: Date;
+  user: {
+    username: string;
+    profile_img: string;
+  };
+}
+
 export interface ItemDetailInfo {
   id: number;
   title: string;
@@ -18,6 +28,7 @@ export interface ItemDetailInfo {
   views: number;
   heartCount: number;
   isHearted: boolean;
+  Comment: CommentInfo[];
 }
 
 export function useItemDetailInfo(itemId: number) {
