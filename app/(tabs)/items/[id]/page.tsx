@@ -103,7 +103,9 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
             {/* 본문 선 */}
             <div className="border-b border-gray-300"></div>
 
-            <div className="w-full break-all">{item.description}</div>
+            <div className="w-full break-all whitespace-pre-line">
+              {item.description}
+            </div>
 
             {/* 작성자 카드 */}
             <div className="grid grid-cols-12 w-full min-h-32 mx-auto bg-slate-100">

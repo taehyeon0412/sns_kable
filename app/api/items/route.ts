@@ -29,6 +29,11 @@ export async function GET(request: NextRequest) {
             profile_img: true,
           },
         },
+        Comment: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
 

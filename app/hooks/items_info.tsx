@@ -13,6 +13,7 @@ export interface ItemsInfoProps {
     username: string;
     profile_img: string;
   };
+  Comment: Comment[];
   created_at: Date;
   views: number;
   heartCount: number;

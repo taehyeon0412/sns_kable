@@ -113,7 +113,7 @@ export default function MainSection() {
                       strokeWidth="1.5"
                     ></path>
                   </svg>
-                  5
+                  {item.Comment.length}
                 </span>
               </div>
             </div>
@@ -134,7 +134,7 @@ export default function MainSection() {
             </div>
 
             <div>
-              <span className="text-gray-500 break-all line-clamp-3">
+              <span className="text-gray-500 break-all line-clamp-3 whitespace-pre-line">
                 {item.description}
               </span>
             </div>
