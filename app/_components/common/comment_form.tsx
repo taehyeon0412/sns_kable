@@ -4,6 +4,7 @@ import Image from "next/image";
 import { cls, formatToTimeAgo } from "@/app/_libs/_client/utils";
 import { useCreateComment } from "@/app/hooks/comment_action";
 import Button from "@/app/_components/common/button";
+import DeleteDiv from "./delete_div";
 
 interface Comment {
   id: number;
@@ -82,7 +83,11 @@ export default function CommentForm({
                   {Number(comment.user.id) === userId && (
                     <div className="flex gap-2">
                       <Button type="itemModify" text="수정" />
-                      <Button type="itemDelete" text="삭제" />
+                      <DeleteDiv
+                        type="comment"
+                        itemId={itemId}
+                        commentId={comment.id}
+                      />
                     </div>
                   )}
                 </div>

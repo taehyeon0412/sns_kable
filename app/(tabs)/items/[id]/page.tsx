@@ -90,7 +90,7 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
                         <Button type="itemModify" text="수정" />
                       </Link>
 
-                      <DeleteDiv itemId={item.id} />
+                      <DeleteDiv type="item" itemId={item.id} />
                     </div>
                   ) : (
                     <div className="bg-blue-400 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
