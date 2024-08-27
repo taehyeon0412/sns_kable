@@ -5,6 +5,7 @@ export interface CommentInfo {
   payload: string;
   created_at: Date;
   user: {
+    id: string;
     username: string;
     profile_img: string;
   };

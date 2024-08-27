@@ -10,6 +10,7 @@ import { userInfo } from "@/app/hooks/user_info";
 import DeleteDiv from "@/app/_components/common/delete_div";
 import Link from "next/link";
 import CommentForm from "@/app/_components/common/comment_form";
+import Button from "@/app/_components/common/button";
 
 export default function ItemDetail({ params }: { params: { id: string } }) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
@@ -86,9 +87,7 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
                   {user?.id === item.user.id ? (
                     <div className="flex justify-center items-center gap-1">
                       <Link href={`/items/upload?id=${item.id}`}>
-                        <div className="bg-blue-400 hover:bg-blue-600 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
-                          수정
-                        </div>
+                        <Button type="itemModify" text="수정" />
                       </Link>
 
                       <DeleteDiv itemId={item.id} />
@@ -145,7 +144,11 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
 
             {/* 아이템 댓글 */}
             <div className="mt-10">
-              <CommentForm comments={item.Comment} />
+              <CommentForm
+                comments={item.Comment}
+                itemId={item.id}
+                userId={user!.id}
+              />
             </div>
           </div>
 

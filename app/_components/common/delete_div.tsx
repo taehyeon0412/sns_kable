@@ -2,6 +2,7 @@ import { useDeleteItem } from "@/app/hooks/item_delete";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Button from "./button";
 
 export default function DeleteDiv({ itemId }: { itemId: number }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,12 +30,7 @@ export default function DeleteDiv({ itemId }: { itemId: number }) {
 
   return (
     <AnimatePresence>
-      <div
-        onClick={() => setIsOpen(true)}
-        className=" bg-red-400 hover:bg-red-500  text-white py-2 px-3 rounded-lg hover:cursor-pointer"
-      >
-        삭제
-      </div>
+      <Button onClick={() => setIsOpen(true)} type="itemDelete" text="삭제" />
 
       {isOpen && (
         <motion.div

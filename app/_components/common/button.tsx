@@ -22,6 +22,8 @@ export default function Button({
   //useFormStatus를 이용하여 부모 form의 pending상태를 알아냄
   //useFormStatus는 form의 자식만 쓸 수 있음
 
+  /* console.log(rest.onClick); */
+
   return type === "github" ? (
     <Link
       href="/github/start"
@@ -112,12 +114,25 @@ export default function Button({
       disabled={pending}
       {...rest}
       className={cls(
-        "mt-3 w-full text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none",
+        "mt-3 w-full text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:outline-none",
         large ? "py-3 text-base" : "py-2 text-sm",
         pending ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-900"
       )}
     >
       {pending ? "회원 가입 중.." : text}
+    </button>
+  ) : type === "itemModify" || type === "itemDelete" ? (
+    <button
+      onClick={onClick}
+      {...rest}
+      className={cls(
+        "h-10  text-white py-2 px-3 rounded-lg hover:cursor-pointer",
+        type === "itemModify"
+          ? "bg-blue-400 hover:bg-blue-600"
+          : "bg-red-400 hover:bg-red-600"
+      )}
+    >
+      {text}
     </button>
   ) : (
     <button

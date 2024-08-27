@@ -42,6 +42,7 @@ export async function GET(
             created_at: true,
             user: {
               select: {
+                id: true,
                 username: true,
                 profile_img: true,
               },
