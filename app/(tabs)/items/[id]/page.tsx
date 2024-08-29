@@ -11,15 +11,21 @@ import DeleteDiv from "@/app/_components/common/delete_div";
 import Link from "next/link";
 import CommentForm from "@/app/_components/common/comment_form";
 import Button from "@/app/_components/common/button";
+import { useRouter } from "next/navigation";
 
 export default function ItemDetail({ params }: { params: { id: string } }) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
   const { data: item, isLoading } = useItemDetailInfo(itemId);
   const { data: user } = userInfo();
+  const router = useRouter();
 
   if (isLoading) {
     return <Loading />;
   }
+
+  const onClickProfile = () => {
+    router.push(`/profile/${item?.user.username}`);
+  };
 
   /*console.log(item?.image); */
 
@@ -34,7 +40,7 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
 
           {/* 중앙 메인 */}
           <div className="col-span-full md:col-span-10 flex flex-col gap-6 my-8 px-2">
-            <div className="relative bg-black w-full aspect-[16/9] rounded-xl">
+            <div className="relative bg-black w-full aspect-[16/9] rounded-xl ">
               <Image
                 src={item.image}
                 alt="user_profileImg"
@@ -54,7 +60,10 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
 
               <div className="flex items-center justify-between mt-4">
                 <div className="flex items-center gap-4">
-                  <div className="relative bg-slate-300 w-8 h-8 rounded-full">
+                  <div
+                    onClick={onClickProfile}
+                    className="relative bg-slate-300 w-8 h-8 rounded-full hover:cursor-pointer"
+                  >
                     <Image
                       src={item.user.profile_img}
                       alt="user_profileImg"
@@ -110,7 +119,10 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
             {/* 작성자 카드 */}
             <div className="grid grid-cols-12 w-full min-h-32 mx-auto bg-slate-100">
               <div className=" col-span-2 flex justify-center items-start py-4">
-                <div className="relative bg-slate-300 w-16 h-16 rounded-full hover:cursor-pointer">
+                <div
+                  onClick={onClickProfile}
+                  className="relative bg-slate-300 w-16 h-16 rounded-full hover:cursor-pointer"
+                >
                   <Image
                     src={item.user.profile_img}
                     alt="user_profileImg"
@@ -138,8 +150,8 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
                   </div>
                 </div>
 
-                <div className="text-sm text-gray-700">
-                  <span>자기소개를 적어주세요!</span>
+                <div className="text-sm text-gray-700 whitespace-pre-line">
+                  <span>{item.user.bio || "자기소개 문구가 없습니다."}</span>
                 </div>
               </div>
             </div>
