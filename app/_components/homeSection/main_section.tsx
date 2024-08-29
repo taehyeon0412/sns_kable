@@ -197,7 +197,7 @@ export default function MainSection() {
                       strokeWidth="1.5"
                     ></path>
                   </svg>
-                  5
+                  {item.Comment.length}
                 </span>
               </div>
             </div>

@@ -2,19 +2,26 @@
 
 import TopNav from "@/app/_components/common/top_nav";
 import { userInfo } from "@/app/hooks/user_info";
-import { useUserProfile } from "@/app/hooks/userProfile";
+import { useUserProfile } from "@/app/hooks/user_profile";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import Loading from "./loading";
+import { useUserItems } from "@/app/hooks/username_item";
 
 export default function Profile() {
   const params = useParams();
   const username = params.username as string; //url에서 username 추출 & string이라고 명시해줌
-  const { data: userProfile, error } = useUserProfile(username);
+  const { data: userProfile, error, isLoading } = useUserProfile(username);
   const { data: logInUser } = userInfo();
+  const { data: userItem } = useUserItems(username);
 
   /* console.log("user닉네임 : ", username);
   console.log("로그인 유저 정보 : ", logInUser);
   console.log("프로필 유저 정보 : ", userProfile); */
+
+  if (isLoading) {
+    return <Loading />; // 로딩 중일 때 보여줄 UI
+  }
 
   if (error || !userProfile) {
     return <div>프로필 정보를 불러오는데 실패했습니다.</div>; // 오류 발생 시 또는 userProfile이 없을 때
