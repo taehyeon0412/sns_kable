@@ -25,6 +25,10 @@ export default function ProfileModal({ name, email, profileImg }: ProfileInfo) {
     router.push("/items/upload");
   };
 
+  const onClickProfile = () => {
+    router.push(`/profile/${name}`);
+  };
+
   return (
     <>
       <button onClick={() => setIsOpen(true)} className="w-full h-full" />
@@ -44,12 +48,8 @@ export default function ProfileModal({ name, email, profileImg }: ProfileInfo) {
               onClick={(e) => e.stopPropagation()} // 내부 컨텐츠 클릭시 이벤트 버블링 방지
               className="flex flex-col w-[250px] gap-2 border-2 bg-white p-4 pr-2 rounded-lg absolute top-16 right-0 md:right-[3%] xl:right-[10%] 2xl:right-[15%]"
             >
-              <div className="flex gap-4">
-                <div
-                  onClick={() => {
-                    "프로필 페이지 가는 것 넣기";
-                  }}
-                >
+              <div className="flex gap-4" onClick={onClickProfile}>
+                <div>
                   {profileImg ? (
                     <Image
                       src={profileImg}
