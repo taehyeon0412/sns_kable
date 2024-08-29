@@ -5,6 +5,7 @@ import { cls, formatToTimeAgo } from "@/app/_libs/_client/utils";
 import { useCreateComment } from "@/app/hooks/comment_action";
 import Button from "@/app/_components/common/button";
 import DeleteDiv from "./delete_div";
+import { useUpdateComment } from "@/app/hooks/comment_update";
 
 interface Comment {
   id: number;
@@ -30,9 +31,14 @@ export default function CommentForm({
 }: CommentFormProps) {
   const [value, setValue] = useState("");
   const createComment = useCreateComment(itemId);
+
+  const updateComment = useUpdateComment();
+  const [editMode, setEditMode] = useState<number | null>(null); // 수정 모드 id
+  const [editValue, setEditValue] = useState<string>(""); // 수정할 댓글 내용
+
   const [isPending, setIsPending] = useState(false);
 
-  const onClick = (e: React.FormEvent) => {
+  const createOnClick = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (value.trim()) {
@@ -49,6 +55,22 @@ export default function CommentForm({
         }
       );
     }
+  };
+
+  const editOnClick = (commentId: number) => {
+    setIsPending(true);
+    updateComment.mutate(
+      { itemId, commentId, payload: editValue },
+      {
+        onSuccess: () => {
+          setEditMode(null); // 수정 모드 종료
+          setEditValue("");
+        },
+        onSettled: () => {
+          setIsPending(false);
+        },
+      }
+    );
   };
 
   return (
@@ -82,7 +104,14 @@ export default function CommentForm({
 
                   {Number(comment.user.id) === userId && (
                     <div className="flex gap-2">
-                      <Button type="itemModify" text="수정" />
+                      <Button
+                        type="itemModify"
+                        text="수정"
+                        onClick={() => {
+                          setEditMode(comment.id);
+                          setEditValue(comment.payload);
+                        }}
+                      />
                       <DeleteDiv
                         type="comment"
                         itemId={itemId}
@@ -92,19 +121,47 @@ export default function CommentForm({
                   )}
                 </div>
 
-                <span className="text-xs text-gray-500 block">
-                  {formatToTimeAgo(comment.created_at.toString())}
-                </span>
-                <p className="text-gray-700 my-2 whitespace-pre-line">
-                  {comment.payload}
-                </p>
+                {editMode === comment.id ? (
+                  <div>
+                    <TextArea
+                      value={editValue}
+                      onChange={(e: any) => setEditValue(e.target.value)}
+                      name="editComment"
+                      required
+                      placeholder="수정할 내용을 입력하세요."
+                    />
+                    <div className="flex gap-2 mb-2">
+                      <Button
+                        type="itemModify"
+                        text="저장"
+                        onClick={() => editOnClick(comment.id)}
+                        disabled={isPending}
+                      />
+                      <Button
+                        type="cancel"
+                        text="취소"
+                        onClick={() => setEditMode(null)}
+                        disabled={isPending}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <span className="text-xs text-gray-500 block">
+                      {formatToTimeAgo(comment.created_at.toString())}
+                    </span>
+                    <p className="text-gray-700 my-2 whitespace-pre-line">
+                      {comment.payload}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <form onClick={onClick} className="my-5">
+      <form onClick={createOnClick} className="my-5">
         <TextArea
           value={value}
           onChange={(e: any) => setValue(e.target.value)}

@@ -121,7 +121,7 @@ export default function Button({
     >
       {pending ? "회원 가입 중.." : text}
     </button>
-  ) : type === "itemModify" || type === "itemDelete" ? (
+  ) : type === "itemModify" || type === "itemDelete" || type === "cancel" ? (
     <button
       onClick={onClick}
       {...rest}
@@ -129,7 +129,9 @@ export default function Button({
         "h-10  text-white py-2 px-3 rounded-lg hover:cursor-pointer",
         type === "itemModify"
           ? "bg-blue-400 hover:bg-blue-600"
-          : "bg-red-400 hover:bg-red-600"
+          : type === "itemDelete"
+          ? "bg-red-400 hover:bg-red-600"
+          : "bg-gray-400 hover:bg-gray-600"
       )}
     >
       {text}

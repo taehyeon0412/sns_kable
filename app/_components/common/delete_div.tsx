@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Button from "./button";
 import { useDeleteComment } from "@/app/hooks/comment_delete";
+import { useFormStatus } from "react-dom";
 
 interface DeleteDivProps {
   itemId: number;
@@ -99,19 +100,19 @@ export default function DeleteDiv({ itemId, commentId, type }: DeleteDivProps) {
                 : null}
             </span>
             <div className="flex w-full gap-2 mt-4 justify-center *:hover:cursor-pointer">
-              <div
+              <button
                 onClick={DeleteType}
                 className="bg-red-400 text-white border-2 border-red-400 hover:bg-red-500 px-6 py-1 rounded-lg"
               >
                 예
-              </div>
+              </button>
 
-              <div
+              <button
                 onClick={() => setIsOpen(false)}
                 className="border-2 border-gray-400 px-5 py-1 rounded-lg hover:bg-gray-400 hover:text-white"
               >
                 취소
-              </div>
+              </button>
             </div>
           </motion.div>
         </motion.div>
