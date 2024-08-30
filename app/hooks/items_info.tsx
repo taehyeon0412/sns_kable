@@ -28,7 +28,7 @@ export function useItemsInfo() {
       if (!response.ok) {
         throw new Error("아이템을 불러오는데 실패했습니다. hook 오류");
       }
-      /*  await new Promise((resolve) => setTimeout(resolve, 3000)); */
+      /* await new Promise((resolve) => setTimeout(resolve, 300000)); */
       return response.json() as Promise<ItemsInfoProps[]>;
     },
     getNextPageParam: (lastPage, allPages) => {

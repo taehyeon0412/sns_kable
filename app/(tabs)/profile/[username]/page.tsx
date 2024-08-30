@@ -7,13 +7,19 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import Loading from "./loading";
 import { useUserItems } from "@/app/hooks/username_item";
+import InfiniteScroll from "@/app/_components/common/infiniteScroll/infinite_scroll";
 
 export default function Profile() {
   const params = useParams();
   const username = params.username as string; //url에서 username 추출 & string이라고 명시해줌
   const { data: userProfile, error, isLoading } = useUserProfile(username);
   const { data: logInUser } = userInfo();
-  const { data: userItem } = useUserItems(username);
+  const {
+    data: userItem,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useUserItems(username);
 
   /* console.log("user닉네임 : ", username);
   console.log("로그인 유저 정보 : ", logInUser);
@@ -40,7 +46,7 @@ export default function Profile() {
 
       <div className="nav_h layout_px grid grid-cols-1 md:grid-cols-14 w-full min-h-screen">
         {/* 왼쪽 사이드 */}
-        <div className="bg-gray-300 hidden gap-2 px-2 md:flex md:flex-col xl:flex-row md:col-span-2 items-center xl:items-start xl:justify-center" />
+        <div className=" hidden gap-2 px-2 md:flex md:flex-col xl:flex-row md:col-span-2 items-center xl:items-start xl:justify-center" />
 
         {/* 중앙 메인 */}
         <div className="col-span-full md:col-span-10 flex flex-col gap-6 my-8 px-2">
@@ -95,10 +101,27 @@ export default function Profile() {
 
           {/* 본문 선 */}
           <div className="border-b border-gray-300" />
+
+          <div className="flex flex-col gap-2">
+            <div className="flex justify-between text-xs *:border-2 *:rounded-lg *:py-1 *:px-2">
+              <div>게시물 목록</div>
+
+              {/* <div className="bg-slate-200 hover:bg-slate-500 hover:text-white hover:cursor-pointer">
+                모든 게시물 보기
+              </div> */}
+            </div>
+
+            <InfiniteScroll
+              data={userItem}
+              fetchNextPage={fetchNextPage}
+              hasNextPage={hasNextPage}
+              isFetchingNextPage={isFetchingNextPage}
+            />
+          </div>
         </div>
 
         {/* 오른쪽 사이드 */}
-        <div className="bg-gray-300 hidden md:flex flex-col md:col-span-2 " />
+        <div className=" hidden md:flex flex-col md:col-span-2 " />
       </div>
     </>
   );

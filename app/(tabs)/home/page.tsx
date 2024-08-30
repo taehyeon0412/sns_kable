@@ -4,8 +4,18 @@ import TopNav from "@/app/_components/common/top_nav";
 import LeftSection from "@/app/_components/homeSection/left_section";
 import MainSection from "@/app/_components/homeSection/main_section";
 import RightSection from "@/app/_components/homeSection/right_section";
+import { useItemsInfo } from "@/app/hooks/items_info";
+import Loading from "./loading";
 
 export default function Home() {
+  const { isLoading: isMainLoading } = useItemsInfo();
+
+  const isLoading = isMainLoading;
+
+  if (isLoading) {
+    return <Loading />; // 페이지 전체 로딩 처리
+  }
+
   return (
     <>
       <TopNav />
