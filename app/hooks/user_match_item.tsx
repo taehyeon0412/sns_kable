@@ -1,13 +1,13 @@
 import { useInfiniteQuery } from "react-query";
 import { ItemsInfoProps } from "./items_info";
 
-//특정 사용자의 아이템만 가져와야 하기 때문에 username 인자를 필요
-export function useUserItems(username: string) {
+//특정 사용자의 아이템만 가져와야 하기 때문에 id 인자를 필요
+export function useUserItems(id: number) {
   return useInfiniteQuery<ItemsInfoProps[]>({
-    queryKey: ["userItems", username],
+    queryKey: ["userItems", id],
     queryFn: async ({ pageParam = 1 }) => {
       const response = await fetch(
-        `/api/items/user/${username}?page=${pageParam}&limit=5`
+        `/api/items/user/${id}?page=${pageParam}&limit=5`
       );
       if (!response.ok) {
         throw new Error("유저 아이템을 불러오는데 실패했습니다.");

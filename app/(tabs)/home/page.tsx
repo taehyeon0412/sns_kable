@@ -32,7 +32,7 @@ export default function Home() {
         </div>
 
         {/* 오픈쪽 div */}
-        <div className="hidden md:flex flex-col md:col-span-3 gap-3 ml-2">
+        <div className="hidden md:flex flex-col md:col-span-3 gap-3 ml-4">
           <RightSection />
         </div>
       </div>

@@ -6,20 +6,20 @@ import { useUserProfile } from "@/app/hooks/user_profile";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import Loading from "./loading";
-import { useUserItems } from "@/app/hooks/username_item";
+import { useUserItems } from "@/app/hooks/user_match_item";
 import InfiniteScroll from "@/app/_components/common/infiniteScroll/infinite_scroll";
 
 export default function Profile() {
   const params = useParams();
-  const username = params.username as string; //url에서 username 추출 & string이라고 명시해줌
-  const { data: userProfile, error, isLoading } = useUserProfile(username);
+  const userId = parseInt(params.id as string); // URL에서 id 추출 & 숫자로 변환
+  const { data: userProfile, error, isLoading } = useUserProfile(userId);
   const { data: logInUser } = userInfo();
   const {
     data: userItem,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useUserItems(username);
+  } = useUserItems(userId);
 
   /* console.log("user닉네임 : ", username);
   console.log("로그인 유저 정보 : ", logInUser);
@@ -33,7 +33,7 @@ export default function Profile() {
     return <div>프로필 정보를 불러오는데 실패했습니다.</div>; // 오류 발생 시 또는 userProfile이 없을 때
   }
 
-  const isMyProfile = logInUser?.username === username; // 같은 username이면 내 프로필 다르면 상대 프로필
+  const isMyProfile = logInUser?.id === userId; // 같은 username이면 내 프로필 다르면 상대 프로필
 
   //이미지가 있는지 여부
   const profileImgSrc = isMyProfile

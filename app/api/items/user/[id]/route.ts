@@ -5,19 +5,20 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { username: string } }
+  { params }: { params: { id: string } }
 ) {
   const { searchParams } = new URL(request.url);
   const page = parseInt(searchParams.get("page") || "1");
   const limit = parseInt(searchParams.get("limit") || "5"); //limit은 초기 값이자 한번에 불러오는 데이터 수
   const skip = (page - 1) * limit;
 
-  const { username } = params;
+  const { id } = params;
+  const userId = parseInt(id);
 
   try {
-    //username을 통해 userId를 가져오고 item을 가져오게함
+    //id을 통해 userId를 가져오고 item을 가져오게함
     const user = await prisma.user.findUnique({
-      where: { username },
+      where: { id: userId },
       select: { id: true },
     });
 

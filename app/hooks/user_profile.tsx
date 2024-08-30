@@ -8,17 +8,17 @@ export interface UserProfileProps {
   bio: string;
 }
 
-export function useUserProfile(username: string) {
+export function useUserProfile(id: number) {
   return useQuery<UserProfileProps>({
-    queryKey: ["userProfile", username],
+    queryKey: ["userProfile", id],
     queryFn: async () => {
-      const response = await fetch(`/api/user/${username}`);
+      const response = await fetch(`/api/user/${id}`);
       if (!response.ok) {
         throw new Error("유저 정보를 불러오는데 실패했습니다.");
       }
       /* await new Promise((resolve) => setTimeout(resolve, 200000)); // 지연 */
       return response.json() as Promise<UserProfileProps>;
     },
-    enabled: !!username, // username이 있을 때만 쿼리를 실행
+    enabled: !!id, // username이 있을 때만 쿼리를 실행
   });
 }

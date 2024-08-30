@@ -1,16 +1,17 @@
 import db from "@/app/_libs/_server/db";
 import { NextRequest, NextResponse } from "next/server";
 
-//프로필을 눌렀을 때 username이 url로 전송되고 username을 url에서 들고옴
+//프로필을 눌렀을 때 id가 url로 전송되고 id를 url에서 들고옴
 export async function GET(
   request: NextRequest,
-  { params }: { params: { username: string } }
+  { params }: { params: { id: string } }
 ) {
-  const { username } = params;
+  const { id } = params;
+  const userId = parseInt(id);
 
   try {
     const user = await db.user.findUnique({
-      where: { username },
+      where: { id: userId },
     });
 
     if (user) {
