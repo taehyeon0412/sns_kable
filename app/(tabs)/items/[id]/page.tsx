@@ -12,22 +12,49 @@ import Link from "next/link";
 import CommentForm from "@/app/_components/common/comment_form";
 import Button from "@/app/_components/common/button";
 import { useRouter } from "next/navigation";
+import { getOrCreateChat } from "@/app/_components/chats/chat_service";
 
 export default function ItemDetail({ params }: { params: { id: string } }) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
   const { data: item, isLoading } = useItemDetailInfo(itemId);
-  const { data: user } = userInfo();
+  const { data: user, isLoading: userLoading } = userInfo();
   const router = useRouter();
 
-  if (isLoading) {
+  if (isLoading || userLoading) {
     return <Loading />;
   }
 
+  if (!item || !user) {
+    return <div>아이템 정보 또는 사용자 정보를 불러오는데 실패했습니다.</div>;
+  }
+
   const onClickProfile = () => {
-    router.push(`/profile/${item?.user.username}`);
+    router.push(`/profile/${item?.user.id}`);
+  };
+
+  //채팅하기
+  const onClickChat = async () => {
+    if (item && user) {
+      const chatId = await getOrCreateChat(
+        user.id.toString(),
+        item.user.id.toString(),
+        user.username.toString(),
+        user.profile_img,
+        item.user.username.toString(),
+        item.user.profile_img
+      );
+
+      router.push(`/chats/${chatId}`);
+    }
   };
 
   /*console.log(item?.image); */
+  /*
+   currentUserName: string,
+  currentUserImage: string,
+  otherUserName: string,
+  otherUserImage: string 
+   */
 
   return (
     <>
@@ -112,7 +139,7 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
             {/* 본문 선 */}
             <div className="border-b border-gray-300"></div>
 
-            <div className="w-full break-all whitespace-pre-line">
+            <div className="w-full break-all whitespace-pre-line text-gray-700">
               {item.description}
             </div>
 
@@ -145,9 +172,14 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
                     </div>
                   </div>
 
-                  <div className="flex justify-center items-center h-10 text-sm bg-blue-400 hover:bg-blue-600 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
-                    <span>채팅하기</span>
-                  </div>
+                  {user?.id === item.user.id ? null : (
+                    <button
+                      onClick={onClickChat}
+                      className="flex justify-center items-center h-10 text-sm bg-blue-400 hover:bg-blue-600 text-white py-2 px-3 rounded-lg hover:cursor-pointer"
+                    >
+                      채팅하기
+                    </button>
+                  )}
                 </div>
 
                 <div className="text-sm text-gray-700 whitespace-pre-line">

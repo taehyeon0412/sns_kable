@@ -1,7 +1,20 @@
+"use client";
+
 import TopNav from "@/app/_components/common/top_nav";
 import ChatList from "./../../_components/chats/chat_list";
+import { userInfo } from "@/app/hooks/user_info";
 
 export default function Chats() {
+  const { data: user, isLoading, error } = userInfo();
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error || !user) {
+    return <p>Error loading user information.</p>;
+  }
+
   return (
     <>
       <TopNav />
@@ -14,7 +27,7 @@ export default function Chats() {
         <div className="col-span-full md:col-span-8 flex flex-col gap-6 my-8 px-2">
           {/* map으로 감싸기 */}
           <div className="pb-10 divide-y-[1px]">
-            <ChatList />
+            <ChatList currentUserId={user.id.toString()} />
           </div>
         </div>
 

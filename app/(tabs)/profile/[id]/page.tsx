@@ -33,7 +33,7 @@ export default function Profile() {
     return <div>프로필 정보를 불러오는데 실패했습니다.</div>; // 오류 발생 시 또는 userProfile이 없을 때
   }
 
-  const isMyProfile = logInUser?.id === userId; // 같은 username이면 내 프로필 다르면 상대 프로필
+  const isMyProfile = logInUser?.id === userId; // 같은 id이면 내 프로필 다르면 상대 프로필
 
   //이미지가 있는지 여부
   const profileImgSrc = isMyProfile
