@@ -7,12 +7,18 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ProfileInfo {
+  id:number| null | undefined;
   name: string | null | undefined;
   email: string | null | undefined;
   profileImg: string | null | undefined;
 }
 
-export default function ProfileModal({ name, email, profileImg }: ProfileInfo) {
+export default function ProfileModal({
+  id,
+  name,
+  email,
+  profileImg,
+}: ProfileInfo) {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const logout = useLogout();
@@ -26,7 +32,7 @@ export default function ProfileModal({ name, email, profileImg }: ProfileInfo) {
   };
 
   const onClickProfile = () => {
-    router.push(`/profile/${name}`);
+    router.push(`/profile/${id}`);
   };
 
   return (

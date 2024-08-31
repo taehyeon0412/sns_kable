@@ -104,6 +104,7 @@ export default function TopNav({ kind = "default" }: NavKind) {
               <AnimatePresence>
                 <div className="absolute top-0 w-full h-full rounded-full bg-transparent z-50">
                   <ProfileModal
+                    id={user?.id}
                     name={user?.username}
                     email={
                       user?.email ||

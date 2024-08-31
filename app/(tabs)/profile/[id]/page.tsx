@@ -4,12 +4,14 @@ import TopNav from "@/app/_components/common/top_nav";
 import { userInfo } from "@/app/hooks/user_info";
 import { useUserProfile } from "@/app/hooks/user_profile";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Loading from "./loading";
 import { useUserItems } from "@/app/hooks/user_match_item";
 import InfiniteScroll from "@/app/_components/common/infiniteScroll/infinite_scroll";
+import { getOrCreateChat } from "@/app/_components/chats/chat_service";
 
 export default function Profile() {
+  const router = useRouter();
   const params = useParams();
   const userId = parseInt(params.id as string); // URL에서 id 추출 & 숫자로 변환
   const { data: userProfile, error, isLoading } = useUserProfile(userId);
@@ -39,6 +41,22 @@ export default function Profile() {
   const profileImgSrc = isMyProfile
     ? logInUser?.profile_img
     : userProfile.profile_img;
+
+  //채팅하기
+  const onClickChat = async () => {
+    if (userId && logInUser) {
+      const chatId = await getOrCreateChat(
+        logInUser.id.toString(),
+        userProfile.id.toString(),
+        logInUser.username.toString(),
+        logInUser.profile_img,
+        userProfile.username.toString(),
+        userProfile.profile_img
+      );
+
+      router.push(`/chats/${chatId}`);
+    }
+  };
 
   return (
     <>
@@ -91,9 +109,12 @@ export default function Profile() {
                 </div>
 
                 {isMyProfile ? null : (
-                  <div className="flex justify-center items-center h-8 text-xs bg-blue-400 hover:bg-blue-600 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
+                  <button
+                    onClick={onClickChat}
+                    className="flex justify-center items-center h-8 text-xs bg-blue-400 hover:bg-blue-600 text-white py-2 px-3 rounded-lg hover:cursor-pointer"
+                  >
                     <span>채팅하기</span>
-                  </div>
+                  </button>
                 )}
               </div>
             </div>
@@ -106,17 +127,17 @@ export default function Profile() {
             <div className="flex justify-between text-xs *:border-2 *:rounded-lg *:py-1 *:px-2">
               <div>게시물 목록</div>
 
-              {/* <div className="bg-slate-200 hover:bg-slate-500 hover:text-white hover:cursor-pointer">
-                모든 게시물 보기
-              </div> */}
+              {/* 전체 보기 추가 예정 */}
             </div>
 
-            <InfiniteScroll
-              data={userItem}
-              fetchNextPage={fetchNextPage}
-              hasNextPage={hasNextPage}
-              isFetchingNextPage={isFetchingNextPage}
-            />
+            <div className="w-full h-[80vh] overflow-y-auto no-scrollbar">
+              <InfiniteScroll
+                data={userItem}
+                fetchNextPage={fetchNextPage}
+                hasNextPage={hasNextPage}
+                isFetchingNextPage={isFetchingNextPage}
+              />
+            </div>
           </div>
         </div>
 

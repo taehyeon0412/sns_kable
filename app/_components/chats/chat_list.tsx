@@ -64,10 +64,11 @@ export default function ChatList({ currentUserId }: { currentUserId: string }) {
             >
               <div className="relative w-14 h-12 rounded-full bg-slate-300">
                 {room.otherUserInfo?.userImage ? (
-                  <img
+                  <Image
                     src={room.otherUserInfo.userImage}
                     alt={room.otherUserInfo.userName}
                     className="w-14 h-12 rounded-full"
+                    fill
                   />
                 ) : (
                   <div className="relative w-14 h-12 rounded-full bg-slate-300"></div>

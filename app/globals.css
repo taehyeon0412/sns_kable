@@ -11,6 +11,14 @@
   .layout_px {
     @apply md:px-[10%] xl:px-[15%] 2xl:px-[20%];
   }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+  }
 }
 
 :root {
