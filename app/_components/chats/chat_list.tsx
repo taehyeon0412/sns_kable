@@ -52,49 +52,64 @@ export default function ChatList({ currentUserId }: { currentUserId: string }) {
     router.push(`/chats/${chatId}`);
   };
 
+  //Date 포멧
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <>
       {chatRooms.length > 0 ? (
-        <div className="pb-4 border-b">
-          {chatRooms.map((room) => (
-            <div
-              key={room.id}
-              className="flex px-4 cursor-pointer py-3 items-center space-x-3 "
-              onClick={() => goToChat(room.id)}
-            >
-              <div className="relative w-14 h-12 rounded-full bg-slate-300">
-                {room.otherUserInfo?.userImage ? (
-                  <Image
-                    src={room.otherUserInfo.userImage}
-                    alt={room.otherUserInfo.userName}
-                    className="w-14 h-12 rounded-full"
-                    fill
-                  />
-                ) : (
-                  <div className="relative w-14 h-12 rounded-full bg-slate-300"></div>
-                )}
-              </div>
+        <div>
+          <div className="pb-2">
+            {chatRooms.map((room) => (
+              <div
+                key={room.id}
+                className="flex px-4 py-8 cursor-pointer items-center space-x-3 mb-6 border-b"
+                onClick={() => goToChat(room.id)}
+              >
+                <div className="relative w-14 h-12 rounded-full bg-slate-300 overflow-hidden">
+                  {room.otherUserInfo?.userImage ? (
+                    <Image
+                      src={room.otherUserInfo.userImage}
+                      alt={room.otherUserInfo.userName}
+                      className="object-cover rounded-full"
+                      fill
+                    />
+                  ) : (
+                    <div className="relative w-12 h-12 rounded-full bg-slate-300"></div>
+                  )}
+                </div>
 
-              <div className="w-full">
-                <p className="text-gray-700 text-sm">
-                  {room.otherUserInfo?.userName}
-                </p>
+                <div className="w-full">
+                  <p className="text-gray-700 text-sm">
+                    {room.otherUserInfo?.userName}
+                  </p>
 
-                <div className="flex justify-between text-sm font-medium text-gray-500">
-                  <span className="overflow-hidden whitespace-nowrap text-ellipsis max-w-[250px] sm:max-w-[350px]">
-                    {room.lastMessage}
-                  </span>
+                  <div className="relative flex text-sm font-medium text-gray-500">
+                    <span className="overflow-hidden whitespace-nowrap text-ellipsis max-w-[320px] sm:max-w-[250px] lg:max-w-[300px]">
+                      {room.lastMessage}
+                    </span>
 
-                  <span className="text-xs">
-                    {room.lastChatTime.toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </span>
+                    <div className="absolute w-full top-4 flex justify-end pt-2">
+                      <span className="text-[10px]">
+                        {formatDate(room.lastChatTime)}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="flex w-full justify-center items-center border-2 border-gray-300 h-28 rounded-md">
+            새로운 친구들과 채팅을 해보세요! 👀
+          </div>
         </div>
       ) : (
         <div className="flex w-full justify-center items-center border-2 h-28 rounded-md">
