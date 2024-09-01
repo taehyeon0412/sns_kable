@@ -130,7 +130,7 @@ export default function Profile() {
               {/* 전체 보기 추가 예정 */}
             </div>
 
-            <div className="w-full h-[80vh] overflow-y-auto no-scrollbar">
+            <div className="w-full h-[60vh] overflow-y-auto no-scrollbar pb-10">
               <InfiniteScroll
                 data={userItem}
                 fetchNextPage={fetchNextPage}

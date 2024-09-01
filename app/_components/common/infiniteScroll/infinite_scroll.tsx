@@ -44,7 +44,7 @@ export default function InfiniteScroll({
     const observer = new IntersectionObserver(observerCallback, {
       root: null,
       rootMargin: "0px",
-      threshold: 1.0,
+      threshold: 0.1,
     });
 
     if (observerRef.current) {
@@ -221,7 +221,7 @@ export default function InfiniteScroll({
       ))}
 
       {/* useRef로 참조한 요소 */}
-      <div ref={observerRef}>
+      <div ref={observerRef} className="flex justify-center items-center">
         {isFetchingNextPage ? <div>로딩중....</div> : null}
       </div>
     </>

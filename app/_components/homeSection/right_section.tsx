@@ -6,7 +6,7 @@ export default function RightSection() {
       </span>
 
       <div className="flex gap-2 justify-start">
-        <div className="flex flex-col gap-2 justify-center">
+        <div className="flex flex-col gap-2 justify-center *:text-sm">
           <span>1.</span>
           <span>2.</span>
           <span>3.</span>
