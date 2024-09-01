@@ -21,6 +21,9 @@ model User {
   item        Item[]
   Heart       Heart[]
   Comment     Comment[]
+
+  following Follow[] @relation("followingRelation")
+  followers Follow[] @relation("followerRelation")
 }
 
 model Item {
@@ -58,7 +61,7 @@ model Heart {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  @@id(name: "id", [userId, itemId])
+  @@id(name: "id", [userId, itemId]) //동일한 사용자가 중복 요청 방지
 }
 
 model Comment {
@@ -73,4 +76,17 @@ model Comment {
 
   userId Int
   itemId Int
+}
+
+model Follow {
+  follower  User @relation("followerRelation", fields: [followerId], references: [id], onDelete: Cascade)
+  following User @relation("followingRelation", fields: [followingId], references: [id], onDelete: Cascade)
+
+  followerId  Int
+  followingId Int
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([followerId, followingId]) // 동일한 사용자가 중복 요청 방지
 }

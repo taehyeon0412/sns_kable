@@ -1,10 +1,10 @@
 import { HeartItem, noHeartItem } from "@/app/(tabs)/items/[id]/heart_action";
 import db from "@/app/_libs/_server/db";
 import getSession from "@/app/_libs/_server/session";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈

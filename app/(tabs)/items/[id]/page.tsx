@@ -1,6 +1,7 @@
 "use client";
 
 import TopNav from "@/app/_components/common/top_nav";
+import { useEffect } from "react";
 import { formatToTimeAgo } from "@/app/_libs/_client/utils";
 import { useItemDetailInfo } from "@/app/hooks/item_detail_info";
 import Image from "next/image";
@@ -13,19 +14,27 @@ import CommentForm from "@/app/_components/common/comment_form";
 import Button from "@/app/_components/common/button";
 import { useRouter } from "next/navigation";
 import { getOrCreateChat } from "@/app/_components/chats/chat_service";
+import { useViewsIncrement } from "@/app/hooks/item_views_increment";
 
 export default function ItemDetail({ params }: { params: { id: string } }) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
   const { data: item, isLoading } = useItemDetailInfo(itemId);
   const { data: user, isLoading: userLoading } = userInfo();
+  const incrementViews = useViewsIncrement();
   const router = useRouter();
+
+  //조회수 증가
+  useEffect(() => {
+    console.log("조회수 mutate 호출");
+    incrementViews.mutate(itemId);
+  }, [itemId]);
 
   if (isLoading || userLoading) {
     return <Loading />;
   }
 
   if (!item || !user) {
-    return <div>아이템 정보 또는 사용자 정보를 불러오는데 실패했습니다.</div>;
+    return <Loading />;
   }
 
   const onClickProfile = () => {
@@ -47,14 +56,6 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
       router.push(`/chats/${chatId}`);
     }
   };
-
-  /*console.log(item?.image); */
-  /*
-   currentUserName: string,
-  currentUserImage: string,
-  otherUserName: string,
-  otherUserImage: string 
-   */
 
   return (
     <>
