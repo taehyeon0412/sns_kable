@@ -6,6 +6,9 @@ export interface UserProfileProps {
   email: string;
   profile_img: string;
   bio: string;
+  isFollowing: boolean; // 팔로우 상태 포함
+  followerCount: number; // 팔로워 수
+  followingCount: number; // 팔로잉 수
 }
 
 export function useUserProfile(id: number) {

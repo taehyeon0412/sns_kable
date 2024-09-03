@@ -135,7 +135,7 @@ export default function Button({
         type === "itemModify"
           ? "bg-blue-400 hover:bg-blue-600"
           : type === "follow"
-          ? "hover:bg-blue-700"
+          ? "hover:bg-blue-700 text-xs"
           : type === "itemDelete"
           ? "bg-red-400 hover:bg-red-600"
           : "bg-gray-400 hover:bg-gray-600",

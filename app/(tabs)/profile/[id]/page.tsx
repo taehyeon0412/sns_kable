@@ -9,6 +9,7 @@ import Loading from "./loading";
 import { useUserItems } from "@/app/hooks/user_match_item";
 import InfiniteScroll from "@/app/_components/common/infiniteScroll/infinite_scroll";
 import { getOrCreateChat } from "@/app/_components/chats/chat_service";
+import FollowButton from "@/app/_components/common/follow_button";
 
 export default function Profile() {
   const router = useRouter();
@@ -58,6 +59,8 @@ export default function Profile() {
     }
   };
 
+  console.log(profileImgSrc);
+
   return (
     <>
       <TopNav />
@@ -88,10 +91,12 @@ export default function Profile() {
 
                 <div className="flex gap-2 justify-center items-start">
                   <span className="text-[11px] text-gray-400 font-light">
-                    팔로워 4.2K
+                    팔로워 {userProfile.followerCount}
                   </span>
                   <span className="h-[16px] w-px bg-gray-300"></span>
-                  <span className="text-[11px] text-gray-400">팔로잉 6</span>
+                  <span className="text-[11px] text-gray-400">
+                    팔로잉 {userProfile.followingCount}
+                  </span>
                 </div>
               </div>
             </div>
@@ -104,14 +109,21 @@ export default function Profile() {
               </div>
 
               <div className="flex gap-2">
-                <div className="flex justify-center items-center h-8 text-xs bg-blue-400 hover:bg-blue-600 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
-                  <span>{isMyProfile ? "프로필 편집" : "팔로우"}</span>
-                </div>
+                {isMyProfile ? (
+                  <div className="flex justify-center items-center h-10 text-xs bg-blue-400 hover:bg-blue-600 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
+                    <span>프로필 편집</span>
+                  </div>
+                ) : (
+                  <FollowButton
+                    userId={userId}
+                    initialIsFollowing={userProfile.isFollowing}
+                  />
+                )}
 
                 {isMyProfile ? null : (
                   <button
                     onClick={onClickChat}
-                    className="flex justify-center items-center h-8 text-xs bg-blue-400 hover:bg-blue-600 text-white py-2 px-3 rounded-lg hover:cursor-pointer"
+                    className="flex justify-center items-center h-10 text-xs bg-blue-400 hover:bg-blue-600 text-white py-2 px-3 rounded-lg hover:cursor-pointer"
                   >
                     <span>채팅하기</span>
                   </button>
