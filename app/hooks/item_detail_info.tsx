@@ -30,6 +30,10 @@ export interface ItemDetailInfo {
   views: number;
   heartCount: number;
   isHearted: boolean;
+  isFollowing: boolean;
+  followerCount: number;
+  followingCount: number;
+
   Comment: CommentInfo[];
 }
 

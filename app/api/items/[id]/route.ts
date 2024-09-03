@@ -1,9 +1,8 @@
+import db from "@/app/_libs/_server/db";
 import getSession from "@/app/_libs/_server/session";
 import { bucketName, s3 } from "@/app/_libs/config/awsConfig";
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-
-const prisma = new PrismaClient();
 
 export async function GET(
   request: Request,
@@ -20,7 +19,7 @@ export async function GET(
 
   try {
     // 아이템 정보를 가져옵니다.
-    const itemDetailInfo = await prisma.item.findUnique({
+    const itemDetailInfo = await db.item.findUnique({
       where: { id: itemId },
       include: {
         category: {
@@ -64,8 +63,17 @@ export async function GET(
     }
 
     // 하트 개수 계산
-    const heartCount = await prisma.heart.count({
+    const heartCount = await db.heart.count({
       where: { itemId },
+    });
+
+    //팔로우, 팔로잉 수 계산
+    const followerCount = await db.follow.count({
+      where: { followingId: itemDetailInfo.user.id },
+    });
+
+    const followingCount = await db.follow.count({
+      where: { followerId: itemDetailInfo.user.id },
     });
 
     // 사용자 세션 가져오기
@@ -74,7 +82,7 @@ export async function GET(
     // 사용자가 하트를 눌렀는지 확인
     const isHearted = session?.id
       ? Boolean(
-          await prisma.heart.findFirst({
+          await db.heart.findFirst({
             where: {
               itemId,
               userId: session.id,
@@ -83,12 +91,31 @@ export async function GET(
         )
       : false;
 
-    // 응답에 하트 상태 추가
+    //사용자가 상대방을 팔로우하고 있는지 확인
+    const isFollowing = session?.id
+      ? Boolean(
+          await db.follow.findFirst({
+            where: {
+              followerId: session.id,
+              followingId: itemDetailInfo.user.id,
+            },
+          })
+        )
+      : false;
+
+    /*  console.log("팔로워 카운트:", followerCount);
+    console.log("팔로잉 카운트:", followingCount);
+    console.log("사용자 팔로잉 여부:", isFollowing); */
+
+    // 응답에 하트 상태,팔로우 상태 추가
     return NextResponse.json(
       {
         ...itemDetailInfo,
         heartCount,
         isHearted,
+        isFollowing,
+        followerCount,
+        followingCount,
       },
       { status: 200 }
     );
@@ -125,7 +152,7 @@ export async function DELETE(
     );
   }
 
-  const item = await prisma.item.findUnique({
+  const item = await db.item.findUnique({
     where: {
       id: itemId,
       userId,
@@ -161,7 +188,7 @@ export async function DELETE(
 
   // DB에서 아이템 삭제
   try {
-    await prisma.item.delete({
+    await db.item.delete({
       where: {
         id: itemId,
         userId,

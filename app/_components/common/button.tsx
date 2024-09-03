@@ -8,6 +8,7 @@ interface ButtonProps {
   large?: boolean;
   text: string;
   type?: string;
+  className?: string;
   [key: string]: any;
 }
 
@@ -16,6 +17,7 @@ export default function Button({
   onClick,
   type,
   text,
+  className = "", //기본값은 빈 문자열(추가할 수 있게 받는 것)
   ...rest
 }: ButtonProps) {
   const { pending } = useFormStatus();
@@ -121,17 +123,23 @@ export default function Button({
     >
       {pending ? "회원 가입 중.." : text}
     </button>
-  ) : type === "itemModify" || type === "itemDelete" || type === "cancel" ? (
+  ) : type === "itemModify" ||
+    type === "follow" ||
+    type === "itemDelete" ||
+    type === "cancel" ? (
     <button
       onClick={onClick}
       {...rest}
       className={cls(
-        "h-10  text-white py-2 px-3 rounded-lg hover:cursor-pointer",
+        "h-10 text-white py-2 px-3 rounded-lg hover:cursor-pointer",
         type === "itemModify"
           ? "bg-blue-400 hover:bg-blue-600"
+          : type === "follow"
+          ? "hover:bg-blue-700"
           : type === "itemDelete"
           ? "bg-red-400 hover:bg-red-600"
-          : "bg-gray-400 hover:bg-gray-600"
+          : "bg-gray-400 hover:bg-gray-600",
+        className
       )}
     >
       {text}

@@ -15,6 +15,7 @@ import Button from "@/app/_components/common/button";
 import { useRouter } from "next/navigation";
 import { getOrCreateChat } from "@/app/_components/chats/chat_service";
 import { useViewsIncrement } from "@/app/hooks/item_views_increment";
+import FollowButton from "@/app/_components/common/follow_button";
 
 export default function ItemDetail({ params }: { params: { id: string } }) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
@@ -129,11 +130,7 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
 
                       <DeleteDiv type="item" itemId={item.id} />
                     </div>
-                  ) : (
-                    <div className="bg-blue-400 text-white py-2 px-3 rounded-lg hover:cursor-pointer">
-                      팔로우
-                    </div>
-                  )}
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -164,22 +161,30 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
                 <div className="flex justify-between w-full">
                   <div className="flex flex-col gap-2">
                     <span className="text-sm">{item.user.username}</span>
-                    <div className="flex gap-2 justify-center items-center">
+                    <div className="flex gap-2 justify-start items-center">
                       <span className="text-xs text-gray-400 font-light">
-                        팔로워 4.2K
+                        팔로워 {item.followerCount}
                       </span>
                       <span className="h-[16px] w-px bg-gray-300"></span>
-                      <span className="text-xs text-gray-400">팔로잉 6</span>
+                      <span className="text-xs text-gray-400">
+                        팔로잉 {item.followingCount}
+                      </span>
                     </div>
                   </div>
 
                   {user?.id === item.user.id ? null : (
-                    <button
-                      onClick={onClickChat}
-                      className="flex justify-center items-center h-10 text-sm bg-blue-400 hover:bg-blue-600 text-white py-2 px-3 rounded-lg hover:cursor-pointer"
-                    >
-                      채팅하기
-                    </button>
+                    <div className="flex gap-2 *:text-sm">
+                      <FollowButton
+                        userId={item.user.id}
+                        initialIsFollowing={item.isFollowing}
+                      />
+
+                      <Button
+                        type="itemModify"
+                        onClick={onClickChat}
+                        text="채팅하기"
+                      />
+                    </div>
                   )}
                 </div>
 

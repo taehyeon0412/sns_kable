@@ -17,7 +17,7 @@ export default function HeartButton({
 
   const { mutate } = heartAction(itemId);
 
-  const HeartClick = () => {
+  const onClickHeart = () => {
     //ui 낙관적 업데이트
     setIsHearted((prev) => !prev);
     setHeartCount((prev) => prev + (isHearted ? -1 : 1));
@@ -31,7 +31,7 @@ export default function HeartButton({
 
   return (
     <div
-      onClick={HeartClick}
+      onClick={onClickHeart}
       className={`flex gap-1 justify-center items-center text-white py-2 px-4 rounded-lg hover:cursor-pointer hover:bg-blue-700 ${
         isHearted ? "bg-blue-400" : "bg-blue-500 "
       }`}
