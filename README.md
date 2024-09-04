@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 1. 서비스 개요
+<img src="https://github.com/user-attachments/assets/1fa0531a-9808-4d94-a7cd-357f943b855c" alt="kable name" width="400" height="300" />
 
-## Getting Started
+### 카테고리가 있는 SNS 카블!
+### 다양한 카테고리별로 글을 올리고 다양한 사람들과 소통해 보세요
 
-First, run the development server:
+<br/>
+<br/>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# 2. 개발 환경
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white) ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34) ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+
+<br/>
+
+# 3. 폴더 구조
+
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+📁 public
+├──📁 assets
+│   ├──📁 icons
+│   └──📁 images
+│
+📁 app                    # 라우팅 폴더
+├──📁 (auth)              # 그룹 라우팅 (auth)
+│   ├──📁 create-account
+│   ├──📁 enter
+│   ├──📁 github
+│   │   ├──📁 complete
+│   │   └──📁 start
+│   └──📁 kakao
+│       ├──📁 complete
+│       └──📁 start
+│
+├──📁 (tabs)              # 그룹 라우팅 (tabs)
+│   ├──📁 category
+│   ├──📁 chats
+│   │   └──📁 [id]
+│   ├──📁 following
+│   ├──📁 home
+│   ├──📁 items
+│   │   ├──📁 upload
+│   │   └──📁 [id]
+│   └──📁 profile
+│       └──📁 [id]
+│
+├──📁 api                 # api
+│   ├──📁 category
+│   ├──📁 items
+│   │   └──📁 [id]
+│   │      ├──📁 comments
+│   │      ├──📁 heart
+│   │      └──📁 views
+│   ├──📁 user
+│   │   └──📁 [id]
+│   │      └──📁 follow
+│   └──📁 logout
+│
+📁 hooks
+│   
+📁 _components
+│   ├──📁 chats         # 채팅
+│   ├──📁 common        # 공통 (button, 무한스크롤 등)
+│   ├──📁 homeSection   # 화면 섹션
+│   ├──📁 login         # 로그인
+│   └──📁 modal         # 모달창
+│
+📁 _libs
+├──📁 _client         # 클라이언트 관련
+├──📁 _server         # 서버 관련
+├──📁 config          # aws, firebase config
+└──📁 schema          # zod 스키마
+```
