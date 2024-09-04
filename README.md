@@ -8,7 +8,26 @@
 
 <br/>
 
-- Kable 게스트 계정 정보
+<blockquote>
+<p dir="auto">
+  <strong>개발 기간 : 2024.08 ~ 2024.09</strong> 
+  </p>
+</blockquote>
+
+  <br/> 
+
+  <blockquote>
+    <p dir="auto">
+  <strong>배포 주소 : 나중에 추가하기</strong>
+      </p>
+</blockquote>
+  <br/>
+  
+   <blockquote>
+    <p dir="auto">
+<strong>Kable 게스트 계정 정보</strong>
+</p>
+</blockquote>
 
 <markdown-accessiblity-table data-catalyst=""><table>
 <thead>
