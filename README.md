@@ -1,4 +1,4 @@
-# 1. 서비스 개요
+# 서비스 개요
 <div align="center">
   <img src="https://github.com/user-attachments/assets/1fa0531a-9808-4d94-a7cd-357f943b855c" alt="kable name" width="400" height="300" />
 </div>
@@ -48,14 +48,14 @@
 <br/>
 
 
-# 2. 개발 환경
+# 개발 환경
 ![Next JS](https://img.shields.io/badge/Next-14-black?style=for-the-badge&logo=next.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white) ![AWS](https://img.shields.io/badge/AWS⠀S3-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34) ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 
 
 <br/>
 
-# 3.  프로젝트 구성도
+# 프로젝트 구성도
 
 <details>
   <summary>폴더 구조 보기</summary>
@@ -230,7 +230,7 @@
 
 <br/>
 
-# 4. 기능 소개
+# 기능 소개
 
 __토글을 열면 시연 영상을 확인하실 수 있습니다__
 
@@ -293,7 +293,7 @@ __토글을 열면 시연 영상을 확인하실 수 있습니다__
 
 <br/>
 
-# 5. 🔥 성능 최적화
+# 🔥 성능 최적화
 * [이미지 최적화로 사이즈 약 84% 감소 & Lcp 개선](https://taehyeon-smilestudy.tistory.com/51)
   * next/image 컴포넌트는 기본적으로 지연 로딩(lazy loading)을 수행
     * 첫화면에 보이는 로고나 배너 같은 중요한 요소들은 즉시 로드 하는게 오히려 LCP의 점수에 더 좋은 영향을 끼치는 것을 발견
@@ -301,7 +301,14 @@ __토글을 열면 시연 영상을 확인하실 수 있습니다__
     * sizes를 이용해서 뷰포트에 맞는 이미지를 가져오게 변경
     * fetchPriority="high"를 사용하여 먼저 로드 되도록 우선순위를 높임
    
-* 최적화 후 추가 예정 
+* 최적화 후 추가 예정
+
+<br/>
+
+# ☄️ 트러블 슈팅
+* 추가 예정
+
+
 
 
 
