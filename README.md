@@ -33,7 +33,7 @@
 <thead>
 <tr>
 <th align="center">아이디</th>
-<th align="left"><a href="mailto:ssafymate@gmail.com">kable@gmail.com</a></th>
+<th align="left"><a href="kable@gmail.com">kable@gmail.com</a></th>
 </tr>
 </thead>
 <tbody>
@@ -300,6 +300,29 @@ __토글을 열면 시연 영상을 확인하실 수 있습니다__
     * priority 속성을 추가하여 이미지를 즉시 로드하게 변경
     * sizes를 이용해서 뷰포트에 맞는 이미지를 가져오게 변경
     * fetchPriority="high"를 사용하여 먼저 로드 되도록 우선순위를 높임
+   
+    <br/>
+   
+  <table>
+    <thead>
+      <tr>
+        <th align="center">웹 성능 최적화 전</th>
+        <th align="center">웹 성능 최적화 후</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/31a0daa8-bce0-48ea-9c1d-36b4bbabfc2e" alt="웹 성능 최적화 전 이미지" width="500px" style="max-width: 100%;">
+        </td>
+        <td align="center">
+         최적화 후 개선 이미지 넣기
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+   <br/>
    
 * 최적화 후 추가 예정
 
