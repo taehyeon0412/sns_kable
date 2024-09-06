@@ -316,7 +316,7 @@ __토글을 열면 시연 영상을 확인하실 수 있습니다__
           <img src="https://github.com/user-attachments/assets/31a0daa8-bce0-48ea-9c1d-36b4bbabfc2e" alt="웹 성능 최적화 전 이미지" width="500px" style="max-width: 100%;">
         </td>
         <td align="center">
-         최적화 후 개선 이미지 넣기
+         <img src="https://github.com/user-attachments/assets/cea62949-ef5d-4960-9333-e570f243689f" alt="웹 성능 최적화 후 이미지" width="500px" style="max-width: 100%;">
         </td>
       </tr>
     </tbody>
