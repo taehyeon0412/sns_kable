@@ -58,7 +58,7 @@
 # 프로젝트 구성도
 
 <details>
-  <summary>폴더 구조 보기</summary>
+  <summary>폴더 구조</summary>
 
   <br/>
   
@@ -210,6 +210,12 @@
     - 설명 : 버튼을 눌렀을 때 팔로우 / 언팔로우 합니다.
 
   </details>
+
+  <details>
+  <summary>Prisma DB 설계</summary>
+    표넣기
+  </details>
+  
 
   <br/>
 
