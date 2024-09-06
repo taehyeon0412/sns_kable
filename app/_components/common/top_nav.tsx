@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ProfileModal from "../modal/profile_modal";
 import Kable_name from "@/public/asset/kable.name.png";
-import { userInfo } from "@/app/hooks/user_info";
+import { useUserInfo } from "@/app/hooks/user_info";
 import { AnimatePresence } from "framer-motion";
 import Button from "./button";
 
@@ -13,7 +13,7 @@ interface NavKind {
 }
 
 export default function TopNav({ kind = "default" }: NavKind) {
-  const { data: user } = userInfo();
+  const { data: user } = useUserInfo();
 
   return (
     //네비게이션바
@@ -120,8 +120,8 @@ export default function TopNav({ kind = "default" }: NavKind) {
                       (user?.kakao_id
                         ? `카카오: ${user.kakao_id}`
                         : user?.github_id
-                        ? `깃허브: ${user.github_id}`
-                        : "")
+                          ? `깃허브: ${user.github_id}`
+                          : "")
                     }
                     profileImg={user?.profile_img}
                   />

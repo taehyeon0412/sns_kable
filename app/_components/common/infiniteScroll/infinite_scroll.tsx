@@ -41,19 +41,20 @@ export default function InfiniteScroll({
 
   //무한 스크롤 함수
   useEffect(() => {
+    const currentObserverRef = observerRef.current; // 현재 ref를 로컬 변수에 저장
     const observer = new IntersectionObserver(observerCallback, {
       root: null,
       rootMargin: "0px",
       threshold: 0.1,
     });
 
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+    if (currentObserverRef) {
+      observer.observe(currentObserverRef);
     }
 
     return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
+      if (currentObserverRef) {
+        observer.unobserve(currentObserverRef);
       }
     };
   }, [observerCallback]);

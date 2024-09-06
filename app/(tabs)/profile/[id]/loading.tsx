@@ -30,7 +30,7 @@ export default function Loading() {
 
             <div className=" col-span-9 flex flex-col justify-center items-start p-4 gap-3">
               <div className="flex justify-between w-full h-full">
-                <div className="w-full border-2 bg-slate-300 rounded-md"/>
+                <div className="w-full border-2 bg-slate-300 rounded-md" />
               </div>
 
               <div className="flex gap-2">

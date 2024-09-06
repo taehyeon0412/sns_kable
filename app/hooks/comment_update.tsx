@@ -19,7 +19,7 @@ export function useUpdateComment() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ payload }), // 수정된 댓글 내용 전달
-        }
+        },
       );
 
       if (!response.ok) {
@@ -46,6 +46,6 @@ export function useUpdateComment() {
           console.error("알 수 없는 오류 발생");
         }
       },
-    }
+    },
   );
 }

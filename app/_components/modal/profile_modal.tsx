@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ProfileInfo {
-  id:number| null | undefined;
+  id: number | null | undefined;
   name: string | null | undefined;
   email: string | null | undefined;
   profileImg: string | null | undefined;

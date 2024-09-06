@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 //댓글 삭제 로직
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string; commentId: string } }
+  { params }: { params: { id: string; commentId: string } },
 ) {
   const itemId = parseInt(params.id, 10);
   const commentId = parseInt(params.commentId, 10);
@@ -20,7 +20,7 @@ export async function DELETE(
     if (comment?.itemId !== itemId) {
       return NextResponse.json(
         { message: "잘못된 요청입니다." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -33,13 +33,13 @@ export async function DELETE(
 
     return NextResponse.json(
       { message: "댓글이 삭제되었습니다." },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("댓글 삭제 중 오류 발생:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -47,7 +47,7 @@ export async function DELETE(
 //댓글 수정 로직
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string; commentId: string } }
+  { params }: { params: { id: string; commentId: string } },
 ) {
   const itemId = parseInt(params.id, 10);
   const commentId = parseInt(params.commentId, 10);
@@ -63,7 +63,7 @@ export async function PUT(
     if (comment?.itemId !== itemId) {
       return NextResponse.json(
         { message: "잘못된 요청입니다." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -80,13 +80,13 @@ export async function PUT(
 
     return NextResponse.json(
       { message: "댓글이 수정되었습니다." },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("댓글 수정 중 오류 발생:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

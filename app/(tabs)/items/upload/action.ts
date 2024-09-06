@@ -163,5 +163,5 @@ export async function uploadItem(_: any, formData: FormData) {
     });
   }
 
-  redirect(`/home`);
+  redirect("/home");
 }

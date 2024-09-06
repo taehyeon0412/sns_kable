@@ -54,7 +54,7 @@ export default function DeleteDiv({ itemId, commentId, type }: DeleteDivProps) {
             console.error("알 수 없는 오류 발생");
           }
         },
-      }
+      },
     );
   };
 
@@ -96,8 +96,8 @@ export default function DeleteDiv({ itemId, commentId, type }: DeleteDivProps) {
               {type === "item"
                 ? "글을 삭제하시겠습니까?"
                 : type === "comment"
-                ? "댓글을 삭제하시겠습니까?"
-                : null}
+                  ? "댓글을 삭제하시겠습니까?"
+                  : null}
             </span>
             <div className="flex w-full gap-2 mt-4 justify-center *:hover:cursor-pointer">
               <button

@@ -18,7 +18,7 @@ export async function getOrCreateChat(
   currentUserName: string,
   currentUserImage: string,
   otherUserName: string,
-  otherUserImage: string
+  otherUserImage: string,
 ) {
   // 사용자 ID를 정렬하여 일관된 채팅 ID 생성
   const chatId = [currentUserId, otherUserId].sort().join("_");
@@ -58,11 +58,11 @@ export async function getOrCreateChat(
 // 메시지를 실시간으로 구독하는 함수
 export function subscribeToMessages(
   chatId: string,
-  callback: (messages: any[]) => void
+  callback: (messages: any[]) => void,
 ) {
   const q = query(
     collection(db, `chats/${chatId}/messages`),
-    orderBy("sentAt", "asc")
+    orderBy("sentAt", "asc"),
   );
 
   return onSnapshot(
@@ -77,7 +77,7 @@ export function subscribeToMessages(
     },
     (error) => {
       console.error("메시지 실시간 구독 오류:", error);
-    }
+    },
   );
 }
 
@@ -85,7 +85,7 @@ export function subscribeToMessages(
 export async function sendMessage(
   chatId: string,
   senderId: string,
-  content: string
+  content: string,
 ) {
   if (content.trim() === "") return; // 빈 메시지는 무시
 
@@ -104,7 +104,7 @@ export async function sendMessage(
         lastMessage: content,
         lastChatTime: serverTimestamp(),
       },
-      { merge: true }
+      { merge: true },
     );
   } catch (error) {
     console.error("Error sending message:", error);

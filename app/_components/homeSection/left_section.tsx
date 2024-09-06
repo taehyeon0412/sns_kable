@@ -19,9 +19,10 @@ export default function LeftSection() {
       >
         새 글쓰기
       </button>
-      <button 
-      onClick = {onClickChats}
-      className="xl:mt-6 text-white border-transparent w-[80%] bg-blue-400 hover:bg-blue-600 border-2 rounded-md py-2">
+      <button
+        onClick={onClickChats}
+        className="xl:mt-6 text-white border-transparent w-[80%] bg-blue-400 hover:bg-blue-600 border-2 rounded-md py-2"
+      >
         채팅 하기
       </button>
     </>

@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const { searchParams } = new URL(request.url);
   const page = parseInt(searchParams.get("page") || "1");
@@ -25,7 +25,7 @@ export async function GET(
     if (!user) {
       return NextResponse.json(
         { message: "유저를 찾을 수 없습니다." },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -68,7 +68,7 @@ export async function GET(
           ...item,
           heartCount,
         };
-      })
+      }),
     );
 
     return NextResponse.json(itemsHeartCount, { status: 200 });

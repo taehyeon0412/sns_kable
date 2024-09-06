@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 //프로필을 눌렀을 때 id가 url로 전송되고 id를 url에서 들고옴
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const { id } = params;
   const userId = parseInt(id);
@@ -18,7 +18,7 @@ export async function GET(
     if (!user) {
       return NextResponse.json(
         { message: "유저를 찾을 수 없습니다." },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -42,7 +42,7 @@ export async function GET(
               followerId: session.id,
               followingId: userId,
             },
-          })
+          }),
         )
       : false;
 
@@ -54,13 +54,13 @@ export async function GET(
         followerCount,
         followingCount,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("유저 프로필을 가져오는 중 오류 발생:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

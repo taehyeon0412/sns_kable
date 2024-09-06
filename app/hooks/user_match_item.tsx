@@ -7,7 +7,7 @@ export function useUserItems(id: number) {
     queryKey: ["userItems", id],
     queryFn: async ({ pageParam = 1 }) => {
       const response = await fetch(
-        `/api/items/user/${id}?page=${pageParam}&limit=5`
+        `/api/items/user/${id}?page=${pageParam}&limit=5`,
       );
       if (!response.ok) {
         throw new Error("유저 아이템을 불러오는데 실패했습니다.");

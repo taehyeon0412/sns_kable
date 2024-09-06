@@ -9,7 +9,7 @@ interface MutationContext {
   prevItemDetail?: HeartActionProps;
 }
 
-export function heartAction(itemId: number) {
+export function useHeartAction(itemId: number) {
   const queryClient = useQueryClient();
 
   return useMutation<HeartActionProps, unknown, void, MutationContext>(

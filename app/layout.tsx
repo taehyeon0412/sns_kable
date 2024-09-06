@@ -1,11 +1,9 @@
 "use client";
 
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Head from "next/head";
-
-/* const inter = Inter({ subsets: ["latin"] }); */
+import React from "react";
 
 const queryClient = new QueryClient();
 
@@ -21,7 +19,7 @@ export default function RootLayout({
           <title>Kable - 카테고리가 있는 SNS!</title>
           <meta name="description" content="카테고리가 있는 SNS!" />
         </Head>
-        <body /* className={inter.className} */>{children}</body>
+        <body>{children}</body>
       </html>
     </QueryClientProvider>
   );

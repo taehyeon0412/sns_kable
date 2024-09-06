@@ -30,7 +30,7 @@ export function useDeleteItem() {
 
       //데이터 업데이트, filter로 삭제할 아이템을 제외하고 새로운 데이터 생성
       const updatedPages = previousData.pages.map((page) =>
-        page.filter((item) => item.id !== itemId)
+        page.filter((item) => item.id !== itemId),
       );
 
       // 캐시 업데이트, updatedPages를 이용하여 즉시 업데이트 상태 반영

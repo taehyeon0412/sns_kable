@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
 

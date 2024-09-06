@@ -6,14 +6,14 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const itemId = parseInt(params.id, 10);
 
   if (isNaN(itemId)) {
     return NextResponse.json(
       { message: "아이템ID가 존재하지 않습니다." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -58,7 +58,7 @@ export async function GET(
         {
           message: "아이템을 찾을 수 없습니다.",
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -87,7 +87,7 @@ export async function GET(
               itemId,
               userId: session.id,
             },
-          })
+          }),
         )
       : false;
 
@@ -99,7 +99,7 @@ export async function GET(
               followerId: session.id,
               followingId: itemDetailInfo.user.id,
             },
-          })
+          }),
         )
       : false;
 
@@ -117,13 +117,13 @@ export async function GET(
         followerCount,
         followingCount,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Error fetching item detail:", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -131,14 +131,14 @@ export async function GET(
 //DELETE 요청
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const itemId = parseInt(params.id, 10);
 
   if (isNaN(itemId)) {
     return NextResponse.json(
       { message: "아이템ID가 존재하지 않습니다." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -148,7 +148,7 @@ export async function DELETE(
   if (!userId) {
     return NextResponse.json(
       { message: "인증되지 않은 사용자입니다." },
-      { status: 401 }
+      { status: 401 },
     );
   }
 
@@ -166,7 +166,7 @@ export async function DELETE(
   if (!item) {
     return NextResponse.json(
       { message: "아이템을 찾을 수 없거나 삭제 권한이 없습니다." },
-      { status: 404 }
+      { status: 404 },
     );
   }
 
@@ -182,7 +182,7 @@ export async function DELETE(
     console.error("이미지 삭제 중 오류 발생:", error);
     return NextResponse.json(
       { message: "이미지 삭제 중 오류가 발생했습니다." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 
@@ -197,13 +197,13 @@ export async function DELETE(
 
     return NextResponse.json(
       { message: "아이템이 성공적으로 삭제되었습니다." },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("아이템 삭제 중 오류 발생:", error);
     return NextResponse.json(
       { message: "아이템 삭제 중 오류가 발생했습니다." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

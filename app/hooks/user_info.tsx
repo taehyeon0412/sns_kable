@@ -9,7 +9,7 @@ export interface User {
   github_id?: string;
 }
 
-export function userInfo() {
+export function useUserInfo() {
   return useQuery<User>({
     queryKey: ["user"],
     queryFn: async () => {

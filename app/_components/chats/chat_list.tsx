@@ -22,14 +22,14 @@ export default function ChatList({ currentUserId }: { currentUserId: string }) {
   useEffect(() => {
     const q = query(
       collection(db, "chats"),
-      where("participants", "array-contains", currentUserId)
+      where("participants", "array-contains", currentUserId),
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const rooms = snapshot.docs.map((doc) => {
         const data = doc.data();
         const otherUserId = data.participants.find(
-          (id: string) => id !== currentUserId
+          (id: string) => id !== currentUserId,
         );
         const otherUserInfo = otherUserId ? data.userInfo[otherUserId] : null;
 

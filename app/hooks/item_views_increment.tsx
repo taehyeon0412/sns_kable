@@ -45,7 +45,7 @@ export function useViewsIncrement() {
         if (context?.prevItem) {
           queryClient.setQueryData<ItemViewsProps>(
             ["itemDetail", itemId],
-            context.prevItem
+            context.prevItem,
           );
         }
       },
@@ -53,6 +53,6 @@ export function useViewsIncrement() {
         // 성공 또는 실패 후 데이터를 무효화하여 최신 상태를 가져옴
         queryClient.invalidateQueries(["itemDetail", itemId]);
       },
-    }
+    },
   );
 }

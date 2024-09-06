@@ -92,7 +92,7 @@ export default function Button({
       className={cls(
         "mt-3 w-full text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none",
         large ? "py-3 text-base" : "py-2 text-sm",
-        pending ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-900"
+        pending ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-900",
       )}
     >
       {pending ? "로그인 중.." : text}
@@ -106,7 +106,7 @@ export default function Button({
         "py-2 px-4 border-2 border-gray-700 bg-gray-700 text-white  rounded-lg",
         pending
           ? "bg-gray-400"
-          : "bg-blue-500 hover:bg-blue-900 hover:border-blue-900"
+          : "bg-blue-500 hover:bg-blue-900 hover:border-blue-900",
       )}
     >
       {pending ? "업로드 중.." : text}
@@ -118,7 +118,7 @@ export default function Button({
       className={cls(
         "mt-3 w-full text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:outline-none",
         large ? "py-3 text-base" : "py-2 text-sm",
-        pending ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-900"
+        pending ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-900",
       )}
     >
       {pending ? "회원 가입 중.." : text}
@@ -135,11 +135,11 @@ export default function Button({
         type === "itemModify"
           ? "bg-blue-400 hover:bg-blue-600"
           : type === "follow"
-          ? "hover:bg-blue-700 text-xs"
-          : type === "itemDelete"
-          ? "bg-red-400 hover:bg-red-600"
-          : "bg-gray-400 hover:bg-gray-600",
-        className
+            ? "hover:bg-blue-700 text-xs"
+            : type === "itemDelete"
+              ? "bg-red-400 hover:bg-red-600"
+              : "bg-gray-400 hover:bg-gray-600",
+        className,
       )}
     >
       {text}
@@ -149,7 +149,7 @@ export default function Button({
       {...rest}
       className={cls(
         "mt-3 w-full bg-blue-500 hover:bg-blue-900 text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none",
-        large ? "py-3 text-base" : "py-2 text-sm"
+        large ? "py-3 text-base" : "py-2 text-sm",
       )}
     >
       {text}

@@ -22,6 +22,6 @@ export function useLogout() {
       onError: (error) => {
         console.error("Logout error:", error);
       },
-    }
+    },
   );
 }

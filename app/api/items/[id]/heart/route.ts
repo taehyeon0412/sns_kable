@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
   const session = await getSession();
@@ -13,7 +13,7 @@ export async function POST(
   if (isNaN(itemId)) {
     return NextResponse.json(
       { message: "아이템ID가 존재하지 않습니다." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 

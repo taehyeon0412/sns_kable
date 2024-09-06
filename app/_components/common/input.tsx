@@ -53,4 +53,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
+// displayName 추가
+Input.displayName = "Input";
+
 export default Input;

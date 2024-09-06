@@ -3,7 +3,7 @@ import db from "./db";
 
 export const PASSWORD_MIN_LENGTH = 10;
 export const PASSWORD_REGEX = new RegExp(
-  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).+$/
+  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).+$/,
 );
 //강력한 비밀번호를 위해서 소문자,대문자,숫자,특수문자를 포함해야되는 변수추가
 

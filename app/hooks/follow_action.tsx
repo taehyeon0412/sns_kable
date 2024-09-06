@@ -70,14 +70,14 @@ export function useFollowAction(userId: number) {
         if (context?.prevItemDetail) {
           queryClient.setQueryData(
             ["itemDetail", userId],
-            context.prevItemDetail
+            context.prevItemDetail,
           );
         }
 
         if (context?.prevUserProfile) {
           queryClient.setQueryData(
             ["userProfile", userId],
-            context.prevUserProfile
+            context.prevUserProfile,
           );
         }
       },
@@ -86,6 +86,6 @@ export function useFollowAction(userId: number) {
         queryClient.invalidateQueries(["itemDetail", userId]);
         queryClient.invalidateQueries(["userProfile", userId]);
       },
-    }
+    },
   );
 }

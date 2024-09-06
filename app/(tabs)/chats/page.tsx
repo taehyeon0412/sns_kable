@@ -2,10 +2,10 @@
 
 import TopNav from "@/app/_components/common/top_nav";
 import ChatList from "./../../_components/chats/chat_list";
-import { userInfo } from "@/app/hooks/user_info";
+import { useUserInfo } from "@/app/hooks/user_info";
 
 export default function Chats() {
-  const { data: user, isLoading, error } = userInfo();
+  const { data: user, isLoading, error } = useUserInfo();
 
   if (isLoading) {
     return <p>Loading...</p>;

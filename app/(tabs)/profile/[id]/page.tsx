@@ -1,7 +1,7 @@
 "use client";
 
 import TopNav from "@/app/_components/common/top_nav";
-import { userInfo } from "@/app/hooks/user_info";
+import { useUserInfo } from "@/app/hooks/user_info";
 import { useUserProfile } from "@/app/hooks/user_profile";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ export default function Profile() {
   const params = useParams();
   const userId = parseInt(params.id as string); // URL에서 id 추출 & 숫자로 변환
   const { data: userProfile, error, isLoading } = useUserProfile(userId);
-  const { data: logInUser } = userInfo();
+  const { data: logInUser } = useUserInfo();
   const {
     data: userItem,
     fetchNextPage,

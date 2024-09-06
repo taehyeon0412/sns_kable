@@ -1,6 +1,6 @@
 "use client";
 
-import { userInfo } from "@/app/hooks/user_info";
+import { useUserInfo } from "@/app/hooks/user_info";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { sendMessage, subscribeToMessages } from "./chat_service";

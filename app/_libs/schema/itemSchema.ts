@@ -36,7 +36,7 @@ export const itemUploadSchema = z.object({
             message: "이미지 파일만 업로드 가능합니다.",
           });
         }
-      })
+      }),
   ),
   title: z.string().min(1, { message: "제목을 입력해주세요." }),
   category: z.string().min(1, { message: "카테고리를 선택해주세요." }),
@@ -76,7 +76,7 @@ export const itemUpdateSchema = z.object({
               message: "이미지 파일만 업로드 가능합니다.",
             });
           }
-        })
+        }),
     )
     .optional(),
   title: z.string().min(1, { message: "제목을 입력해주세요." }),

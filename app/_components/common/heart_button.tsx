@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { heartAction } from "@/app/hooks/heart_action";
+import { useHeartAction } from "@/app/hooks/heart_action";
 
 interface HeartButtonProps {
   itemId: number;
@@ -15,7 +15,7 @@ export default function HeartButton({
   const [isHearted, setIsHearted] = useState(initialIsHearted);
   const [heartCount, setHeartCount] = useState(initialHeartCount);
 
-  const { mutate } = heartAction(itemId);
+  const { mutate } = useHeartAction(itemId);
 
   const onClickHeart = () => {
     //ui 낙관적 업데이트

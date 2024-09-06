@@ -23,6 +23,6 @@ export function useCreateComment(itemId: number) {
       onSuccess: () => {
         queryClient.invalidateQueries(["itemDetail", itemId]);
       },
-    }
+    },
   );
 }

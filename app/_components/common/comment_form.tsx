@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import TextArea from "./textarea";
 import Image from "next/image";
 import { cls, formatToTimeAgo } from "@/app/_libs/_client/utils";

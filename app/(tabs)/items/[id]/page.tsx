@@ -7,7 +7,7 @@ import { useItemDetailInfo } from "@/app/hooks/item_detail_info";
 import Image from "next/image";
 import Loading from "./loading";
 import HeartButton from "@/app/_components/common/heart_button";
-import { userInfo } from "@/app/hooks/user_info";
+import { useUserInfo } from "@/app/hooks/user_info";
 import DeleteDiv from "@/app/_components/common/delete_div";
 import Link from "next/link";
 import CommentForm from "@/app/_components/common/comment_form";
@@ -20,7 +20,7 @@ import FollowButton from "@/app/_components/common/follow_button";
 export default function ItemDetail({ params }: { params: { id: string } }) {
   const itemId = parseInt(params.id, 10); // URL에서 id를 가져오고 10진수로 바꿈
   const { data: item, isLoading } = useItemDetailInfo(itemId);
-  const { data: user, isLoading: userLoading } = userInfo();
+  const { data: user, isLoading: userLoading } = useUserInfo();
   const incrementViews = useViewsIncrement();
   const router = useRouter();
 
@@ -28,6 +28,7 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
   useEffect(() => {
     console.log("조회수 mutate 호출");
     incrementViews.mutate(itemId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemId]);
 
   if (isLoading || userLoading) {

@@ -2,10 +2,10 @@
 
 import MessagesList from "@/app/_components/chats/message_list";
 import TopNav from "@/app/_components/common/top_nav";
-import { userInfo } from "@/app/hooks/user_info";
+import { useUserInfo } from "@/app/hooks/user_info";
 
 export default function ChatRoom() {
-  const { data: user, isLoading, error } = userInfo();
+  const { data: user, isLoading, error } = useUserInfo();
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -20,7 +20,7 @@ export default function ChatRoom() {
       <TopNav />
 
       <div>
-        <MessagesList currentUserId={user.id.toString()}/>
+        <MessagesList currentUserId={user.id.toString()} />
       </div>
     </>
   );

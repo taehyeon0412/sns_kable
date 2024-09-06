@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   const itemId = parseInt(params.id, 10);
   const { payload, userId } = await request.json();
@@ -13,7 +13,7 @@ export async function POST(
   if (!payload || !userId) {
     return NextResponse.json(
       { message: "잘못된 요청입니다." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
