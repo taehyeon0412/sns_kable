@@ -89,9 +89,10 @@ export default function InfiniteScroll({
               <Image
                 src={item.image}
                 alt="item_image"
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "cover" }}
                 className="rounded-xl"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
 
@@ -159,8 +160,9 @@ export default function InfiniteScroll({
                 <Image
                   src={item.user.profile_img}
                   alt="user_profileImg"
-                  layout="fill"
+                  fill
                   className="rounded-full"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
 

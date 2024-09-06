@@ -17,3 +17,13 @@ export function formatToTimeAgo(date: string): string {
   return formatter.format(diff, "days");
 }
 //몇일전에 업로드 됐는지 알 수 있는 함수
+
+//enter 키 감지
+export const enterKeyPress = (
+  e: React.KeyboardEvent<HTMLInputElement>,
+  callback: () => void
+) => {
+  if (e.key === "Enter") {
+    callback(); //전달받은 콜백 함수 호출
+  }
+};

@@ -4,6 +4,7 @@ import { userInfo } from "@/app/hooks/user_info";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { sendMessage, subscribeToMessages } from "./chat_service";
+import { enterKeyPress } from "@/app/_libs/_client/utils";
 
 interface Message {
   id: string;
@@ -79,13 +80,6 @@ export default function MessagesList({
     });
   };
 
-  //enter 키 감지
-  const enterKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      onClickSendMessage();
-    }
-  };
-
   return (
     <div className="nav_h layout_px grid grid-cols-1 md:grid-cols-14 w-full min-h-screen">
       {/* 왼쪽 div */}
@@ -152,7 +146,7 @@ export default function MessagesList({
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="메시지를 입력하세요."
-            onKeyDown={enterKeyPress}
+            onKeyDown={(e) => enterKeyPress(e, onClickSendMessage)}
             className="h-10 px-6 shadow-sm w-[90%] md:w-full rounded-2xl border-2 border-gray-300 focus:ring-blue-500 focus:outline-none focus:border-blue-500 pr-12 placeholder:text-sm"
           />
           <div className="absolute inset-y-0 flex py-1.5 pr-1.5 right-8 md:right-0">

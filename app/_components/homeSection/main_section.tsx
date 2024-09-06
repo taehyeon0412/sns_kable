@@ -17,7 +17,7 @@ export default function MainSection() {
       hasNextPage={hasNextPage}
       isFetchingNextPage={isFetchingNextPage}
     />
-  );
+  ); /* null; */
 }
 
 /*isFetchingNextPage =  다음 페이지 데이터를 불러오는 중인지 확인하는 것

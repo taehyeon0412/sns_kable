@@ -24,7 +24,14 @@ export default function TopNav({ kind = "default" }: NavKind) {
           href="/home"
           className="absolute h-20 md:h-24 -top-3 md:-top-5 py-4 px-20"
         >
-          <Image src={Kable_name} alt="KABLE logo" layout="fill" />
+          <Image
+            src={Kable_name}
+            alt="KABLE logo"
+            fill
+            priority={true}
+            fetchPriority="high"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
         </Link>
 
         <div className="h-full w-full py-4 px-10" />
@@ -43,7 +50,7 @@ export default function TopNav({ kind = "default" }: NavKind) {
             </Link>
 
             <Link href="following" className="text-blue-400">
-              팔로윙
+              팔로잉
             </Link>
 
             <Link href="#" className="text-blue-400">
@@ -94,6 +101,8 @@ export default function TopNav({ kind = "default" }: NavKind) {
                     className="rounded-full w-10 h-10 bg-cover"
                     width={40}
                     height={40}
+                    priority={true}
+                    fetchPriority="high"
                   />
                 ) : (
                   <div className="w-10 h-10 rounded-full bg-slate-300" />
@@ -121,10 +130,7 @@ export default function TopNav({ kind = "default" }: NavKind) {
             </div>
           </div>
         </>
-      ) : /*  <div className="flex lg:mr-12 xl:mr-16">
-          <Button type="upload" form="uploadForm" text="작성 하기"></Button>
-          <div className="hidden md:flex w-16"></div>
-        </div> */ null}
+      ) : null}
     </nav>
   );
 }
