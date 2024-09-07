@@ -69,8 +69,8 @@
 │   ├──📁 icons
 │   └──📁 images
 │
-📁 app                    # 라우팅 폴더
-├──📁 (auth)              # 그룹 라우팅 (auth)
+📁 app                    # 라우팅 폴더 / (그룹별, api, hooks, components, libs 분류)
+├──📁 (auth)              # 그룹 라우팅 (로그인, 사용자 인증 관련)
 │   ├──📁 create-account
 │   ├──📁 enter
 │   ├──📁 github
@@ -80,7 +80,7 @@
 │       ├──📁 complete
 │       └──📁 start
 │
-├──📁 (tabs)              # 그룹 라우팅 (tabs)
+├──📁 (tabs)              # 그룹 라우팅 (페이지 관련)
 │   ├──📁 category
 │   ├──📁 chats
 │   │   └──📁 [id]
@@ -106,14 +106,14 @@
 │
 📁 hooks                  # React-Query hook (api)
 │   
-📁 _components
+📁 _components            # 컴포넌트 기능별로 정리
 │   ├──📁 chats           # 채팅
 │   ├──📁 common          # 공통 (button, 무한스크롤 등)
 │   ├──📁 homeSection     # 화면 섹션
 │   ├──📁 login           # 로그인
 │   └──📁 modal           # 모달창
 │
-📁 _libs
+📁 _libs                  # 라이브러리(유틸리티 함수)
 ├──📁 _client             # 클라이언트 관련
 ├──📁 _server             # 서버 관련
 ├──📁 config              # aws, firebase config
@@ -322,20 +322,10 @@
 
 <br/>
 
-# 🔥 성능 최적화
+# 🔥 개선 사항
+### 성능 개선
 
-- [이미지 최적화로 사이즈 약 84% 감소 & Lcp 개선](https://taehyeon-smilestudy.tistory.com/51)
-
-  - next/image 컴포넌트는 기본적으로 지연 로딩(lazy loading)을 수행
-
-    - 첫화면에 보이는 로고나 배너 같은 중요한 요소들은 즉시 로드 하는게 오히려 LCP의 점수에 더 좋은 영향을 끼치는 것을 발견
-    - priority 속성을 추가하여 이미지를 즉시 로드하게 변경
-    - sizes를 이용해서 뷰포트에 맞는 이미지를 가져오게 변경
-    - fetchPriority="high"를 사용하여 먼저 로드 되도록 우선순위를 높임
-
-    <br/>
-
-  <table>
+ <table>
     <thead>
       <tr>
         <th align="center">웹 성능 최적화 전</th>
@@ -354,10 +344,88 @@
     </tbody>
   </table>
 
-   <br/>
+   
+- 웹 성능 최적화 점수 약 **29.8%** 증가
+  - [이미지 최적화로 사이즈 약 **84%** 감소](https://taehyeon-smilestudy.tistory.com/51)
+  - <details>
+      <summary>LCP 시간 2.8s -> 0.7s로 <strong>75%</strong> 개선</summary>
+    
+      - next/image 컴포넌트는 기본적으로 지연 로딩(lazy loading)을 수행,<br/>
+        첫화면에 보이는 로고나 배너 같은 중요한 요소들은 즉시 로드 하는게 오히려 LCP의 점수에 더 좋은 영향을 끼치는 것을 발견
+        
+        - priority 속성을 추가하여 이미지를 즉시 로드하게 변경
+        - sizes를 이용해서 뷰포트에 맞는 이미지를 가져오게 변경
+        - fetchPriority="high"를 사용하여 먼저 로드 되도록 우선순위를 높임 
+      </details>
+      
+    <br/>
 
+### 사용자 경험 개선
+- <details>
+      <summary>pending 상태를 추적하여 서버 액션을 할 때 사용자가 시각적으로 볼 수 있게 처리</summary>
+      <br/>
+    
+    <table>
+      <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/bae24b88-6f83-463a-9a01-25fee34f3f7a" alt="댓글" width="500px" style="max-width: 100%;">
+        </td>
+        <td align="center">
+         <img src="https://github.com/user-attachments/assets/3995c8f7-455e-4b74-9843-1b96651cf610" alt="업로드" width="500px" style="max-width: 100%;">
+        </td>
+      </tr>
+    </table>
+    </details>
+    
+- <details>
+      <summary>페이지 이동 시 스켈레톤을 추가하여 로딩이 시각적으로 보여지게 처리</summary>
+       <br/>
+    
+    <table>
+      <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/02bb8ec1-9796-45d1-b119-7f278ce89446" alt="홈 스켈레톤" width="500px" style="max-width: 100%;">
+        </td>
+        <td align="center">
+         <img src="https://github.com/user-attachments/assets/02a546b8-bd19-4a07-b407-540c4502b5de" alt="아이템 스켈레톤" width="500px" style="max-width: 100%;">
+        </td>
+      </tr>
+    </table>
+    
+    </details>
+    
+- <details>
+    <summary>react-query의 invalidateQueries를 사용, 유저가 새로고침을 하지 않아도 게시글 자동으로 갱신</summary>
+      <br/>
+    
+  <table>
+      <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/8a367a45-7aea-4e5b-984f-a35e2c484be5" alt="생성갱신" width="500px" style="max-width: 100%;">
+        </td>
+        <td align="center">
+         <img src="https://github.com/user-attachments/assets/10486784-6886-4ce9-9669-1f6d787029c3" alt="삭제갱신" width="500px" style="max-width: 100%;">
+        </td>
+      </tr>
+      </table>
+    
+    </details>
 
-- 최적화 후 추가 예정
+- <details>
+    <summary>낙관적 업데이트를 추가하여 사용자 액션에 딜레이를 없앰</summary>
+    <br/>
+    
+  <table>
+      <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/0d8e54e0-c955-4db0-9d59-7f4e95754251" alt="팔로우 낙관적 업데이트" width="500px" style="max-width: 100%;">
+        </td>
+        <td align="center">
+         <img src="https://github.com/user-attachments/assets/7d516010-e6bf-4c1d-98f8-e4b8f77a2ffb" alt="좋아요 낙관적 업데이트" width="500px" style="max-width: 100%;">
+        </td>
+      </tr>
+      </table>
+  </details>
 
 <br/>
 
