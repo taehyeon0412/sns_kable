@@ -313,8 +313,9 @@
 
 <details>
   <summary>실시간 채팅</summary>
-
-시연 gif 넣기
+<br/>
+  
+![채팅 구현](https://github.com/user-attachments/assets/9218bb8e-a2ac-4c12-ad32-72d1a5e289bf)
 
 </details>
 
@@ -357,8 +358,35 @@
         - sizes를 이용해서 뷰포트에 맞는 이미지를 가져오게 변경
         - fetchPriority="high"를 사용하여 먼저 로드 되도록 우선순위를 높임 
       </details>
-      
-    <br/>
+  <br/>
+
+<table>
+    <thead>
+      <tr>
+        <th align="center">무한 스크롤 적용 전</th>
+        <th align="center">무한 스크롤 적용 후</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/aa506587-109c-4cf2-a067-3bc490ea386a" alt="무한스크롤 적용 전" width="500px" style="max-width: 100%;">
+        </td>
+        <td align="center">
+         <img src="https://github.com/user-attachments/assets/76ece647-ce14-4cbb-8de9-b1eb8f5a6cff" alt="무한스크롤 적용 후" width="500px" style="max-width: 100%;">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+- <details>
+      <summary>무한 스크롤 도입, API 응답 시간 약 <strong>84%</strong> 개선</summary>
+  <br/>
+  
+  - 무한 스크롤을 도입하여 초기 데이터 요청량을 줄였고, 필요한 데이터만 점진적으로 요청함으로써 API 응답 시간을 개선하였습니다.
+  </details>
+
+  <br/>
 
 ### 사용자 경험 개선
 - <details>
