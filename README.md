@@ -235,6 +235,23 @@
   </tbody>
 </table>
 
+ <br/>
+
+<table>
+  <thead>
+    <tr>
+      <th align="center">유저 플로우(Architecture)</th>
+    </tr>
+  </thead>
+<tbody>
+  <tr>
+     <td align="center">
+          <img src="https://github.com/user-attachments/assets/49f841f4-5a87-4492-9d90-c463dc92a601" alt="유저 플로우 이미지" width="1000px" style="max-width: 100%;">
+        </td>
+    </tr>
+  </tbody>
+</table>
+
 <br/>
 
 # 기능 소개
