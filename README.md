@@ -263,7 +263,26 @@
 <details>
   <summary>로그인 / 회원가입</summary>
 
-시연 gif 넣기
+  <br/>
+
+   <table>
+    <thead>
+      <tr>
+        <th align="center">로그인</th>
+         <th align="center">회원가입</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/b6d307c2-a68d-4914-9184-499ab07df27b" alt="로그인" width="500px" style="max-width: 100%;">
+        </td>
+           <td align="center">
+         <img src="https://github.com/user-attachments/assets/7c4b400d-9d9c-4e19-89e1-584b368d0544" alt="회원가입" width="500px" style="max-width: 100%;" >
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 </details>
 
@@ -277,7 +296,22 @@
 <details>
   <summary>전체 게시글 조회 & 게시글 상세 조회</summary>
 
-시연 gif 넣기
+<br/>
+
+   <table>
+    <thead>
+      <tr>
+        <th align="center">게시글 조회 & 상세 조회</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/0642f03c-79f0-45d3-be93-887aaf0df2e2" alt="게시물" width="500px" style="max-width: 100%;">
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 </details>
 
@@ -289,7 +323,26 @@
 <details>
   <summary>게시글 CRUD & 댓글 CRUD</summary>
 
-시연 gif 넣기
+<br/>
+
+   <table>
+    <thead>
+      <tr>
+        <th align="center">게시글 시연</th>
+         <th align="center">댓글 시연</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/20ea7f9c-abf2-4437-a590-dab3692c9175" alt="게시글" width="500px" style="max-width: 100%;">
+        </td>
+           <td align="center">
+         <img src="https://github.com/user-attachments/assets/192f85cb-0629-4a08-885e-54b6d2744828" alt="댓글" width="500px" style="max-width: 100%;" >
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 </details>
 
@@ -302,8 +355,21 @@
 <details>
   <summary>게시글 좋아요 & 유저 팔로우</summary>
 
-시연 gif 넣기
+<br/>
 
+   <table>
+    <thead>
+      <tr>
+        <th align="center">게시물 좋아요 & 유저 팔로우</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/f2fbf640-78ce-49cc-bf81-91a800b4387c" alt="게시물 좋아요 & 유저 팔로우" width="500px" style="max-width: 100%;">
+      </tr>
+    </tbody>
+  </table>
 </details>
 
 - 게시글 좋아요 기능 & 게시글 모아보기 기능
