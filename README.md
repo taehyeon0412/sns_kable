@@ -323,6 +323,33 @@
 
 <br/>
 
+<details>
+  <summary>반응형 페이지</summary>
+<br/>
+  
+ <table>
+    <thead>
+      <tr>
+        <th align="center">데스크톱</th>
+         <th align="center">모바일</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/a4367846-a812-4775-bcc8-3207af18b940" alt="데스크톱" width="650px" style="max-width: 100%;">
+        </td>
+           <td align="center">
+         <img src="https://github.com/user-attachments/assets/28adf06d-bfc6-47f4-ba62-d69271668165" alt="모바일" width="350px" style="max-width: 100%;" >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</details>
+
+<br/>
+
 # 🔥 개선 사항
 ### 성능 개선
 
