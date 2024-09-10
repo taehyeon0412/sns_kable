@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
           ...item,
           heartCount,
         };
-      }),
+      })
     );
 
     return NextResponse.json(itemsHeartCount, { status: 200 });

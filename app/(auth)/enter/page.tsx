@@ -4,6 +4,7 @@ import Image from "next/image";
 import LoginForm from "../../_components/login/login_form";
 import Link from "next/link";
 import Kable_name from "@/public/asset/kable.name.gif";
+import Kable_banner from "@/public/asset/banner.webp";
 
 export default function InitHome() {
   return (
@@ -29,7 +30,7 @@ export default function InitHome() {
 
           <div className="flex gap-4">
             <Link href="/create-account">
-              <div className="py-2 px-3 lg:px-4 bg-gray-700 hover:bg-gray-100 hover:text-black rounded-md text-white">
+              <div className="py-2 px-3 lg:px-4 bg-blue-400 hover:bg-blue-700 rounded-md text-white">
                 회원가입
               </div>
             </Link>
@@ -45,8 +46,8 @@ export default function InitHome() {
         {/* 중단 */}
         <div className="flex items-center justify-center px-[8%]">
           <div className=" h-[90%] w-full grid grid-cols-1 md:grid-cols-2 gap-8 px-[5%] sm:px-[15%] md:px-0 lg:px-[10%] xl:px-[15%]">
-            <div className="hidden md:flex bg-black text-white  justify-center items-center">
-              이미지 들어감
+            <div className="hidden md:flex  justify-center items-center relative h-[90%]">
+              <Image src={Kable_banner} alt="KABLE banner" layout="fill" />
             </div>
             <LoginForm />
           </div>

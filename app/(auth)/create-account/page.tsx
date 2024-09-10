@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CreateForm from "@/app/_components/login/create_form";
 import Kable_name from "@/public/asset/kable.name.gif";
+import Kable_banner2 from "@/public/asset/banner2.webp";
 
 export default function CreateHome() {
   return (
@@ -29,7 +30,7 @@ export default function CreateHome() {
 
           <div className="flex gap-4">
             <Link href="/create-account">
-              <div className="py-2 px-3 lg:px-4 bg-gray-700 hover:bg-gray-100 hover:text-black rounded-md text-white">
+              <div className="py-2 px-3 lg:px-4 bg-blue-400 hover:bg-blue-700 rounded-md text-white">
                 회원가입
               </div>
             </Link>
@@ -45,8 +46,8 @@ export default function CreateHome() {
         {/* 중단 */}
         <div className="flex items-center justify-center px-[8%]">
           <div className=" h-[90%] w-full grid grid-cols-2 gap-8 lg:px-[10%] xl:px-[15%] items-center">
-            <div className="bg-black text-white flex justify-center items-center h-full">
-              이미지 들어감
+            <div className="hidden md:flex  justify-center items-center relative h-[90%]">
+              <Image src={Kable_banner2} alt="KABLE banner" layout="fill" />
             </div>
             <CreateForm />
           </div>
