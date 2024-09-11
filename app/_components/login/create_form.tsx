@@ -24,7 +24,7 @@ export default function CreateForm() {
   }, [state?.fieldErrors]);
 
   return (
-    <div className="px-4 py-4">
+    <div className="px-4 py-4 2xl:px-16">
       <div>
         <div className="flex flex-col gap-2">
           <h1 className="text-xl font-semibold">안녕하세요!</h1>

@@ -20,11 +20,15 @@ export interface ItemsInfoProps {
   isHearted: boolean;
 }
 
-export function useItemsInfo() {
+export function useItemsInfo(categoryId?: string) {
   return useInfiniteQuery<ItemsInfoProps[]>({
-    queryKey: ["items"],
+    queryKey: ["items", categoryId],
     queryFn: async ({ pageParam = 1 }) => {
-      const response = await fetch(`/api/items?page=${pageParam}&limit=5`);
+      // 카테고리 ID가 있을 경우 URL에 추가
+      const categoryParam = categoryId ? `&category=${categoryId}` : "";
+      const response = await fetch(
+        `/api/items?page=${pageParam}&limit=5${categoryParam}`
+      );
       if (!response.ok) {
         throw new Error("아이템을 불러오는데 실패했습니다. hook 오류");
       }

@@ -45,10 +45,6 @@ export default function TopNav({ kind = "default" }: NavKind) {
               홈
             </Link>
 
-            <Link href="/category" className="text-blue-400">
-              카테고리
-            </Link>
-
             <Link href="following" className="text-blue-400">
               팔로잉
             </Link>

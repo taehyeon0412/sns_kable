@@ -3,15 +3,18 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCategoryInfo } from "@/app/hooks/category_info";
+import { useRouter } from "next/navigation";
 
 interface CategoryDivProps {
   errors?: string[];
   initCategory?: string;
+  home?: boolean;
 }
 
 export default function CategoryDiv({
   errors,
   initCategory,
+  home,
 }: CategoryDivProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isCategory, setIsCategory] = useState(`${initCategory}` || "");
@@ -19,6 +22,7 @@ export default function CategoryDiv({
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const { data: category } = useCategoryInfo();
+  const router = useRouter();
 
   /* useRef로 버튼의 위치를 파악하고 모달의 위치를 업데이트 하는 함수 */
   const updateModalPosition = () => {
@@ -42,11 +46,21 @@ export default function CategoryDiv({
     };
   }, [isOpen]);
 
-  const categorySelect = (categoryName: string) => {
+  const categorySelect = (categoryName: string, categoryId?: string) => {
     // isDisabled가 false일 때만 실행
     if (!isDisabled) {
       setIsCategory(categoryName);
       SetIsDisabled(true);
+
+      if (home) {
+        // "전체보기" 선택 시
+        if (categoryName === "전체보기") {
+          router.push("/home");
+        } else {
+          // 다른 카테고리 선택 시
+          router.push(`?category=${categoryId}`);
+        }
+      }
 
       setTimeout(() => {
         setIsOpen(false);
@@ -106,12 +120,22 @@ export default function CategoryDiv({
                     <button
                       key={category.id}
                       type="button"
-                      onClick={() => categorySelect(category.name)}
+                      onClick={() =>
+                        categorySelect(category.name, category.id.toString())
+                      }
                       className="flex items-center justify-center border-2 rounded-xl p-1 hover:border-blue-400"
                     >
                       {category.name}
                     </button>
                   ))}
+                  {home ? (
+                    <button
+                      onClick={() => categorySelect("전체보기")}
+                      className="w-full flex justify-center items-center border-2 rounded-xl p-1 hover:border-blue-400"
+                    >
+                      전체보기
+                    </button>
+                  ) : null}
                 </motion.div>
               </motion.div>
             )}

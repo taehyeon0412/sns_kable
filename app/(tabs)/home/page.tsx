@@ -6,6 +6,7 @@ import MainSection from "@/app/_components/homeSection/main_section";
 import RightSection from "@/app/_components/homeSection/right_section";
 import { useItemsInfo } from "@/app/hooks/items_info";
 import Loading from "./loading";
+import CategoryDiv from "@/app/_components/common/category_div";
 
 export default function Home() {
   const { isLoading: isMainLoading } = useItemsInfo();
@@ -27,7 +28,10 @@ export default function Home() {
         </div>
 
         {/* 중앙 메인 div */}
-        <div className="col-span-full md:col-span-8 flex flex-col gap-6 my-8 px-2">
+        <div className="col-span-full relative md:col-span-8 flex flex-col gap-6 my-12 px-2">
+          <div className="absolute -top-16 md:-top-14 left-2 md:left-4 w-full">
+            <CategoryDiv initCategory="전체보기" home />
+          </div>
           <MainSection />
         </div>
 

@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
   const page = parseInt(searchParams.get("page") || "1");
   const limit = parseInt(searchParams.get("limit") || "5");
   const skip = (page - 1) * limit;
+  const categoryId = searchParams.get("category");
 
   //limit은 초기 값이자 한번에 불러오는 데이터 수
   try {
@@ -17,6 +18,9 @@ export async function GET(request: NextRequest) {
       orderBy: {
         created_at: "desc",
       },
+      where: categoryId
+        ? { categoryId: parseInt(categoryId) } // 카테고리로 필터링
+        : {}, // 카테고리 없으면 전체 아이템
       include: {
         category: {
           select: {

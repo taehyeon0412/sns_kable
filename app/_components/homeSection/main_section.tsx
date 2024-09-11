@@ -1,14 +1,12 @@
 import { useItemsInfo } from "@/app/hooks/items_info";
 import InfiniteScroll from "../common/infiniteScroll/infinite_scroll";
-import Loading from "../common/infiniteScroll/loading";
+import { useSearchParams } from "next/navigation";
 
 export default function MainSection() {
+  const searchParams = useSearchParams();
+  const categoryId = searchParams.get("category") || "";
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useItemsInfo();
-
-  /* if (isLoading) {
-    return <Loading />;
-  } */
+    useItemsInfo(categoryId);
 
   return (
     <InfiniteScroll

@@ -28,8 +28,8 @@ export default function LoginForm() {
   }, [state?.fieldErrors?.email, state?.fieldErrors?.password]);
 
   return (
-    <div className="mt-16 px-4">
-      <div className="flex justify-center">이미지 들어갈 공간</div>
+    <div className="mt-16 px-4 2xl:px-16">
+      <div className="flex justify-center"></div>
 
       <div className="mt-12">
         <div className="flex flex-col items-center">
