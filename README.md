@@ -294,7 +294,7 @@
   <br/>
 
 <details>
-  <summary>전체 게시글 조회 & 게시글 상세 조회</summary>
+  <summary>전체 게시글 조회 & 게시글 상세 조회 & 카테고리 필터링</summary>
 
 <br/>
 
@@ -302,12 +302,16 @@
     <thead>
       <tr>
         <th align="center">게시글 조회 & 상세 조회</th>
+        <th align="center">카테고리 필터링</th>
         </tr>
       </thead>
         <tbody>
         <tr>
         <td align="center">
           <img src="https://github.com/user-attachments/assets/0642f03c-79f0-45d3-be93-887aaf0df2e2" alt="게시물" width="500px" style="max-width: 100%;">
+        </td>
+        <td align="center">
+         <img src="https://github.com/user-attachments/assets/b836f5ce-86c5-4a95-a22a-5296d1c9523b" alt="카테고리 필터링" width="500px" style="max-width: 100%;" >
         </td>
       </tr>
     </tbody>
