@@ -49,7 +49,7 @@ export default function TopNav({ kind = "default" }: NavKind) {
               팔로잉
             </Link>
 
-            <Link href="#" className="text-blue-400">
+            <Link href="/heart" className="text-blue-400">
               좋아요
             </Link>
           </div>

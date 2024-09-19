@@ -1,8 +1,6 @@
+import db from "@/app/_libs/_server/db";
 import getSession from "@/app/_libs/_server/session";
-import { PrismaClient } from "@prisma/client";
 import { NextResponse, NextRequest } from "next/server";
-
-const prisma = new PrismaClient();
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -14,12 +12,55 @@ export async function GET(request: NextRequest) {
   const session = await getSession();
   const userId = session.id;
   const isFollowing = searchParams.get("following") === "true"; // 클라이언트에서 경로 정보로 넘긴 쿼리 파라미터
+  const isHearted = searchParams.get("hearted") === "true";
 
   try {
     let itemsInfo = [];
 
-    if (isFollowing) {
-      const followingUsers = await prisma.follow.findMany({
+    if (isHearted) {
+      const heartedItems = await db.heart.findMany({
+        where: {
+          userId: userId,
+        },
+        select: {
+          itemId: true,
+        },
+      });
+
+      const heartedItemIds = heartedItems.map((heart) => heart.itemId);
+
+      // 하트를 누른 게시물 가져오기
+      itemsInfo = await db.item.findMany({
+        skip,
+        take: limit,
+        orderBy: {
+          created_at: "desc",
+        },
+        where: {
+          id: { in: heartedItemIds }, // 하트를 누른 게시물만 필터링
+          ...(categoryId && { categoryId: parseInt(categoryId) }), // 카테고리 필터 추가
+        },
+        include: {
+          category: {
+            select: {
+              name: true,
+            },
+          },
+          user: {
+            select: {
+              username: true,
+              profile_img: true,
+            },
+          },
+          Comment: {
+            select: {
+              id: true,
+            },
+          },
+        },
+      });
+    } else if (isFollowing) {
+      const followingUsers = await db.follow.findMany({
         where: {
           followerId: userId, //로그인 된 유저가 팔로우 한 유저들
         },
@@ -33,7 +74,7 @@ export async function GET(request: NextRequest) {
       );
 
       // 팔로우한 유저들의 아이템만 가져옴
-      itemsInfo = await prisma.item.findMany({
+      itemsInfo = await db.item.findMany({
         skip,
         take: limit,
         orderBy: {
@@ -63,7 +104,7 @@ export async function GET(request: NextRequest) {
         },
       });
     } else {
-      itemsInfo = await prisma.item.findMany({
+      itemsInfo = await db.item.findMany({
         skip,
         take: limit,
         orderBy: {
@@ -97,7 +138,7 @@ export async function GET(request: NextRequest) {
     //모든 하트 개수 계산이 완료되면, 결과를 배열(itemsHeartCount)로 반환함
     const itemsHeartCount = await Promise.all(
       itemsInfo.map(async (item) => {
-        const heartCount = await prisma.heart.count({
+        const heartCount = await db.heart.count({
           where: { itemId: item.id },
         });
 

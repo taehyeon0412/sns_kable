@@ -2,7 +2,6 @@ import CategoryDiv from "@/app/_components/common/category_div";
 import TopNav from "@/app/_components/common/top_nav";
 import LeftSection from "@/app/_components/followSection/left_section";
 import MainSection from "@/app/_components/followSection/main_section";
-import RightSection from "@/app/_components/followSection/right_section";
 
 export default async function FollowingHome() {
   return (
@@ -24,9 +23,7 @@ export default async function FollowingHome() {
         </div>
 
         {/* 오픈쪽 div */}
-        <div className="hidden md:flex flex-col md:col-span-3 gap-3 ml-4">
-          <RightSection />
-        </div>
+        <div className="hidden md:flex flex-col md:col-span-3 gap-3 ml-4"></div>
       </div>
     </>
   );

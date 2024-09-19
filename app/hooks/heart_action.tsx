@@ -59,6 +59,7 @@ export function useHeartAction(itemId: number) {
       onSettled: () => {
         // 성공 또는 실패 후에 캐시 무효화하여 최신 데이터를 가져옴
         queryClient.invalidateQueries(["itemDetail", itemId]);
+        queryClient.invalidateQueries("items");
       },
     }
   );
