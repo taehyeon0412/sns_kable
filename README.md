@@ -365,7 +365,7 @@
     <thead>
       <tr>
         <th align="center">게시물 좋아요 & 유저 팔로우</th>
-        <th align="center">팔로우 페이지</th>
+        <th align="center">팔로우 페이지 & 좋아요 페이지</th>
         </tr>
       </thead>
         <tbody>
@@ -374,7 +374,7 @@
           <img src="https://github.com/user-attachments/assets/f2fbf640-78ce-49cc-bf81-91a800b4387c" alt="게시물 좋아요 & 유저 팔로우" width="500px" style="max-width: 100%;">
           </td>
            <td align="center">
-          <img src="https://github.com/user-attachments/assets/18d048d2-8e57-4f9f-a275-f3aa46fdfd78" alt="팔로우 페이지" width="500px" style="max-width: 100%;">
+          <img src="https://github.com/user-attachments/assets/19bee51c-63b5-495b-8c7e-9f55b407d3bc" alt="팔로우 & 좋아요 페이지" width="500px" style="max-width: 100%;">
           </td>
       </tr>
     </tbody>
