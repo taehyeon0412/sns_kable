@@ -2,6 +2,7 @@ import CategoryDiv from "@/app/_components/common/category_div";
 import TopNav from "@/app/_components/common/top_nav";
 import LeftSection from "@/app/_components/followSection/left_section";
 import MainSection from "@/app/_components/followSection/main_section";
+import React, { Suspense } from "react";
 
 export default async function FollowingHome() {
   return (
@@ -19,7 +20,10 @@ export default async function FollowingHome() {
           <div className="absolute -top-16 md:-top-14 left-2 md:left-4 w-full">
             <CategoryDiv initCategory="전체보기" following />
           </div>
-          <MainSection />
+
+          <Suspense>
+            <MainSection />
+          </Suspense>
         </div>
 
         {/* 오픈쪽 div */}

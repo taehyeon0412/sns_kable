@@ -1,6 +1,6 @@
-import CategoryDiv from "@/app/_components/common/category_div";
 import TopNav from "@/app/_components/common/top_nav";
 import MainSection from "@/app/_components/heartSection/main_section";
+import React, { Suspense } from "react";
 
 export default async function HeartHome() {
   return (
@@ -13,7 +13,9 @@ export default async function HeartHome() {
 
         {/* 중앙 메인 div */}
         <div className="col-span-full relative md:col-span-8 flex flex-col gap-6 mb-12 px-2">
-          <MainSection />
+          <Suspense>
+            <MainSection />
+          </Suspense>
         </div>
 
         {/* 오픈쪽 div */}
