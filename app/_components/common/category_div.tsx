@@ -9,16 +9,18 @@ interface CategoryDivProps {
   errors?: string[];
   initCategory?: string;
   home?: boolean;
+  following?: boolean;
 }
 
 export default function CategoryDiv({
   errors,
   initCategory,
   home,
+  following,
 }: CategoryDivProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isCategory, setIsCategory] = useState(`${initCategory}` || "");
-  const [isDisabled, SetIsDisabled] = useState(false); //버튼 활성화
+  const [isDisabled, setIsDisabled] = useState(false); //버튼 활성화
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const { data: category } = useCategoryInfo();
@@ -50,24 +52,24 @@ export default function CategoryDiv({
     // isDisabled가 false일 때만 실행
     if (!isDisabled) {
       setIsCategory(categoryName);
-      SetIsDisabled(true);
+      setIsDisabled(true);
 
-      if (home) {
-        // "전체보기" 선택 시
-        if (categoryName === "전체보기") {
-          router.push("/home");
-        } else {
-          // 다른 카테고리 선택 시
-          router.push(`?category=${categoryId}`);
-        }
-      }
+      // "전체보기" 처리 및 다른 카테고리 처리
+      const path =
+        categoryName === "전체보기"
+          ? home
+            ? "/home"
+            : "/following"
+          : `?category=${categoryId}`;
+
+      router.push(path);
 
       setTimeout(() => {
         setIsOpen(false);
       }, 100);
 
       setTimeout(() => {
-        SetIsDisabled(false);
+        setIsDisabled(false);
       }, 300);
     }
   };
@@ -128,7 +130,7 @@ export default function CategoryDiv({
                       {category.name}
                     </button>
                   ))}
-                  {home ? (
+                  {home || following ? (
                     <button
                       onClick={() => categorySelect("전체보기")}
                       className="w-full flex justify-center items-center border-2 rounded-xl p-1 hover:border-blue-400"

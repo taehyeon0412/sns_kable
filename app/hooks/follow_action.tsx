@@ -3,11 +3,13 @@ import { useMutation, useQueryClient } from "react-query";
 interface FollowActionProps {
   followCount: number;
   isFollowing: boolean;
+  id: number;
 }
 
 interface MutationContext {
   prevItemDetail?: FollowActionProps;
   prevUserProfile?: FollowActionProps;
+  prevFollowingList?: FollowActionProps[];
 }
 
 export function useFollowAction(userId: number) {
@@ -31,6 +33,7 @@ export function useFollowAction(userId: number) {
         //요청 발생하기 전에 캐시 업데이트 - 기존 데이터를 가져옴
         await queryClient.cancelQueries(["itemDetail", userId]);
         await queryClient.cancelQueries(["userProfile", userId]);
+        await queryClient.cancelQueries("followingList");
 
         const prevItemDetail = queryClient.getQueryData<FollowActionProps>([
           "itemDetail",
@@ -41,6 +44,9 @@ export function useFollowAction(userId: number) {
           "userProfile",
           userId,
         ]);
+
+        const prevFollowingList =
+          queryClient.getQueryData<FollowActionProps[]>("followingList");
 
         // 새로운 팔로우 상태를 낙관적 업데이트 적용
         if (prevItemDetail) {
@@ -63,29 +69,48 @@ export function useFollowAction(userId: number) {
           });
         }
 
+        if (prevFollowingList) {
+          queryClient.setQueryData<FollowActionProps[]>(
+            "followingList",
+            (prev) =>
+              prev
+                ? prev.map((user) =>
+                    user.id === userId
+                      ? { ...user, isFollowing: !user.isFollowing }
+                      : user
+                  )
+                : []
+          );
+        }
+
         // 에러 발생 시 롤백할 수 있도록 이전 데이터를 반환
-        return { prevItemDetail, prevUserProfile };
+        return { prevItemDetail, prevUserProfile, prevFollowingList };
       },
       onError: (err, variables, context) => {
         if (context?.prevItemDetail) {
           queryClient.setQueryData(
             ["itemDetail", userId],
-            context.prevItemDetail,
+            context.prevItemDetail
           );
         }
 
         if (context?.prevUserProfile) {
           queryClient.setQueryData(
             ["userProfile", userId],
-            context.prevUserProfile,
+            context.prevUserProfile
           );
+        }
+
+        if (context?.prevFollowingList) {
+          queryClient.setQueryData("followingList", context.prevFollowingList);
         }
       },
       // 성공 또는 실패 후에 캐시 무효화하여 최신 데이터를 가져옴
       onSettled: () => {
         queryClient.invalidateQueries(["itemDetail", userId]);
         queryClient.invalidateQueries(["userProfile", userId]);
+        queryClient.invalidateQueries("followingList");
       },
-    },
+    }
   );
 }

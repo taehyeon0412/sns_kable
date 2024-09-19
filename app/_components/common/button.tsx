@@ -135,7 +135,7 @@ export default function Button({
         type === "itemModify"
           ? "bg-blue-400 hover:bg-blue-600"
           : type === "follow"
-            ? "hover:bg-blue-700 text-xs"
+            ? "hover:bg-blue-700"
             : type === "itemDelete"
               ? "bg-red-400 hover:bg-red-600"
               : "bg-gray-400 hover:bg-gray-600",
@@ -149,7 +149,8 @@ export default function Button({
       {...rest}
       className={cls(
         "mt-3 w-full bg-blue-500 hover:bg-blue-900 text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:outline-none",
-        large ? "py-3 text-base" : "py-2 text-sm"
+        large ? "py-3 text-base" : "py-2 text-sm",
+        className
       )}
     >
       {text}

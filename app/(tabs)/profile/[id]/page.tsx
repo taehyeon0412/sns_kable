@@ -117,6 +117,7 @@ export default function Profile() {
                   <FollowButton
                     userId={userId}
                     initialIsFollowing={userProfile.isFollowing}
+                    className="text-xs"
                   />
                 )}
 

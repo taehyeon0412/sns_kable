@@ -5,11 +5,13 @@ import Button from "./button";
 interface FollowButtonProps {
   userId: number;
   initialIsFollowing: boolean;
+  className?: string;
 }
 
 export default function FollowButton({
   userId,
   initialIsFollowing,
+  className,
 }: FollowButtonProps) {
   const [isFollowing, setIsFollowing] = useState(initialIsFollowing);
   const { mutate } = useFollowAction(userId);
@@ -29,7 +31,7 @@ export default function FollowButton({
       onClick={onClickFollow}
       type="follow"
       text={`${isFollowing ? "팔로잉" : "팔로우"}`}
-      className={`${isFollowing ? "bg-blue-900" : "bg-blue-400"}`}
+      className={`${isFollowing ? "bg-blue-900" : "bg-blue-400"} ${className}`}
     />
   );
 }
