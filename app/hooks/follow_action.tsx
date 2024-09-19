@@ -110,6 +110,7 @@ export function useFollowAction(userId: number) {
         queryClient.invalidateQueries(["itemDetail", userId]);
         queryClient.invalidateQueries(["userProfile", userId]);
         queryClient.invalidateQueries("followingList");
+        queryClient.invalidateQueries("items");
       },
     }
   );

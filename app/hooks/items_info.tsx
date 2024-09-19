@@ -1,3 +1,4 @@
+import { usePathname } from "next/navigation";
 import { useInfiniteQuery, useQuery } from "react-query";
 
 export interface ItemsInfoProps {
@@ -21,13 +22,19 @@ export interface ItemsInfoProps {
 }
 
 export function useItemsInfo(categoryId?: string) {
+  const pathname = usePathname();
+
+  /* console.log("url 경로 : ", pathname); */
+
   return useInfiniteQuery<ItemsInfoProps[]>({
-    queryKey: ["items", categoryId],
+    queryKey: ["items", categoryId, pathname],
     queryFn: async ({ pageParam = 1 }) => {
       // 카테고리 ID가 있을 경우 URL에 추가
       const categoryParam = categoryId ? `&category=${categoryId}` : "";
+      const pathParam = pathname === "/following" ? "&following=true" : ""; // 현재 경로가 /following인지 확인 후 쿼리 파라미터로 전달
+
       const response = await fetch(
-        `/api/items?page=${pageParam}&limit=5${categoryParam}`
+        `/api/items?page=${pageParam}&limit=5${categoryParam}${pathParam}`
       );
       if (!response.ok) {
         throw new Error("아이템을 불러오는데 실패했습니다. hook 오류");
