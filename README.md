@@ -189,26 +189,31 @@
 - 프로필 페이지 유저 정보
 
   - **HTTP Method**: ”GET”
-  - **Endpoint**: / api / user / [id] / route.ts
+  - **Endpoint**: / api / user / [id]
   - 설명 : url에 있는 id로 유저 정보를 불러옵니다.
 
 - 특정 유저 아이템 들고 오기
 
   - **HTTP Method**: ”GET”
-  - **Endpoint**: / api / items / user / [id] / route.ts
+  - **Endpoint**: / api / items / user / [id]
   - 설명 : url에 있는 id로 유저 정보를 불러옵니다.
 
 - 아이템 조회수 증가
 
   - **HTTP Method**: ”POST”
-  - **Endpoint**: / api / items / [id] / views / route.ts
+  - **Endpoint**: / api / items / [id] / views
   - 설명 : item의 views를 증가시킵니다.
 
 - 팔로우 / 팔로잉
 
   - **HTTP Method**: ”POST”
-  - **Endpoint**: / api / items / [id] / follow / route.ts
+  - **Endpoint**: / api / items / [id] / follow
   - 설명 : 버튼을 눌렀을 때 팔로우 / 언팔로우 합니다.
+ 
+- 인기글 순위
+  - **HTTP Method**: ”GET”
+  - **Endpoint**: / api / items / popular
+  - 설명 : view, heart를 계산하여 인기글 순위를 가져옵니다.
 
   </details>
 
