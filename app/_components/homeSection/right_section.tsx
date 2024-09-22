@@ -1,4 +1,14 @@
+import { useRankedItems } from "@/app/hooks/ranked_items";
+import { useRouter } from "next/navigation";
+
 export default function RightSection() {
+  const { data: rankedItems } = useRankedItems();
+  const router = useRouter();
+
+  const rankClicked = (itemId: number) => {
+    router.push(`items/${itemId}`);
+  };
+
   return (
     <>
       <span className="flex mt-10 w-full justify-center">
@@ -7,42 +17,16 @@ export default function RightSection() {
 
       <div className="flex gap-2 justify-start">
         <div className="flex flex-col gap-2 justify-center *:text-sm">
-          <div className="grid grid-cols-6">
-            <span className="col-span-2">1.</span>
-            <span className="col-span-4">인기글</span>
-          </div>
-          <div className="grid grid-cols-6">
-            <span className="col-span-2">2.</span>
-            <span className="col-span-4">인기글</span>
-          </div>
-          <div className="grid grid-cols-6">
-            <span className="col-span-2">3.</span>
-            <span className="col-span-4">인기글</span>
-          </div>
-          <div className="grid grid-cols-6">
-            <span className="col-span-2">4.</span>
-            <span className="col-span-4">인기글</span>
-          </div>
-          <div className="grid grid-cols-6">
-            <span className="col-span-2">5.</span>
-            <span className="col-span-4">인기글</span>
-          </div>
-          <div className="grid grid-cols-6">
-            <span className="col-span-2">6.</span>
-            <span className="col-span-4">인기글</span>
-          </div>
-          <div className="grid grid-cols-6">
-            <span className="col-span-2">7.</span>
-            <span className="col-span-4">인기글</span>
-          </div>
-          <div className="grid grid-cols-6">
-            <span className="col-span-2">8.</span>
-            <span className="col-span-4">인기글</span>
-          </div>
-          <div className="grid grid-cols-6">
-            <span className="col-span-2">9.</span>
-            <span className="col-span-4">인기글</span>
-          </div>
+          {rankedItems?.map((item, index) => (
+            <div
+              key={item.id}
+              onClick={() => rankClicked(item.id)}
+              className="flex gap-2 border-2 p-2 rounded-lg border-blue-200 hover:cursor-pointer"
+            >
+              <span className="text-xs text-gray-600">{index + 1}. </span>
+              <span className="line-clamp-3 text-gray-800">{item.title}</span>
+            </div>
+          ))}
         </div>
       </div>
     </>
