@@ -243,7 +243,7 @@
 
   <br/>
 
-<table align="center">
+<table >
   <thead>
     <tr>
       <th align="center">아키텍처(Architecture)</th>
@@ -260,7 +260,7 @@
 
  <br/>
 
-<table align="center">
+<table >
   <thead>
     <tr>
       <th align="center">유저 플로우(Architecture)</th>
@@ -269,7 +269,7 @@
 <tbody>
   <tr>
      <td align="center">
-          <img src="https://github.com/user-attachments/assets/49f841f4-5a87-4492-9d90-c463dc92a601" alt="유저 플로우 이미지" width="750px" style="max-width: 100%;">
+          <img src="https://github.com/user-attachments/assets/fc560578-21c1-4d52-b0f7-7227bb85f0b8" alt="유저 플로우 이미지" width="750px" style="max-width: 100%;">
         </td>
     </tr>
   </tbody>
