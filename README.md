@@ -243,7 +243,7 @@
 
   <br/>
 
-<table >
+<table align="center">
   <thead>
     <tr>
       <th align="center">아키텍처(Architecture)</th>
@@ -260,7 +260,7 @@
 
  <br/>
 
-<table >
+<table align="center">
   <thead>
     <tr>
       <th align="center">유저 플로우(Architecture)</th>
