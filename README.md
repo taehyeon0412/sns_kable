@@ -235,11 +235,6 @@
 
   </details>
 
-  <details>
-  <summary>Prisma DB 설계</summary>
-    표넣기
-  </details>
-  
 
   <br/>
 
