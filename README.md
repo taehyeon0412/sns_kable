@@ -52,7 +52,25 @@
 
 # 개발 환경
 
-![Next JS](https://img.shields.io/badge/Next-14-black?style=for-the-badge&logo=next.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white) ![AWS](https://img.shields.io/badge/AWS⠀S3-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34) ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+**FrontEnd**
+<br/>
+
+![Next JS](https://img.shields.io/badge/Next-14-black?style=for-the-badge&logo=next.js&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white) 
+
+**BackEnd**
+<br/>
+
+![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white) 
+
+**Cloud Services**
+<br/>
+
+![AWS](https://img.shields.io/badge/AWS⠀S3-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) ![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34) 
+
+**Deployment | Package Management**
+<br/>
+
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white) ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 
 <br/>
 
@@ -225,7 +243,7 @@
 
   <br/>
 
-<table>
+<table align="center">
   <thead>
     <tr>
       <th align="center">아키텍처(Architecture)</th>
@@ -234,7 +252,7 @@
 <tbody>
   <tr>
     <td align="center">
-      아키텍쳐 이미지 넣기
+      <img src="https://github.com/user-attachments/assets/a128bbbb-dc78-4249-99c6-295312d364b0" alt="아키텍처 이미지" width="750px" style="max-width: 100%;">
     </td>
     </tr>
   </tbody>
@@ -242,7 +260,7 @@
 
  <br/>
 
-<table>
+<table align="center">
   <thead>
     <tr>
       <th align="center">유저 플로우(Architecture)</th>
@@ -251,7 +269,7 @@
 <tbody>
   <tr>
      <td align="center">
-          <img src="https://github.com/user-attachments/assets/49f841f4-5a87-4492-9d90-c463dc92a601" alt="유저 플로우 이미지" width="1000px" style="max-width: 100%;">
+          <img src="https://github.com/user-attachments/assets/49f841f4-5a87-4492-9d90-c463dc92a601" alt="유저 플로우 이미지" width="750px" style="max-width: 100%;">
         </td>
     </tr>
   </tbody>
