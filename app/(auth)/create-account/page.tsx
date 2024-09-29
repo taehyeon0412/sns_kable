@@ -36,7 +36,7 @@ export default function CreateHome() {
             </Link>
 
             <Link href="/enter">
-              <div className="py-2 px-3 lg:px-4 bg-gray-400 text-white hover:bg-gray-100 hover:text-black rounded-md ">
+              <div className="py-2 px-3 lg:px-4 bg-gray-400 text-white hover:bg-gray-600 rounded-md ">
                 로그인
               </div>
             </Link>

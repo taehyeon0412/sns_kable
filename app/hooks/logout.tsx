@@ -4,10 +4,16 @@ import { useMutation } from "react-query";
 export function useLogout() {
   const router = useRouter();
 
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? "https://sns-kable.vercel.app"
+      : "http://localhost:3000";
+
   return useMutation(
     async () => {
-      const response = await fetch("/api/logout", {
+      const response = await fetch(`${baseUrl}/api/logout`, {
         method: "POST",
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -22,6 +28,6 @@ export function useLogout() {
       onError: (error) => {
         console.error("Logout error:", error);
       },
-    },
+    }
   );
 }

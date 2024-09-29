@@ -63,7 +63,7 @@ export async function GET(request: NextRequest) {
     const session = await getSession();
     session.id = user.id;
     await session.save();
-    return redirect("/home");
+    return redirect("https://sns-kable.vercel.app/home");
   }
   //기존 유저면 바로 홈으로 이동
 
@@ -81,6 +81,6 @@ export async function GET(request: NextRequest) {
   const session = await getSession();
   session.id = newUser.id;
   await session.save();
-  return redirect("/home");
+  return redirect("https://sns-kable.vercel.app/home");
   //새 유저면 db에 추가하고 홈으로 이동
 }
