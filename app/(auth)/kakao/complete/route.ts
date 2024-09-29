@@ -6,7 +6,7 @@ import { NextRequest } from "next/server";
 export async function GET(req: NextRequest) {
   const KAKAO_REDIRECT_URL =
     process.env.NODE_ENV === "production"
-      ? ""
+      ? "https://sns-kable.vercel.app/kakao/complete"
       : "http://localhost:3000/kakao/complete"; //로컬
 
   // 액세스 토큰 받기

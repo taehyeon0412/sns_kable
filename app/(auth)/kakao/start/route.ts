@@ -13,7 +13,7 @@ export function GET(request: NextRequest) {
   const baseURL = "https://kauth.kakao.com/oauth/authorize";
   const KAKAO_REDIRECT_URL =
     process.env.NODE_ENV === "production"
-      ? ""
+      ? "https://sns-kable.vercel.app/kakao/complete"
       : "http://localhost:3000/kakao/complete"; //로컬
 
   const params = new URLSearchParams({
