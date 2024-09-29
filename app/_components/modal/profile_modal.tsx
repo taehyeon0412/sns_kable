@@ -55,7 +55,7 @@ export default function ProfileModal({
               className="flex flex-col w-[250px] gap-2 border-2 bg-white p-4 pr-2 rounded-lg absolute top-16 right-0 md:right-[3%] xl:right-[10%] 2xl:right-[15%]"
             >
               <div className="flex gap-4" onClick={onClickProfile}>
-                <div>
+                <div className="flex flex-col gap-1">
                   {profileImg ? (
                     <Image
                       src={profileImg}

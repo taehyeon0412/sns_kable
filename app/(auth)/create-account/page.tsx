@@ -45,7 +45,7 @@ export default function CreateHome() {
 
         {/* 중단 */}
         <div className="flex items-center justify-center px-[8%]">
-          <div className=" h-[90%] w-full grid grid-cols-2 gap-8 lg:px-[10%] xl:px-[15%] items-center">
+          <div className=" h-[90%] w-full flex md:grid md:grid-cols-2 gap-8 lg:px-[10%] xl:px-[15%] items-center">
             <div className="hidden md:flex  justify-center items-center relative h-[90%]">
               <Image src={Kable_banner2} alt="KABLE banner" layout="fill" />
             </div>

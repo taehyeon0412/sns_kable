@@ -72,7 +72,7 @@ export default function Profile() {
         {/* 중앙 메인 */}
         <div className="col-span-full md:col-span-10 flex flex-col gap-6 my-8 px-2">
           <div className="grid grid-cols-12 w-full min-h-32 mx-auto bg-slate-100">
-            <div className=" col-span-3 flex flex-col justify-center items-center py-4 gap-2">
+            <div className="col-span-4 md:col-span-3 flex flex-col justify-center items-center py-4 gap-2">
               <div className="relative bg-slate-300 w-16 h-16 rounded-full hover:cursor-pointer">
                 {profileImgSrc ? (
                   <Image
@@ -101,7 +101,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className=" col-span-9 flex flex-col justify-center items-start p-4 gap-3">
+            <div className="col-span-8 md:col-span-9 flex flex-col justify-center items-start p-4 gap-3">
               <div className="flex justify-between w-full h-full">
                 <div className="w-full border-2 border-blue-400 rounded-md text-sm text-gray-700 p-2 whitespace-pre-line">
                   <span>{userProfile.bio || "자기소개를 입력해 주세요!"}</span>
