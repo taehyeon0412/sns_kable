@@ -20,7 +20,7 @@
 
   <blockquote>
     <p dir="auto">
-  <strong>배포 주소 : 나중에 추가하기</strong>
+  <strong>배포 주소 : https://sns-kable.vercel.app/</strong>
       </p>
 </blockquote>
   <br/>
