@@ -88,7 +88,7 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
                 <span className="text-3xl break-all">{item.title}</span>
               </div>
 
-              <div className="flex items-center justify-between mt-4">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-4">
                 <div className="flex items-center gap-4">
                   <div
                     onClick={onClickProfile}
@@ -114,7 +114,7 @@ export default function ItemDetail({ params }: { params: { id: string } }) {
                   </div>
                 </div>
 
-                <div className="flex justify-center items-center gap-3">
+                <div className="flex justify-end items-center gap-3">
                   {/* 하트 */}
                   <HeartButton
                     itemId={item.id}
