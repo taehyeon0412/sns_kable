@@ -18,5 +18,6 @@ export function useRankedItems() {
       return response.json() as Promise<RankedItemProps[]>;
     },
     staleTime: 1000 * 60 * 5, //5분 동안 데이터 최신 상태 유지
+    refetchInterval: 1000 * 60 * 5, //5분 마다 데이터 갱신
   });
 }
