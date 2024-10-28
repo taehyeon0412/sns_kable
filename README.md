@@ -521,7 +521,7 @@
           <img src="https://github.com/user-attachments/assets/d200bd4d-7826-4e48-bdb7-aa490bc6dbc7" alt="Seo 개선 전" width="500px" style="width: 100%; min-width: 100%;">
         </td>
         <td align="center">
-         <img src="https://github.com/user-attachments/assets/49721b2f-f81f-4923-864b-31dfe01088f9" alt="Seo 개선 후" width="500px" style="width: 100%; min-width: 100%;">
+         <img src="https://github.com/user-attachments/assets/93692117-4355-4c70-84a4-285770fe4d13" alt="Seo 개선 후" width="500px" style="width: 100%; min-width: 100%;">
         </td>
       </tr>
     </tbody>
