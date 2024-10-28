@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://sns-kable.vercel.app
+
+# Sitemaps
+Sitemap: https://sns-kable.vercel.app/sitemap.xml
