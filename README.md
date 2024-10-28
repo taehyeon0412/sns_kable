@@ -508,6 +508,35 @@
 
   <br/>
 
+ <table style="width: 100%; max-width: 1000px;">
+    <thead>
+      <tr>
+        <th align="center">Seo 개선 전</th>
+        <th align="center">Seo 개선 후</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr>
+        <td align="center">
+          <img src="https://github.com/user-attachments/assets/d200bd4d-7826-4e48-bdb7-aa490bc6dbc7" alt="Seo 개선 전" width="500px" style="width: 100%; min-width: 100%;">
+        </td>
+        <td align="center">
+         <img src="https://github.com/user-attachments/assets/49721b2f-f81f-4923-864b-31dfe01088f9" alt="Seo 개선 후" width="500px" style="width: 100%; min-width: 100%;">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+- <details>
+      <summary>Seo 개선</summary>
+  <br/>
+  
+  - metadata 추가 & 구글 서치 콘솔 사이트 추가 & 사이트맵 추가로 Seo를 개선하였습니다.
+  </details>
+
+  <br/>
+  
+
 ### 사용자 경험 개선
 - <details>
       <summary>pending 상태를 추적하여 서버 액션을 할 때 사용자가 시각적으로 볼 수 있게 처리</summary>
